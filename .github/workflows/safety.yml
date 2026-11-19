@@ -28,6 +28,10 @@ jobs:
           bash -n install.sh packaging/arch/build.sh packaging/arch/create-repo.sh
           python3 -B -m unittest discover -s packaging/arch/tests -v
           python3 packaging/arch/check-component.py
+      - name: Check generated documentation and the shared docs kit are current
+        run: |
+          python3 scripts/gen-cheatsheet.py --root .sources --check
+          python3 scripts/sync-docs-kit.py --root .sources --check
       - name: Build central documentation strictly
         run: |
           python -m pip install -r docs/requirements.txt

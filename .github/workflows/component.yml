@@ -36,6 +36,15 @@ jobs:
           python-version: ${{ steps.contract.outputs.python }}
           cache: pip
           cache-dependency-path: .sources/${{ github.event.repository.name }}/docs/requirements.txt
+      - name: Check generated documentation and the shared docs kit are current
+        if: steps.contract.outputs.docs == 'true'
+        env:
+          COMPONENT: .sources/${{ github.event.repository.name }}
+        run: |
+          python3 tooling/scripts/sync-docs-kit.py --root .sources --check
+          if [ -f "$COMPONENT/scripts/gen-docs.py" ]; then
+            (cd "$COMPONENT" && python3 scripts/gen-docs.py --check)
+          fi
       - name: Build documentation with the Read the Docs Python version
         if: steps.contract.outputs.docs == 'true'
         env:

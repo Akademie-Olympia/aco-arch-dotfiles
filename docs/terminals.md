@@ -1,18 +1,5 @@
 # Terminal Emulators
 
-[![Docs](https://readthedocs.org/projects/aco-arch-dotfiles/badge/?version=latest)](https://aco-arch-dotfiles.readthedocs.io/en/latest/)
-[![Platform: Arch Linux](https://img.shields.io/badge/platform-Arch%20Linux%20%7C%20Linux%20%7C%20macOS-1793D1?logo=arch-linux&logoColor=white)](https://archlinux.org/)
-[![Theme: Catppuccin Mocha](https://img.shields.io/badge/theme-Catppuccin%20Mocha-cba6f7)](https://github.com/catppuccin/catppuccin)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Akademie-Olympia/aco-arch-dotfiles/blob/main/LICENSE)
-
-[**Documentation Hub**](index.md) ·
-[Installation](installation.md) ·
-[Hyprland Desktop](hyprland.md) ·
-[Waybar Panel](waybar.md) ·
-[Terminals](terminals.md) ·
-[Shell & CLI](shell.md) ·
-[Paket-Migration](subtrees.md)
-
 The [`aco-arch-dotfiles`](https://aco-arch-dotfiles.readthedocs.io/en/latest/) ecosystem provides three pre-configured terminal emulators: **Ghostty**, **Kitty**, and **Foot**. Each is tuned to deliver identical typography, window transparency, and **Catppuccin Mocha** color fidelity.
 
 ---
@@ -24,7 +11,7 @@ Regardless of which terminal emulator is active, you experience consistent visua
 - 🎨 **Palette**: Official **Catppuccin Mocha** pastel colors (`#1e1e2e` base, `#cdd6f4` text, `#89b4fa` pastel blue selection, `#f5e0dc` rosewater block cursor).
 - 🪟 **Transparency**: Uniform `0.90` background opacity for smooth compositing on Wayland.
 - 🔤 **Typography**: **JetBrainsMonoNL Nerd Font** (`10.5pt`, No Ligatures variant) with `8px` window padding, complete Powerline/Nerd Font glyphs, and zero operator ligatures (`==`, `->`, `*` remain unmodified).
-- 🐚 **Default Shell**: Automatically launches into `/usr/bin/zsh` with Oh My Zsh (see [Shell Guide](shell.md)).
+- 🐚 **Default Shell**: Automatically launches into `/usr/bin/zsh` with Oh My Zsh (see [Shell Guide](https://aco-zsh.readthedocs.io/en/latest/guide/)).
 - 🔔 **Bell**: Audio bell disabled across all emulators (`enable_audio_bell no`, `urgent=no`).
 
 ---
@@ -73,7 +60,7 @@ Managed by `aco-arch-dotfiles-foot`; install and update through [Pacman](arch-pa
 
 ## Selecting Your Default Terminal in Hyprland
 
-In Hyprland (`~/.config/hypr/hyprland.lua`), the default terminal shortcut (<kbd>Super</kbd> + <kbd>Return</kbd> or <kbd>Super</kbd> + <kbd>Q</kbd>) is bound to Kitty (see [Hyprland Keybindings](hyprland.md#application-launchers--system-controls)):
+In Hyprland (`~/.config/hypr/hyprland.lua`), the default terminal shortcut (<kbd>Super</kbd> + <kbd>Return</kbd> or <kbd>Super</kbd> + <kbd>Q</kbd>) is bound to Kitty (see [Hyprland Keybindings](https://aco-hypr.readthedocs.io/en/latest/guide/#application-launchers--system-controls)):
 
 ```lua
 -- ~/.config/hypr/hyprland.lua
@@ -82,16 +69,3 @@ local terminal = "kitty"
 
 To switch your default terminal to Ghostty or Foot, change `local terminal = "ghostty"` (or `"foot"`) in `hyprland.lua`.
 
----
-
-## Connected Dotfiles Ecosystem
-
-| Component | Repository | Documentation |
-| :--- | :--- | :--- |
-| **ACO Arch Dotfiles Hub** *(Main System)* | [Akademie-Olympia/aco-arch-dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [aco-arch-dotfiles.readthedocs.io](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
-| **Neovim (`aco-nvim`)** | [Akademie-Olympia/aco-nvim](https://github.com/Akademie-Olympia/aco-nvim) | [aco-nvim.readthedocs.io](https://aco-nvim.readthedocs.io/en/latest/) |
-| **tmux (`aco-tmux`)** | [Akademie-Olympia/aco-tmux](https://github.com/Akademie-Olympia/aco-tmux) | [aco-tmux.readthedocs.io](https://aco-tmux.readthedocs.io/en/latest/) |
-| **Ghostty (`aco-ghostty`)** | [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [aco-ghostty.readthedocs.io](https://aco-ghostty.readthedocs.io/en/latest/) |
-| **Kitty (`aco-kitty`)** | [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [aco-kitty.readthedocs.io](https://aco-kitty.readthedocs.io/en/latest/) |
-| **Foot (`aco-foot`)** | [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot) | [Terminals Guide](terminals.md) |
-| **Vim (`aco-vim`)** | [Akademie-Olympia/aco-vim](https://github.com/Akademie-Olympia/aco-vim) | [aco-vim.readthedocs.io](https://aco-vim.readthedocs.io/en/latest/) |

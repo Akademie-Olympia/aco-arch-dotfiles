@@ -89,14 +89,14 @@ erfolgreichem Build und Signierung ist die neue Paketversion per `-Syu` verfügb
   Werkzeuge und verwendete Programme werden über Abhängigkeiten installiert.
 - Rechnerabhängige Monitore in `~/.config/hypr/monitors.local.lua` anpassen;
   diese Datei wird nicht verteilt.
-- [Desktop, Screenshots und Keybindings](hyprland.md).
+- [Desktop, Screenshots und Keybindings](https://aco-hypr.readthedocs.io/en/latest/guide/).
   Eine laufende grafische Sitzung wird weder vom Installer noch von Tests neugestartet.
 
 ## Waybar
 
 - Paket: `aco-arch-dotfiles-waybar`; Quelle: [waybar-config](https://github.com/Akademie-Olympia/aco-waybar).
 - Dateien: `~/.config/waybar/config.jsonc`, `style.css`, `power_menu.xml`.
-- [Panel-Anleitung](waybar.md) beschreibt Module, Bedienung und Anpassungen.
+- [Panel-Anleitung](https://aco-waybar.readthedocs.io/en/latest/guide/) beschreibt Module, Bedienung und Anpassungen.
   Für die Darstellung werden Wayland, die passenden Schriftarten und eine laufende Sitzung benötigt.
 
 ## Fuzzel
@@ -104,7 +104,7 @@ erfolgreichem Build und Signierung ist die neue Paketversion per `-Syu` verfügb
 - Paket: `aco-arch-dotfiles-fuzzel`; Quelle: [fuzzel-config](https://github.com/Akademie-Olympia/aco-fuzzel).
 - Datei: `~/.config/fuzzel/fuzzel.ini` für Schrift, Farben, Layout und Verhalten.
 - Fuzzel ist Anwendungsstarter und `--dmenu`-Frontend für Desktop-Helfer.
-  [Hyprland-Anleitung](hyprland.md) dokumentiert die Starter-/Menü-Tasten.
+  [Hyprland-Anleitung](https://aco-hypr.readthedocs.io/en/latest/guide/) dokumentiert die Starter-/Menü-Tasten.
   Starten lässt es sich in einer Wayland-Sitzung mit `fuzzel`.
 
 ## Wallpaper
@@ -141,7 +141,7 @@ Ein privates Bilder-Repository separat mit Git verwalten, nicht mit früheren
 - `theme.toml` wählt die mitgelieferte Catppuccin-Mocha-Flavor aus `flavors/`;
   `package.toml` dokumentiert die Flavor-Quelle.
 - `yazi` startet den Dateimanager. Die Zsh-Funktion `y [pfad]` wechselt nach dem
-  Beenden in das zuletzt besuchte Verzeichnis; siehe [Shell-Anleitung](shell.md).
+  Beenden in das zuletzt besuchte Verzeichnis; siehe [Shell-Anleitung](https://aco-zsh.readthedocs.io/en/latest/guide/).
 
 ## Zsh
 
@@ -149,7 +149,7 @@ Ein privates Bilder-Repository separat mit Git verwalten, nicht mit früheren
 - Dateien: `~/.config/zsh/zshrc`, `aliases.zsh`, `themes/`; `~/.zshrc` wird verlinkt.
 - Oh My Zsh und die beiden Highlighting-/Vorschlags-Plugins werden über Pakete
   verwaltet. Die paketierte Oh-My-Zsh-Kopie aktualisiert sich nicht selbst per Git.
-- [Shell-Anleitung](shell.md): `j`/`ji`, `y`, FZF, Editor- und tmux-Aliase.
+- [Shell-Anleitung](https://aco-zsh.readthedocs.io/en/latest/guide/): `j`/`ji`, `y`, FZF, Editor- und tmux-Aliase.
   Die Login-Shell bei Bedarf selbst mit `chsh -s /usr/bin/zsh` umstellen.
 
 ## GTK3

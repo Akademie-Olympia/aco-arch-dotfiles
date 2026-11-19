@@ -1,4 +1,4 @@
-# Migration: Git-Subtrees zu Paketen
+# Migration von Git-Subtrees
 
 Git-Subtrees werden nicht mehr aktualisiert oder verteilt. Die vollständigen
 Quellen liegen getrennt in eigenständigen GitHub-Repositories laut `repositories.json` und werden

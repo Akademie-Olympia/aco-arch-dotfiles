@@ -20,7 +20,7 @@ case "${1:-help}" in
         exec aco-arch-dotfiles-config update ;;
     packages|pkgs)
         shift
-        exec sudo pacman -Syu --needed "${@:-arch-dotfiles}" ;;
+        exec sudo pacman -Syu --needed "${@:-aco-arch-dotfiles}" ;;
     list|ls|modules)
         pacman -Q | awk '$1 ~ /^aco-arch-dotfiles($|-)/'
         ;;
