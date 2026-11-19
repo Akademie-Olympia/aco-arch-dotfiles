@@ -27,6 +27,15 @@ for database in db files; do
         gpg --batch --verify "$output/arch-dotfiles.$database.tar.gz.sig" "$output/arch-dotfiles.$database.tar.gz"
     fi
 done
+# Packages renamed to aco-arch-dotfiles-* replace their predecessors through the
+# new packages' replaces= field, so the pre-rename entries are no longer needed.
+if [[ -f $output/arch-dotfiles.db.tar.gz ]]; then
+    mapfile -t legacy < <(bsdtar -tf "$output/arch-dotfiles.db.tar.gz" | sed -n 's#^\(arch-dotfiles\(-[A-Za-z0-9.+_-]*\)\?\)-[^-/]*-[^-/]*/$#\1#p' | sort -u)
+    if [[ ${#legacy[@]} -gt 0 ]]; then
+        repo-remove "$output/arch-dotfiles.db.tar.gz" "${legacy[@]}"
+        repo-remove "$output/arch-dotfiles.files.tar.gz" "${legacy[@]}" || true
+    fi
+fi
 repo-add --include-sigs --prevent-downgrade "$output/arch-dotfiles.db.tar.gz" "${packages[@]}"
 # repo-add embeds package signatures; separately sign both database archives.
 for database in arch-dotfiles.db.tar.gz arch-dotfiles.files.tar.gz; do

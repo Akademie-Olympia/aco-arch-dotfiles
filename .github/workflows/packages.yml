@@ -197,3 +197,19 @@ jobs:
             packaging/arch/repo/arch-dotfiles.files.sig \
             packaging/arch/repo/arch-dotfiles.files.tar.gz \
             packaging/arch/repo/arch-dotfiles.files.tar.gz.sig --clobber
+      - name: Prune superseded package versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The database is already published; only files it does not reference
+          # and that are older than the two newest versions are removed.
+          gh release view repo --json assets > /tmp/assets-after.json
+          python packaging/arch/prune-release.py /tmp/assets-after.json \
+            packaging/arch/repo/arch-dotfiles.db.tar.gz > /tmp/prune.txt
+          while IFS= read -r name; do
+            [ -n "$name" ] && gh release delete-asset repo "$name" --yes
+          done < /tmp/prune.txt
+          echo "Pruned $(wc -l < /tmp/prune.txt) superseded assets."
