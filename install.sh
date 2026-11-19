@@ -78,11 +78,22 @@ cat > "$temporary/repository.conf" <<EOF
 SigLevel = Required DatabaseRequired
 Server = $server
 EOF
+migrate_repo_conf=false
 if [[ -f $repo_conf ]] && ! cmp -s "$temporary/repository.conf" "$repo_conf"; then
-    echo "$repo_conf contains different settings; review it manually. Nothing was changed." >&2
-    exit 1
+    # Known pre-organisation location: same repository name, old release URL. Replace it (with a backup).
+    if grep -Eq '^Server[[:space:]]*=[[:space:]]*https://github\.com/MichaelWeissDEV/dotfiles/releases/download/repo/?[[:space:]]*$' "$repo_conf" \
+        && [[ $(grep -Evc '^[[:space:]]*(#|$)' "$repo_conf") -eq 3 ]]; then
+        migrate_repo_conf=true
+    else
+        echo "$repo_conf contains different settings; review it manually. Nothing was changed." >&2
+        exit 1
+    fi
 fi
 sudo -v
+if $migrate_repo_conf; then
+    sudo cp -a -- "$repo_conf" "$repo_conf.bak-before-aco"
+    echo "Old repository settings backed up to $repo_conf.bak-before-aco"
+fi
 sudo pacman-key --add "$temporary/key.asc"
 sudo pacman-key --lsign-key "$fingerprint"
 sudo install -m644 "$temporary/repository.conf" "$repo_conf"
