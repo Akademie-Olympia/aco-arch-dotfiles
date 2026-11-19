@@ -3,7 +3,7 @@
 set -euo pipefail
 umask 022
 repository=Akademie-Olympia/aco-arch-dotfiles
-fingerprint=5635E5E93F5BA18D8868AAB5A8DD63927F151C4D
+fingerprint=11FB2A9AB0F5B8AC4F4BA79C27CD0D52E7E008F2
 yes=false
 activate=true
 sync=true

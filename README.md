@@ -36,7 +36,7 @@ herunterladen und prüfen.
 Signierschlüssel-Fingerprint:
 
 ```text
-5635 E5E9 3F5B A18D 8868 AAB5 A8DD 6392 7F15 1C4D
+11FB 2A9A B0F5 B8AC 4F4B A79C 27CD 0D52 E7E0 08F2
 ```
 
 ## Updates
