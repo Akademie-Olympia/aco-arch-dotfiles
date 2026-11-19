@@ -36,10 +36,12 @@ The Hyprland module ships `monitors.sh` ({kbd}`Super + Shift + D` opens the menu
 ~/.config/hypr/monitors.sh only external          # laptop display off
 ~/.config/hypr/monitors.sh scale HDMI-A-1 1.5
 ~/.config/hypr/monitors.sh profile save office    # remember the layout; plugging the same monitors in again restores it
+~/.config/hypr/monitors.sh default placement left # where unknown new monitors go (right|left|above|below|mirror)
 ~/.config/hypr/monitors.sh reset                  # back to automatic
 ```
 
-The script writes `~/.config/hypr/monitors.local.lua` (loaded by `hyprland.lua`) and reloads Hyprland.
+The script writes `~/.config/hypr/monitors.local.lua` (loaded by `hyprland.lua`) and reloads Hyprland. Layouts are remembered automatically per set of connected
+monitors and settings per physical display; see the [Hyprland configuration page](https://aco-hypr.readthedocs.io/en/latest/configuration/).
 
 ### Manage wallpapers
 
