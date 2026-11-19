@@ -4,50 +4,50 @@ set -euo pipefail
 case "${1:-help}" in
     install|setup|init|links|symlinks)
         shift
-        exec arch-dotfiles-config activate "$@" ;;
+        exec aco-arch-dotfiles-config activate "$@" ;;
     deactivate|status|check|sync)
         command=$1; shift
         [[ $command == check ]] && command=status
         [[ $command == sync ]] && command=update
-        exec arch-dotfiles-config "$command" "$@" ;;
+        exec aco-arch-dotfiles-config "$command" "$@" ;;
     update|upgrade|up)
         shift
         if [[ $# -gt 0 && $1 != all && $1 != system ]]; then
-            echo 'Updates are system-wide: use adot update (no partial upgrades).' >&2
+            echo 'Updates are system-wide: use aco update (no partial upgrades).' >&2
             exit 2
         fi
         sudo pacman -Syu
-        exec arch-dotfiles-config update ;;
+        exec aco-arch-dotfiles-config update ;;
     packages|pkgs)
         shift
         exec sudo pacman -Syu --needed "${@:-arch-dotfiles}" ;;
     list|ls|modules)
-        pacman -Q | awk '$1 ~ /^arch-dotfiles($|-)/'
+        pacman -Q | awk '$1 ~ /^aco-arch-dotfiles($|-)/'
         ;;
     path)
         printf '%s\n' "${XDG_DATA_HOME:-$HOME/.local/share}/arch-dotfiles/config" ;;
     keys|docs)
-        printf '%s\n' 'https://arch-dotfiles.readthedocs.io/en/latest/'
+        printf '%s\n' 'https://aco-arch-dotfiles.readthedocs.io/en/latest/'
         printf '%s\n' 'See also each installed module README in /usr/share/arch-dotfiles/<module>.' ;;
     commands)
         cat <<'HELP'
-adot update                  pacman -Syu, then merge defaults safely
-adot sync                    merge defaults after running pacman yourself
-adot packages <package>...    install packages with a full system upgrade
-adot install [module]...      activate installed modules (without sudo)
-adot deactivate [module]...   restore previous settings
-adot status / adot list       inspect activation / installed packages
+aco update                  pacman -Syu, then merge defaults safely
+aco sync                    merge defaults after running pacman yourself
+aco packages <package>...    install packages with a full system upgrade
+aco install [module]...      activate installed modules (without sudo)
+aco deactivate [module]...   restore previous settings
+aco status / aco list       inspect activation / installed packages
 HELP
         ;;
     scripts)
-        printf '%s\n' /usr/bin/adot /usr/bin/arch-dotfiles-config /usr/bin/arch-dotfiles-registry-kick
+        printf '%s\n' /usr/bin/aco /usr/bin/aco-arch-dotfiles-config /usr/bin/aco-arch-dotfiles-registry-kick
         for script in screenshot wallpaper; do command -v "$script" || true; done ;;
     subtrees|subtree|pull|push|wallpapers)
         echo 'Subtree/Git updates have been retired. Use pacman -Syu; manage private pictures separately.' >&2
         exit 1 ;;
     help|-h|--help)
         "$0" commands
-        printf '%s\n' 'Optional automatic user sync: systemctl --user enable --now arch-dotfiles-sync.timer'
-        printf '%s\n' 'Optional automatic registry reconciliation (needs gh auth): systemctl --user enable --now arch-dotfiles-registry-kick.timer' ;;
+        printf '%s\n' 'Optional automatic user sync: systemctl --user enable --now aco-arch-dotfiles-sync.timer'
+        printf '%s\n' 'Optional automatic registry reconciliation (needs gh auth): systemctl --user enable --now aco-arch-dotfiles-registry-kick.timer' ;;
     *) echo "Unknown command: $1" >&2; exit 2 ;;
 esac

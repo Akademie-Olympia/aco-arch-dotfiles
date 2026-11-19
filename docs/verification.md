@@ -3,11 +3,11 @@
 ## Auf einem installierten Rechner
 
 ```bash
-pacman -Q | grep '^arch-dotfiles'
-pacman -Qkk $(pacman -Qq | grep '^arch-dotfiles')
-arch-dotfiles-config status
-systemctl --user status arch-dotfiles-sync.timer
-systemctl --user status arch-dotfiles-sync.service
+pacman -Q | grep '^aco-arch-dotfiles'
+pacman -Qkk $(pacman -Qq | grep '^aco-arch-dotfiles')
+aco-arch-dotfiles-config status
+systemctl --user status aco-arch-dotfiles-sync.timer
+systemctl --user status aco-arch-dotfiles-sync.service
 ```
 
 Bei einer vollständigen Installation sind 19 Pakete vorhanden. Eine absichtlich
@@ -16,9 +16,9 @@ nicht deine editierbaren Kopien. Ein erfolgreicher oneshot-Sync-Service darf als
 `inactive (dead)` erscheinen; entscheidend sind Exit-Code 0 und der aktive Timer.
 
 ```bash
-adot sync
+aco sync
 find "${XDG_DATA_HOME:-$HOME/.local/share}/arch-dotfiles/config" -name '*.pacnew*'
-journalctl --user -u arch-dotfiles-sync.service -n 30 --no-pager
+journalctl --user -u aco-arch-dotfiles-sync.service -n 30 --no-pager
 ```
 
 Eigene Änderungen werden nicht automatisch zusammengeführt. `.pacnew`-Dateien
@@ -31,16 +31,16 @@ muss vor einer erneuten Installer-Nutzung überprüft werden.
 
 Die Registry wird aus dem Hub-Repository heraus gebaut. Nach erfolgreicher
 Komponentenprüfung fordert ein Push auf `main` den zentralen Build direkt an.
-Zusätzlich vergleicht `arch-dotfiles-registry-kick` die veröffentlichte `sources.json`
+Zusätzlich vergleicht `aco-arch-dotfiles-registry-kick` die veröffentlichte `sources.json`
 (alle Komponenten-Commits plus hub) mit dem `main` jeder Quelle und startet
 den zentralen `Arch packages`-Workflow genau dann, wenn ein Paket hinter `main`
 zurückliegt. Der Dispatch ist nur eine Anfrage — gebaut, signiert und
 veröffentlicht wird ausschließlich der geprüfte hub-Workflow.
 
 ```bash
-arch-dotfiles-registry-kick          # vergleicht, dispatcht nur bei Drift
-systemctl --user status arch-dotfiles-registry-kick.timer
-journalctl --user -u arch-dotfiles-registry-kick.service -n 30 --no-pager
+aco-arch-dotfiles-registry-kick          # vergleicht, dispatcht nur bei Drift
+systemctl --user status aco-arch-dotfiles-registry-kick.timer
+journalctl --user -u aco-arch-dotfiles-registry-kick.service -n 30 --no-pager
 ```
 
 Ohne `gh` oder ohne `gh auth login` beendet sich das Skript mit Hinweis und
@@ -59,7 +59,7 @@ wird beim nächsten Timer-Tick wiederholt, kein Fehler.
 3. Der Hub klont die Komponenten auf `main`, prüft und baut die Pakete, testet
    Installation und Updates isoliert und veröffentlicht signierte Pakete und
    Repository-Datenbanken. Ein Push auf den Hub startet denselben Workflow direkt.
-4. `sudo pacman -Syu` installiert veröffentlichte Updates. `adot sync` gleicht
+4. `sudo pacman -Syu` installiert veröffentlichte Updates. `aco sync` gleicht
    anschließend die Benutzerkopie ab; der optionale Sync-Timer erledigt dies
    ebenfalls. Änderungen des Benutzers bleiben erhalten; abweichende neue
    Vorgaben landen als `.pacnew` daneben und müssen geprüft werden.
@@ -116,7 +116,7 @@ Installation wird nicht von Pacman aktualisiert.
 command -v gh
 gh --version
 gh auth status
-gh run list -R Akademie-Olympia/aco-dotfiles --workflow packages.yml
+gh run list -R Akademie-Olympia/aco-arch-dotfiles --workflow packages.yml
 ```
 
 Keine Tokens oder privaten Signierschlüssel in Issue-/CI-Logs oder Git committen.

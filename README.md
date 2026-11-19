@@ -1,10 +1,10 @@
-# Arch Dotfiles
+# ACO Arch Dotfiles
 
 **Einmal installieren. In einzelnen Repositories entwickeln. Mit `pacman -Syu` aktualisieren.**
 
-**[Vollständige Dokumentation](https://arch-dotfiles.readthedocs.io/en/latest/)** ·
-[Komponenten](https://arch-dotfiles.readthedocs.io/en/latest/components/) ·
-[Installation prüfen](https://arch-dotfiles.readthedocs.io/en/latest/verification/)
+**[Vollständige Dokumentation](https://aco-arch-dotfiles.readthedocs.io/en/latest/)** ·
+[Komponenten](https://aco-arch-dotfiles.readthedocs.io/en/latest/components/) ·
+[Installation prüfen](https://aco-arch-dotfiles.readthedocs.io/en/latest/verification/)
 
 Dieses Repository enthält Installer, Paketverwaltung und die signierte
 Pacman-Registry. Die 16 Konfigurationen liegen in **eigenen GitHub-Repositories**,
@@ -15,13 +15,13 @@ nicht mehr als Subtrees oder Konfigurationskopien in diesem Repository.
 Auf Arch Linux als normaler Benutzer mit `sudo`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash
 ```
 
 Oder nur ausgewählte Konfigurationen installieren:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash -s -- nvim tmux
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash -s -- nvim tmux
 ```
 
 Der Installer prüft den fest hinterlegten Signierschlüssel, richtet das
@@ -47,26 +47,26 @@ sudo pacman -Syu
 
 Nach erfolgreichem Registry-Build sind neue Konfigurationspakete normale
 Pacman-Updates. Der installierte User-Timer synchronisiert die Defaults innerhalb
-von etwa zwei Minuten. Sofortige Synchronisation: `adot sync`.
+von etwa zwei Minuten. Sofortige Synchronisation: `aco sync`.
 Die betroffene Anwendung gegebenenfalls neu laden/starten.
 
 ## Entwicklung: unabhängige Repositories
 
 ```bash
 mkdir -p ~/git/config
-git clone git@github.com:Akademie-Olympia/aco-dotfiles.git ~/git/config/dotfiles
-bash ~/git/config/dotfiles/scripts/clone-repos.sh
+git clone git@github.com:Akademie-Olympia/aco-arch-dotfiles.git ~/git/config/aco-arch-dotfiles
+bash ~/git/config/aco-arch-dotfiles/scripts/clone-repos.sh
 ```
 
 Danach liegen alle Repositories nebeneinander:
 
 ```text
 ~/git/config/
-  dotfiles/          # Installer, Registry, gemeinsame Verwaltung
-  nvim-config/       # eigene Git-Historie, main, Quellen und PKGBUILD
-  tmux-config/
-  hypr-config/
-  zsh-config/
+  aco-arch-dotfiles/ # Installer, Registry, gemeinsame Verwaltung
+  aco-nvim/       # eigene Git-Historie, main, Quellen und PKGBUILD
+  aco-tmux/
+  aco-hypr/
+  aco-zsh/
   ...
 ```
 
@@ -91,21 +91,21 @@ für normale Konfigurationsänderungen erforderlich. Sofortiger Build-Start für
 Maintainer:
 
 ```bash
-gh workflow run packages.yml -R Akademie-Olympia/aco-dotfiles
+gh workflow run packages.yml -R Akademie-Olympia/aco-arch-dotfiles
 ```
 
 ## Paketstruktur
 
 - 16 Konfigurationspakete, jeweils aus einem eigenen Repository.
-- `arch-dotfiles-core`: `adot`, Aktivierung, Backups und User-Synchronisation.
-- `arch-dotfiles-oh-my-zsh`: separat gepinnter Oh-My-Zsh-Runtime.
-- `arch-dotfiles`: optionales Metapaket für die komplette Umgebung.
+- `aco-arch-dotfiles-core`: `aco`, Aktivierung, Backups und User-Synchronisation.
+- `aco-arch-dotfiles-oh-my-zsh`: separat gepinnter Oh-My-Zsh-Runtime.
+- `aco-arch-dotfiles`: optionales Metapaket für die komplette Umgebung.
 
 Jede Konfiguration pflegt ihre Abhängigkeiten und ihr Rezept selbst in
 `packaging/arch/PKGBUILD`. Hier bleiben nur die drei gemeinsamen Paketordner
 unter `packages/`. Alle Pakete und Repository-Daten werden signiert als Assets
-des GitHub-Releases [`repo`](https://github.com/Akademie-Olympia/aco-dotfiles/releases/tag/repo)
+des GitHub-Releases [`repo`](https://github.com/Akademie-Olympia/aco-arch-dotfiles/releases/tag/repo)
 veröffentlicht. `sources.json` dort dokumentiert die tatsächlich gebauten Commits.
 
 **[Builds, Sicherheit, Migration und Deinstallation](packaging/arch/README.md)** ·
-**[Anwendungsdokumentation](https://arch-dotfiles.readthedocs.io/en/latest/)**
+**[Anwendungsdokumentation](https://aco-arch-dotfiles.readthedocs.io/en/latest/)**

@@ -16,7 +16,7 @@ class PackagedCliTest(unittest.TestCase):
         binary.mkdir()
         self.log = self.root / "calls"
         for name, body in {
-            "arch-dotfiles-config": 'printf "manager:%s\\n" "$*"',
+            "aco-arch-dotfiles-config": 'printf "manager:%s\\n" "$*"',
             "sudo": 'printf "sudo:%s\\n" "$*"; exit "${PACMAN_FAILURE:-0}"',
             "git": "exit 99",
         }.items():
@@ -24,7 +24,7 @@ class PackagedCliTest(unittest.TestCase):
             script.write_text('#!/bin/bash\n' + body + '\n')
             script.chmod(0o755)
         self.env = dict(os.environ, HOME=str(self.root), PATH=str(binary) + os.pathsep + os.environ['PATH'])
-        self.command = ["bash", str(ROOT / "packages/arch-dotfiles-core/adot")]
+        self.command = ["bash", str(ROOT / "packages/aco-arch-dotfiles-core/aco")]
 
     def run_cli(self, *args):
         return subprocess.run([*self.command, *args], env=self.env, text=True, capture_output=True)
@@ -53,8 +53,8 @@ class PackagedCliTest(unittest.TestCase):
             self.assertEqual(self.run_cli(command).returncode, 1)
 
     def test_package_install_uses_full_upgrade(self):
-        result = self.run_cli("packages", "arch-dotfiles-vim", "arch-dotfiles-tmux")
-        self.assertIn("sudo:pacman -Syu --needed arch-dotfiles-vim arch-dotfiles-tmux", result.stdout)
+        result = self.run_cli("packages", "aco-arch-dotfiles-vim", "aco-arch-dotfiles-tmux")
+        self.assertIn("sudo:pacman -Syu --needed aco-arch-dotfiles-vim aco-arch-dotfiles-tmux", result.stdout)
 
 
 if __name__ == "__main__":

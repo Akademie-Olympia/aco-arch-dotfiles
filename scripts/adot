@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# Compatibility entry point: all runtime management now belongs to the core package.
-set -euo pipefail
-if [[ -x /usr/bin/adot ]]; then
-    exec /usr/bin/adot "$@"
-fi
-echo 'Install arch-dotfiles-core first; see packaging/arch/README.md.' >&2
-exit 1

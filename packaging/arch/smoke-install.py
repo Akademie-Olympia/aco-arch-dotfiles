@@ -23,7 +23,7 @@ def main():
     if os.geteuid() == 0:
         raise RuntimeError("Run as an unprivileged user. This test never needs real root.")
     registry = json.loads((HERE / "packages.json").read_text())
-    with tempfile.TemporaryDirectory(prefix="arch-dotfiles-smoke-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="aco-arch-dotfiles-smoke-") as temporary:
         temporary = Path(temporary)
         gnupg = temporary / "gnupg"
         gnupg.mkdir(mode=0o700)
@@ -68,7 +68,7 @@ def main():
             # installation below requires valid signatures and a separate config.
             resolver.write_text("[options]\nArchitecture = auto\nSigLevel = Never\n" + "\n".join(sections))
             run(["pacman", "--root", root, "--dbpath", resolution, "--config", resolver,
-                 "--logfile", temporary / "resolve.log", "-Sp", "--print-format", "%n", "arch-dotfiles"])
+                 "--logfile", temporary / "resolve.log", "-Sp", "--print-format", "%n", "aco-arch-dotfiles"])
 
             config = temporary / "pacman.conf"
             config.write_text(f"[options]\nArchitecture = auto\nSigLevel = Required DatabaseRequired\n"
@@ -97,7 +97,7 @@ def main():
                             XDG_DATA_HOME=str(home / ".local/share"), XDG_STATE_HOME=str(home / ".local/state"),
                             XDG_CACHE_HOME=str(home / ".cache"), SHELL="/bin/sh")
             defaults = root / "usr/share/arch-dotfiles"
-            manager = ["python3", root / "usr/bin/arch-dotfiles-config"]
+            manager = ["python3", root / "usr/bin/aco-arch-dotfiles-config"]
             run([*manager, "activate", "--defaults", defaults], env=user_env)
             for module in ("nvim", "tmux", "zsh"):
                 if not (home / ".config" / module).is_symlink():

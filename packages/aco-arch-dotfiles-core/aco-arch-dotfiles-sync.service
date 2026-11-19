@@ -3,5 +3,5 @@ Description=Merge installed dotfiles defaults into activated user configurations
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/arch-dotfiles-config update --if-active
+ExecStart=/usr/bin/aco-arch-dotfiles-config update --if-active
 UMask=0077

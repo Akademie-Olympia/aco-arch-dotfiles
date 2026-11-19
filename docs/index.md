@@ -1,11 +1,11 @@
-# Arch Dotfiles
+# ACO Arch Dotfiles
 
 Einzeln installierbare Pacman-Pakete für Hyprland, Waybar, Terminals, Editoren
 und Shell. Quellen und Paketrezepte liegen in eigenen GitHub-Repositories.
 Ein signiertes GitHub-Release stellt das Pacman-Repository bereit:
 Installation und Updates erfolgen mit `pacman -Syu`, nicht über Git-Subtrees.
 
-Schnellstart: `curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash`.
+Schnellstart: `curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash`.
 
 Start: [Installation](installation.md) ·
 [Paketierung, GitHub-Repository und Migration](arch-package.md).
@@ -31,11 +31,11 @@ subtrees
 :caption: Handbücher der Komponenten
 :maxdepth: 1
 
-Neovim <https://nvim-config.readthedocs.io/en/latest/>
-tmux <https://tmux-config.readthedocs.io/en/latest/>
-Vim <https://vim-config.readthedocs.io/en/latest/>
-Kitty <https://kitty-config.readthedocs.io/en/latest/>
-Ghostty <https://ghostty-config.readthedocs.io/en/latest/>
+Neovim <https://aco-nvim.readthedocs.io/en/latest/>
+tmux <https://aco-tmux.readthedocs.io/en/latest/>
+Vim <https://aco-vim.readthedocs.io/en/latest/>
+Kitty <https://aco-kitty.readthedocs.io/en/latest/>
+Ghostty <https://aco-ghostty.readthedocs.io/en/latest/>
 ```
 
 Die Anwendungsanleitungen beschreiben weiterhin die Konfiguration unter

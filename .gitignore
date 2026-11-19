@@ -10,11 +10,11 @@
 .DS_Store
 
 # Lokale Tmux-Overrides (falls angelegt)
-packages/arch-dotfiles-tmux/config/local.conf
-packages/arch-dotfiles-tmux/config/local-options.conf
+packages/aco-arch-dotfiles-tmux/config/local.conf
+packages/aco-arch-dotfiles-tmux/config/local-options.conf
 
 # Individuelle Monitor-Anordnung (pro Rechner, nicht versionieren)
-packages/arch-dotfiles-hypr/config/monitors.local.lua
+packages/aco-arch-dotfiles-hypr/config/monitors.local.lua
 
 # Dokumentations-Builds (Sphinx & MkDocs)
 _build/

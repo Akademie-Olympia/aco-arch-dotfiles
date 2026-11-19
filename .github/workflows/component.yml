@@ -23,7 +23,7 @@ jobs:
           path: .sources/${{ github.event.repository.name }}
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: Akademie-Olympia/aco-dotfiles
+          repository: Akademie-Olympia/aco-arch-dotfiles
           ref: main
           persist-credentials: false
           path: tooling
@@ -60,4 +60,4 @@ jobs:
             echo 'DOTFILES_DISPATCH_TOKEN is missing; configure the repository secret.' >&2
             exit 1
           fi
-          gh workflow run packages.yml --repo Akademie-Olympia/aco-dotfiles --ref main
+          gh workflow run packages.yml --repo Akademie-Olympia/aco-arch-dotfiles --ref main

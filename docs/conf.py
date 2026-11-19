@@ -15,7 +15,7 @@ lexers["tmux"] = IniLexer()
 lexers["kitty"] = IniLexer()
 lexers["mermaid"] = TextLexer()
 
-project = "arch-dotfiles"
+project = "aco-arch-dotfiles"
 copyright = "2026, Michael Weiss"
 author = "Michael Weiss"
 
@@ -40,9 +40,9 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", ".venv"]
 myst_heading_anchors = 3
 
 html_theme = "furo"
-html_title = "arch-dotfiles docs"
+html_title = "aco-arch-dotfiles docs"
 html_theme_options = {
-    "source_repository": "https://github.com/Akademie-Olympia/aco-dotfiles",
+    "source_repository": "https://github.com/Akademie-Olympia/aco-arch-dotfiles",
     "source_branch": "main",
     "source_directory": "docs/",
     "light_css_variables": {

@@ -6,7 +6,7 @@ Git-Subtrees und eines monolithischen Dotfiles-Installers.
 Einmaliger Installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash
 ```
 
 Alternativ manuell:
@@ -18,22 +18,22 @@ Alternativ manuell:
    und editierbare Konfigurationskopien angelegt werden.
 
 ```bash
-sudo pacman -Syu --needed arch-dotfiles-nvim arch-dotfiles-tmux
-arch-dotfiles-config activate nvim tmux
+sudo pacman -Syu --needed aco-arch-dotfiles-nvim aco-arch-dotfiles-tmux
+aco-arch-dotfiles-config activate nvim tmux
 
 # Oder die komplette Desktop-/Terminal-Umgebung:
-sudo pacman -Syu --needed arch-dotfiles
-arch-dotfiles-config activate
+sudo pacman -Syu --needed aco-arch-dotfiles
+aco-arch-dotfiles-config activate
 ```
 
-Updates: `adot update` oder `sudo pacman -Syu` gefolgt von
-`arch-dotfiles-config update`. Optional synchronisiert der User-Timer
-`arch-dotfiles-sync.timer` die Defaults automatisch. Eigene Änderungen werden
+Updates: `aco update` oder `sudo pacman -Syu` gefolgt von
+`aco-arch-dotfiles-config update`. Optional synchronisiert der User-Timer
+`aco-arch-dotfiles-sync.timer` die Defaults automatisch. Eigene Änderungen werden
 nicht überschrieben; neue Defaults erscheinen als `.pacnew`.
 
 Ein Push auf `main` einer Komponente fordert nach erfolgreicher Paketprüfung
 automatisch einen zentralen Registry-Build an. Der optionale Timer
-`arch-dotfiles-registry-kick.timer` (enthalten in `arch-dotfiles-core`)
+`aco-arch-dotfiles-registry-kick.timer` (enthalten in `aco-arch-dotfiles-core`)
 ist eine zusätzliche Absicherung: Er vergleicht die veröffentlichte
 `sources.json` mit `main` aller Komponenten und des hubs und startet den
 zentralen `Arch packages`-Workflow genau dann, wenn ein Paket hinter

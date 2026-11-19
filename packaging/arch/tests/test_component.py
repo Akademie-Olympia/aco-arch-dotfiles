@@ -18,12 +18,12 @@ class ComponentTest(unittest.TestCase):
         self.origin = self.root / "aco-foot"
         (self.origin / "packaging/arch").mkdir(parents=True)
         self.recipe = self.origin / "packaging/arch/PKGBUILD"
-        self.recipe.write_text("pkgname=arch-dotfiles-foot\ndepends=('arch-dotfiles-core>=0.3.0' 'foot')\n")
+        self.recipe.write_text("pkgname=aco-arch-dotfiles-foot\ndepends=('aco-arch-dotfiles-core>=0.3.0' 'foot')\n")
         (self.origin / "foot.ini").write_text("[main]\nfont=monospace\n")
         (self.root / "LICENSE").write_text("MIT")
         packages = self.root / "packages"
-        (packages / "arch-dotfiles-core").mkdir(parents=True)
-        (packages / "arch-dotfiles-core/BUNDLE-LICENSE").write_text("MIT")
+        (packages / "aco-arch-dotfiles-core").mkdir(parents=True)
+        (packages / "aco-arch-dotfiles-core/BUNDLE-LICENSE").write_text("MIT")
         for name, value in (("ROOT", self.root), ("PACKAGES", packages), ("SOURCE_ROOT", self.root)):
             context = patch.object(component.source, name, value)
             context.start()
@@ -41,7 +41,7 @@ class ComponentTest(unittest.TestCase):
             component.check("foot")
 
     def test_core_version_dependency_is_mandatory(self):
-        self.recipe.write_text("pkgname=arch-dotfiles-foot\ndepends=('foot')\n")
+        self.recipe.write_text("pkgname=aco-arch-dotfiles-foot\ndepends=('foot')\n")
         with self.assertRaisesRegex(RuntimeError, "core dependency"):
             component.check("foot")
 

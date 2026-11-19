@@ -6,7 +6,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
-HUB = "Akademie-Olympia/aco-dotfiles"
+HUB = "Akademie-Olympia/aco-arch-dotfiles"
 
 SOURCES = {
     "distribution": "1111111111111111111111111111111111111111",
@@ -39,9 +39,9 @@ case "$1/$2" in
   workflow/run) exit 0 ;;
 esac
 case "$url" in
-  repos/Akademie-Olympia/aco-dotfiles/releases/tags/repo)
+  repos/Akademie-Olympia/aco-arch-dotfiles/releases/tags/repo)
     ${KICK_NO_ASSET:+:} echo 12345 ;;
-  repos/Akademie-Olympia/aco-dotfiles/releases/assets/12345)
+  repos/Akademie-Olympia/aco-arch-dotfiles/releases/assets/12345)
     cat "${KICK_SOURCES}" ;;
   repos/*/branches/main)
     repo="${url#repos/}"
@@ -75,7 +75,7 @@ class RegistryKickTest(unittest.TestCase):
             KICK_SOURCES=self.temp.joinpath("sources.json").as_posix(),
             KICK_HEADS=self.temp.joinpath("heads.tsv").as_posix(),
         )
-        self.command = ["bash", str(ROOT / "packages/arch-dotfiles-core/arch-dotfiles-registry-kick")]
+        self.command = ["bash", str(ROOT / "packages/aco-arch-dotfiles-core/aco-arch-dotfiles-registry-kick")]
 
     def publish(self, heads):
         (self.temp / "sources.json").write_text(json.dumps(SOURCES) + "\n")
@@ -108,7 +108,7 @@ class RegistryKickTest(unittest.TestCase):
         result = self.run_kick()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue(self.dispatched())
-        self.assertIn("dispatched 'Arch packages' in Akademie-Olympia/aco-dotfiles", result.stdout)
+        self.assertIn("dispatched 'Arch packages' in Akademie-Olympia/aco-arch-dotfiles", result.stdout)
         self.assertIn("aco-tmux", result.stdout)
         self.assertIn(SOURCES["components"]["tmux"]["commit"], result.stdout)
         self.assertIn("a" * 40, result.stdout)

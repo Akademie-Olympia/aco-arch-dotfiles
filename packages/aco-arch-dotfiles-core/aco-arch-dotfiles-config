@@ -171,7 +171,7 @@ class Config:
     def activate(self):
         modules = self.modules()
         if not modules:
-            raise RuntimeError("No configuration packages installed. Install an arch-dotfiles-<module> package first.")
+            raise RuntimeError("No configuration packages installed. Install an aco-arch-dotfiles-<module> package first.")
         entries = []
         if self.activation.exists():
             entries = json.loads(self.activation.read_text())
@@ -265,7 +265,7 @@ def main():
             fcntl.flock(lock, fcntl.LOCK_EX)
             getattr(config, args.command)()
     except (OSError, ValueError, RuntimeError) as error:
-        print(f"arch-dotfiles-config: {error}", file=sys.stderr)
+        print(f"aco-arch-dotfiles-config: {error}", file=sys.stderr)
         return 1
     return 0
 

@@ -1,7 +1,7 @@
 # Migrations-Einstiege
 
 Die eigentlichen Programme liegen jetzt im Paket
-`packages/arch-dotfiles-core/`. `scripts/adot`, `install.sh` und
+`packages/aco-arch-dotfiles-core/`. `scripts/aco`, `install.sh` und
 `install-links.sh` delegieren an das installierte Paket. Es werden keine
 Git-Subtrees, Oh-My-Zsh-Clones oder bisherigen Komplettinstallationen gestartet.
 

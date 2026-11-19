@@ -19,7 +19,7 @@ Belegungen und versionsabhängigen Details stehen in den verlinkten Handbüchern
 | tmux Prefix, dann R | tmux-Konfiguration neu laden |
 
 Alle Desktop-Belegungen: [Hyprland](hyprland.md). Für Anwendungen siehe
-[Neovim](https://nvim-config.readthedocs.io/en/latest/),
-[tmux](https://tmux-config.readthedocs.io/en/latest/),
-[Vim](https://vim-config.readthedocs.io/en/latest/) und
-[Kitty](https://kitty-config.readthedocs.io/en/latest/).
+[Neovim](https://aco-nvim.readthedocs.io/en/latest/),
+[tmux](https://aco-tmux.readthedocs.io/en/latest/),
+[Vim](https://aco-vim.readthedocs.io/en/latest/) und
+[Kitty](https://aco-kitty.readthedocs.io/en/latest/).

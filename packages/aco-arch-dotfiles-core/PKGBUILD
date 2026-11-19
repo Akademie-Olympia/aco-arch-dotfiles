@@ -1,17 +1,19 @@
 # Package-local recipe. Stage checksummed sources with packaging/arch/build.sh.
-pkgname=arch-dotfiles-core
+pkgname=aco-arch-dotfiles-core
 pkgver=0.3.0
 pkgrel=1
 pkgdesc='Per-user dotfiles activation and package management'
 arch=('any')
-url='https://github.com/Akademie-Olympia/aco-dotfiles'
+url='https://github.com/Akademie-Olympia/aco-arch-dotfiles'
 license=('LicenseRef-arch-dotfiles-bundle')
 depends=('python' 'bash' 'coreutils' 'pacman' 'sudo' 'gawk' 'util-linux')
-optdepends=('github-cli: reconcile the pacman registry with main via arch-dotfiles-registry-kick')
+optdepends=('github-cli: reconcile the pacman registry with main via aco-arch-dotfiles-registry-kick')
+replaces=('arch-dotfiles-core')
+conflicts=('arch-dotfiles-core')
 options=('!strip')
 source=('payload.tar.gz')
 sha256sums=('__SOURCE_SHA256__')
-install=arch-dotfiles.install
+install=aco-arch-dotfiles.install
 
 package() {
     cp -a "$srcdir/usr" "$pkgdir/"

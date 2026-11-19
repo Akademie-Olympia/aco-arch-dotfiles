@@ -1,9 +1,9 @@
 # Shell, CLI Commands & Productivity Aliases
 
-[![Docs](https://readthedocs.org/projects/arch-dotfiles/badge/?version=latest)](https://arch-dotfiles.readthedocs.io/en/latest/)
+[![Docs](https://readthedocs.org/projects/aco-arch-dotfiles/badge/?version=latest)](https://aco-arch-dotfiles.readthedocs.io/en/latest/)
 [![Platform: Arch Linux](https://img.shields.io/badge/platform-Arch%20Linux%20%7C%20Linux%20%7C%20macOS-1793D1?logo=arch-linux&logoColor=white)](https://archlinux.org/)
 [![Theme: Catppuccin Mocha](https://img.shields.io/badge/theme-Catppuccin%20Mocha-cba6f7)](https://github.com/catppuccin/catppuccin)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Akademie-Olympia/aco-dotfiles/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Akademie-Olympia/aco-arch-dotfiles/blob/main/LICENSE)
 
 [**Documentation Hub**](index.md) ·
 [Installation](installation.md) ·
@@ -13,7 +13,7 @@
 [Shell & CLI](shell.md) ·
 [Paket-Migration](subtrees.md)
 
-The command-line environment centers on **Zsh** (`~/.config/zsh/zshrc` and `~/.config/zsh/aliases.zsh`) enhanced with **Oh My Zsh**, Catppuccin Mocha syntax highlighting, asynchronous autosuggestions, FZF integration, and custom CLI tools (`adot` / `arch-dot` / `arch-dotfiles` and `wallpaper`).
+The command-line environment centers on **Zsh** (`~/.config/zsh/zshrc` and `~/.config/zsh/aliases.zsh`) enhanced with **Oh My Zsh**, Catppuccin Mocha syntax highlighting, asynchronous autosuggestions, FZF integration, and custom CLI tools (`aco` / `arch-dot` / `aco-arch-dotfiles` and `wallpaper`).
 
 ---
 
@@ -21,7 +21,7 @@ The command-line environment centers on **Zsh** (`~/.config/zsh/zshrc` and `~/.c
 
 - **Default Editor**: `EDITOR="nvim"` and `VISUAL="nvim"`
 - **Graphical Sudo Prompt**: `SUDO_ASKPASS="$HOME/.config/hypr/askpass.sh"` (uses `fuzzel --dmenu --password` in Wayland sessions)
-- **PATH**: Automatically prepends `~/.local/bin` so custom CLI tools (`arch-dot`, `arch-dotfiles`, `wallpaper`) are available everywhere.
+- **PATH**: Automatically prepends `~/.local/bin` so custom CLI tools (`arch-dot`, `aco-arch-dotfiles`, `wallpaper`) are available everywhere.
 - **Minimal Prompt**: Clean `> ` prompt indicator with zero visual clutter, paired with the custom theme at `~/.oh-my-zsh/custom/themes/catppuccin.zsh-theme`.
 - **TUI Styling (`NEWT_COLORS`)**: Pre-configured Catppuccin Mocha color variables for `nmtui` and other libnewt TUI utilities.
 
@@ -42,30 +42,30 @@ The command-line environment centers on **Zsh** (`~/.config/zsh/zshrc` and `~/.c
 
 ## Custom CLI Programs (`/usr/bin`)
 
-### 1. `adot` / `arch-dot` / `arch-dotfiles` (Unified Ecosystem & Dotfiles Manager)
+### 1. `aco` / `arch-dot` / `aco-arch-dotfiles` (Unified Ecosystem & Dotfiles Manager)
 
-Provided by `arch-dotfiles-core` as `/usr/bin/adot`, `arch-dot`, and
-`arch-dotfiles`. Updates use Pacman exclusively; there are no runtime subtree
+Provided by `aco-arch-dotfiles-core` as `/usr/bin/aco`, `arch-dot`, and
+`aco-arch-dotfiles`. Updates use Pacman exclusively; there are no runtime subtree
 pulls or Git clones. See [package setup and activation](arch-package.md).
 
 | Command | Action |
 | :--- | :--- |
-| `adot update` | Run `sudo pacman -Syu`, then safely synchronize user copies |
-| `adot sync` | Synchronize defaults only, e.g. after running Pacman yourself |
-| `adot status` | Inspect activation and user configuration paths |
-| `adot list` | List installed dotfiles packages |
-| `adot keys` / `adot docs` | Show documentation locations |
-| `adot commands` | Show package-management commands |
-| `adot scripts` | Show available helper binaries |
-| `adot install [module ...]` / `adot links [module ...]` | Activate installed modules without sudo |
-| `adot deactivate [module ...]` | Restore previous settings |
-| `adot packages [package ...]` | Install selected packages with `pacman -Syu --needed` (default: metapackage) |
-| `adot path` | Print the editable user configuration directory |
-| `adot help` | Display help message and subcommands |
+| `aco update` | Run `sudo pacman -Syu`, then safely synchronize user copies |
+| `aco sync` | Synchronize defaults only, e.g. after running Pacman yourself |
+| `aco status` | Inspect activation and user configuration paths |
+| `aco list` | List installed dotfiles packages |
+| `aco keys` / `aco docs` | Show documentation locations |
+| `aco commands` | Show package-management commands |
+| `aco scripts` | Show available helper binaries |
+| `aco install [module ...]` / `aco links [module ...]` | Activate installed modules without sudo |
+| `aco deactivate [module ...]` | Restore previous settings |
+| `aco packages [package ...]` | Install selected packages with `pacman -Syu --needed` (default: metapackage) |
+| `aco path` | Print the editable user configuration directory |
+| `aco help` | Display help message and subcommands |
 
 ### 2. `wallpaper` (Multi-Monitor Wallpaper Manager)
 
-Provided by `arch-dotfiles-wallpaper`; prefers the activated user script
+Provided by `aco-arch-dotfiles-wallpaper`; prefers the activated user script
 `~/.config/wallpaper/wallpaper.sh` (alias: `wp`):
 
 | Command | Action |
@@ -91,16 +91,16 @@ Provided by `arch-dotfiles-wallpaper`; prefers the activated user script
 | Alias | Command Executed | Purpose |
 | :--- | :--- | :--- |
 | `dotfiles` | `cd "${XDG_DATA_HOME:-$HOME/.local/share}/arch-dotfiles/config"` | Jump to editable configuration copies |
-| `cfg-update` | `adot update` | Full system upgrade and user sync |
-| `cfg-links` | `arch-dotfiles-config activate` | Activate installed modules |
+| `cfg-update` | `aco update` | Full system upgrade and user sync |
+| `cfg-links` | `aco-arch-dotfiles-config activate` | Activate installed modules |
 | `wp` | `wallpaper` | Short alias for the wallpaper manager |
 
 ### Text Editors & Interactive Fuzzy Openers
 
 | Alias / Function | Implementation | Purpose |
 | :--- | :--- | :--- |
-| `nv` | `nvim` | Open [Neovim (`nvim-config`)](https://nvim-config.readthedocs.io/en/latest/) |
-| `v` | `vim` | Open standalone [Vim (`vim-config`)](https://vim-config.readthedocs.io/en/latest/) |
+| `nv` | `nvim` | Open [Neovim (`aco-nvim`)](https://aco-nvim.readthedocs.io/en/latest/) |
+| `v` | `vim` | Open standalone [Vim (`aco-vim`)](https://aco-vim.readthedocs.io/en/latest/) |
 | `fznv [args]` | `fzf --height=40% --layout=reverse --border --prompt='nvim > '` -> `nvim` | Fuzzy-find a file interactively and open it in Neovim |
 | `fzv [args]` | `fzf --height=40% --layout=reverse --border --prompt='vim > '` -> `vim` | Fuzzy-find a file interactively and open it in Vim |
 
@@ -124,7 +124,7 @@ y [path]
 
 ### tmux Session Shortcuts
 
-See the full [tmux-config Documentation](https://tmux-config.readthedocs.io/en/latest/) for internal tmux bindings.
+See the full [tmux-config Documentation](https://aco-tmux.readthedocs.io/en/latest/) for internal tmux bindings.
 
 | Alias | Command Executed | Purpose |
 | :--- | :--- | :--- |
@@ -150,10 +150,10 @@ See the full [tmux-config Documentation](https://tmux-config.readthedocs.io/en/l
 
 | Component | Repository | Documentation |
 | :--- | :--- | :--- |
-| **Arch Dotfiles Hub** *(Main System)* | [Akademie-Olympia/aco-dotfiles](https://github.com/Akademie-Olympia/aco-dotfiles) | [arch-dotfiles.readthedocs.io](https://arch-dotfiles.readthedocs.io/en/latest/) |
-| **Neovim (`nvim-config`)** | [Akademie-Olympia/aco-nvim](https://github.com/Akademie-Olympia/aco-nvim) | [nvim-config.readthedocs.io](https://nvim-config.readthedocs.io/en/latest/) |
-| **tmux (`tmux-config`)** | [Akademie-Olympia/aco-tmux](https://github.com/Akademie-Olympia/aco-tmux) | [tmux-config.readthedocs.io](https://tmux-config.readthedocs.io/en/latest/) |
-| **Ghostty (`ghostty-config`)** | [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [ghostty-config.readthedocs.io](https://ghostty-config.readthedocs.io/en/latest/) |
-| **Kitty (`kitty-config`)** | [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [kitty-config.readthedocs.io](https://kitty-config.readthedocs.io/en/latest/) |
-| **Foot (`foot-config`)** | [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot) | [Terminals Guide](terminals.md) |
-| **Vim (`vim-config`)** | [Akademie-Olympia/aco-vim](https://github.com/Akademie-Olympia/aco-vim) | [vim-config.readthedocs.io](https://vim-config.readthedocs.io/en/latest/) |
+| **ACO Arch Dotfiles Hub** *(Main System)* | [Akademie-Olympia/aco-arch-dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [aco-arch-dotfiles.readthedocs.io](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
+| **Neovim (`aco-nvim`)** | [Akademie-Olympia/aco-nvim](https://github.com/Akademie-Olympia/aco-nvim) | [aco-nvim.readthedocs.io](https://aco-nvim.readthedocs.io/en/latest/) |
+| **tmux (`aco-tmux`)** | [Akademie-Olympia/aco-tmux](https://github.com/Akademie-Olympia/aco-tmux) | [aco-tmux.readthedocs.io](https://aco-tmux.readthedocs.io/en/latest/) |
+| **Ghostty (`aco-ghostty`)** | [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [aco-ghostty.readthedocs.io](https://aco-ghostty.readthedocs.io/en/latest/) |
+| **Kitty (`aco-kitty`)** | [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [aco-kitty.readthedocs.io](https://aco-kitty.readthedocs.io/en/latest/) |
+| **Foot (`aco-foot`)** | [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot) | [Terminals Guide](terminals.md) |
+| **Vim (`aco-vim`)** | [Akademie-Olympia/aco-vim](https://github.com/Akademie-Olympia/aco-vim) | [aco-vim.readthedocs.io](https://aco-vim.readthedocs.io/en/latest/) |

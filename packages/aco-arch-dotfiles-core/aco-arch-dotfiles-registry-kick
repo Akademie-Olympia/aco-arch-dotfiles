@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ==============================================================================
-#  arch-dotfiles-registry-kick — reconcile the pacman registry with main
+#  aco-arch-dotfiles-registry-kick — reconcile the pacman registry with main
 # ==============================================================================
 #
-#  Usage: arch-dotfiles-registry-kick
+#  Usage: aco-arch-dotfiles-registry-kick
 #
 #  Component pushes do not trigger the registry build: GitHub fires no
 #  cross-repo workflow without a shared token, and scheduled runs are
@@ -11,7 +11,7 @@
 #  gap the honest way. It compares what the published registry was built
 #  from (sources.json, which names every component commit plus the hub)
 #  with the current main of each of those repositories, and dispatches the
-#  "Arch packages" workflow in Akademie-Olympia/aco-dotfiles when they disagree.
+#  "Arch packages" workflow in Akademie-Olympia/aco-arch-dotfiles when they disagree.
 #
 #  The dispatch is a REQUEST only. The hub workflow re-runs its own safety
 #  pipeline — recipes, syntax, generated docs, smoke installs, gated
@@ -25,16 +25,16 @@
 #    * GitHub temporarily unreachable — the timer simply reruns
 #
 #  Exit 1 is for errors that cannot be transient. Inspect with
-#  journalctl --user -u arch-dotfiles-registry-kick
+#  journalctl --user -u aco-arch-dotfiles-registry-kick
 #
-#  Opt-in timer: systemctl --user enable --now arch-dotfiles-registry-kick.timer
+#  Opt-in timer: systemctl --user enable --now aco-arch-dotfiles-registry-kick.timer
 #
 #  Only one reconciliation runs at a time; a second invocation yields.
 # ==============================================================================
 
 set -euo pipefail
 
-REPO='Akademie-Olympia/aco-dotfiles'
+REPO='Akademie-Olympia/aco-arch-dotfiles'
 WORKFLOW='Arch packages'
 
 case "${1:-}" in

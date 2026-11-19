@@ -43,7 +43,7 @@ class PackageLayoutTest(unittest.TestCase):
                 return
             for dependency in source.metadata(name)["depends"]:
                 dependency = dependency.split(">=")[0]
-                if dependency.startswith("arch-dotfiles"):
+                if dependency.startswith("aco-arch-dotfiles"):
                     self.assertIn(dependency, source.REGISTRY)
                     visit(dependency, pending | {name})
             visited.add(name)
@@ -53,7 +53,7 @@ class PackageLayoutTest(unittest.TestCase):
     def test_vim_payload_does_not_include_other_module_sources(self):
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary)
-            source.stage("arch-dotfiles-vim", target)
+            source.stage("aco-arch-dotfiles-vim", target)
             share = target / "usr/share/arch-dotfiles"
             self.assertTrue((share / "vim/vimrc").is_file())
             self.assertEqual(sorted(p.name for p in share.iterdir()), ["modules.d", "vim"])
@@ -64,7 +64,7 @@ class PackageLayoutTest(unittest.TestCase):
             root = Path(temporary)
             package = root / "aco-hypr"
             package.mkdir(parents=True)
-            core = root / "packages/arch-dotfiles-core"
+            core = root / "packages/aco-arch-dotfiles-core"
             core.mkdir(parents=True)
             (root / "LICENSE").write_text("license")
             (core / "BUNDLE-LICENSE").write_text("license")
@@ -73,7 +73,7 @@ class PackageLayoutTest(unittest.TestCase):
             destination = root / "export"
             tracked = {"hyprland.lua", "monitors.local.lua", "screenshot.sh", "screenshot.desktop"}
             with patch.object(source, "ROOT", root), patch.object(source, "PACKAGES", root / "packages"), patch.object(source, "SOURCE_ROOT", root):
-                source.stage("arch-dotfiles-hypr", destination, tracked)
+                source.stage("aco-arch-dotfiles-hypr", destination, tracked)
             share = destination / "usr/share/arch-dotfiles/hypr"
             self.assertTrue((share / "hyprland.lua").exists())
             self.assertFalse((share / "secret").exists())

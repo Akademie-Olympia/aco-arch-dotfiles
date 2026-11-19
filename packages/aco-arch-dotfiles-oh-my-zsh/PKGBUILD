@@ -1,13 +1,15 @@
 # Package-local recipe. Stage checksummed sources with packaging/arch/build.sh.
-pkgname=arch-dotfiles-oh-my-zsh
+pkgname=aco-arch-dotfiles-oh-my-zsh
 pkgver=0.3.0
 pkgrel=1
 pkgdesc='Pinned, pacman-managed Oh My Zsh runtime'
 arch=('any')
-url='https://github.com/Akademie-Olympia/aco-dotfiles'
+url='https://github.com/Akademie-Olympia/aco-arch-dotfiles'
 license=('LicenseRef-arch-dotfiles-bundle')
 depends=('zsh' 'git')
 optdepends=()
+replaces=('arch-dotfiles-oh-my-zsh')
+conflicts=('arch-dotfiles-oh-my-zsh')
 options=('!strip')
 source=('payload.tar.gz')
 sha256sums=('__SOURCE_SHA256__')

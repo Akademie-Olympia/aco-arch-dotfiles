@@ -1,9 +1,9 @@
 # Hyprland Desktop Environment & Keybindings
 
-[![Docs](https://readthedocs.org/projects/arch-dotfiles/badge/?version=latest)](https://arch-dotfiles.readthedocs.io/en/latest/)
+[![Docs](https://readthedocs.org/projects/aco-arch-dotfiles/badge/?version=latest)](https://aco-arch-dotfiles.readthedocs.io/en/latest/)
 [![Platform: Arch Linux](https://img.shields.io/badge/platform-Arch%20Linux%20%7C%20Linux%20%7C%20macOS-1793D1?logo=arch-linux&logoColor=white)](https://archlinux.org/)
 [![Theme: Catppuccin Mocha](https://img.shields.io/badge/theme-Catppuccin%20Mocha-cba6f7)](https://github.com/catppuccin/catppuccin)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Akademie-Olympia/aco-dotfiles/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Akademie-Olympia/aco-arch-dotfiles/blob/main/LICENSE)
 
 [**Documentation Hub**](index.md) ·
 [Installation](installation.md) ·
@@ -13,7 +13,7 @@
 [Shell & CLI](shell.md) ·
 [Paket-Migration](subtrees.md)
 
-Hyprland (`~/.config/hypr/hyprland.lua`) serves as the primary Wayland tiling compositor in the [`arch-dotfiles`](https://arch-dotfiles.readthedocs.io/en/latest/) ecosystem. It is engineered for **instant reaction speeds**, **maximum screen real estate**, **multi-monitor workspace agility**, and **seamless cross-monitor window recall**.
+Hyprland (`~/.config/hypr/hyprland.lua`) serves as the primary Wayland tiling compositor in the [`aco-arch-dotfiles`](https://aco-arch-dotfiles.readthedocs.io/en/latest/) ecosystem. It is engineered for **instant reaction speeds**, **maximum screen real estate**, **multi-monitor workspace agility**, and **seamless cross-monitor window recall**.
 
 ---
 
@@ -59,8 +59,8 @@ The primary modifier key (`SUPER`) is the **Windows / Super key**.
 | Keybinding | Command / Script | Action |
 | :--- | :--- | :--- |
 | <kbd>Super</kbd> + <kbd>Space</kbd> *(or <kbd>Alt</kbd> + <kbd>Space</kbd>, <kbd>Super</kbd> + <kbd>D</kbd> / <kbd>R</kbd> / <kbd>A</kbd>)* | `pkill -x fuzzel \|\| fuzzel` | Toggle **Fuzzel** application launcher |
-| <kbd>Super</kbd> + <kbd>Return</kbd> *(or <kbd>Super</kbd> + <kbd>Q</kbd>)* | `kitty` | Open default terminal ([Kitty](https://kitty-config.readthedocs.io/en/latest/)) |
-| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>Return</kbd> | `kitty -e tmux new-session -A -s main` | Open terminal attached to persistent [tmux](https://tmux-config.readthedocs.io/en/latest/) session `main` |
+| <kbd>Super</kbd> + <kbd>Return</kbd> *(or <kbd>Super</kbd> + <kbd>Q</kbd>)* | `kitty` | Open default terminal ([Kitty](https://aco-kitty.readthedocs.io/en/latest/)) |
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>Return</kbd> | `kitty -e tmux new-session -A -s main` | Open terminal attached to persistent [tmux](https://aco-tmux.readthedocs.io/en/latest/) session `main` |
 | <kbd>Super</kbd> + <kbd>B</kbd> | `firefox` | Launch web browser (**Firefox**) |
 | <kbd>Super</kbd> + <kbd>E</kbd> | `pcmanfm` | Open GUI file manager (**PCManFM** in Catppuccin Mocha GTK theme) |
 | <kbd>Super</kbd> + <kbd>Y</kbd> | `kitty -e yazi` | Open TUI file manager (**Yazi** in Catppuccin Mocha flavor) |
@@ -226,10 +226,10 @@ wallpaper add ~/Downloads/mountain.jpg --set
 
 | Component | Repository | Documentation |
 | :--- | :--- | :--- |
-| **Arch Dotfiles Hub** *(Main System)* | [Akademie-Olympia/aco-dotfiles](https://github.com/Akademie-Olympia/aco-dotfiles) | [arch-dotfiles.readthedocs.io](https://arch-dotfiles.readthedocs.io/en/latest/) |
-| **Neovim (`nvim-config`)** | [Akademie-Olympia/aco-nvim](https://github.com/Akademie-Olympia/aco-nvim) | [nvim-config.readthedocs.io](https://nvim-config.readthedocs.io/en/latest/) |
-| **tmux (`tmux-config`)** | [Akademie-Olympia/aco-tmux](https://github.com/Akademie-Olympia/aco-tmux) | [tmux-config.readthedocs.io](https://tmux-config.readthedocs.io/en/latest/) |
-| **Ghostty (`ghostty-config`)** | [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [ghostty-config.readthedocs.io](https://ghostty-config.readthedocs.io/en/latest/) |
-| **Kitty (`kitty-config`)** | [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [kitty-config.readthedocs.io](https://kitty-config.readthedocs.io/en/latest/) |
-| **Foot (`foot-config`)** | [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot) | [Terminals Guide](terminals.md) |
-| **Vim (`vim-config`)** | [Akademie-Olympia/aco-vim](https://github.com/Akademie-Olympia/aco-vim) | [vim-config.readthedocs.io](https://vim-config.readthedocs.io/en/latest/) |
+| **ACO Arch Dotfiles Hub** *(Main System)* | [Akademie-Olympia/aco-arch-dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [aco-arch-dotfiles.readthedocs.io](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
+| **Neovim (`aco-nvim`)** | [Akademie-Olympia/aco-nvim](https://github.com/Akademie-Olympia/aco-nvim) | [aco-nvim.readthedocs.io](https://aco-nvim.readthedocs.io/en/latest/) |
+| **tmux (`aco-tmux`)** | [Akademie-Olympia/aco-tmux](https://github.com/Akademie-Olympia/aco-tmux) | [aco-tmux.readthedocs.io](https://aco-tmux.readthedocs.io/en/latest/) |
+| **Ghostty (`aco-ghostty`)** | [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [aco-ghostty.readthedocs.io](https://aco-ghostty.readthedocs.io/en/latest/) |
+| **Kitty (`aco-kitty`)** | [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [aco-kitty.readthedocs.io](https://aco-kitty.readthedocs.io/en/latest/) |
+| **Foot (`aco-foot`)** | [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot) | [Terminals Guide](terminals.md) |
+| **Vim (`aco-vim`)** | [Akademie-Olympia/aco-vim](https://github.com/Akademie-Olympia/aco-vim) | [aco-vim.readthedocs.io](https://aco-vim.readthedocs.io/en/latest/) |

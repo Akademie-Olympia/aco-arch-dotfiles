@@ -2,7 +2,7 @@
 # Install signed Arch dotfiles packages; never clone development sources into a home.
 set -euo pipefail
 umask 022
-repository=Akademie-Olympia/aco-dotfiles
+repository=Akademie-Olympia/aco-arch-dotfiles
 fingerprint=5635E5E93F5BA18D8868AAB5A8DD63927F151C4D
 yes=false
 activate=true
@@ -11,7 +11,7 @@ dry_run=false
 packages=()
 usage() {
     cat <<'HELP'
-Arch Dotfiles installer (run as your normal user, not root)
+ACO Arch Dotfiles installer (run as your normal user, not root)
   bash install.sh                         Install the full environment
   bash install.sh nvim tmux               Install selected configuration packages
   bash install.sh --yes                   Accept pacman prompts
@@ -30,14 +30,14 @@ for argument in "$@"; do
         --no-activate) activate=false ;;
         --no-sync) sync=false ;;
         --dry-run) dry_run=true ;;
-        arch-dotfiles|arch-dotfiles-*) packages+=("$argument") ;;
-        [a-z0-9]*) packages+=("arch-dotfiles-$argument") ;;
+        aco-arch-dotfiles|aco-arch-dotfiles-*) packages+=("$argument") ;;
+        [a-z0-9]*) packages+=("aco-arch-dotfiles-$argument") ;;
         *) echo "Unknown option: $argument" >&2; exit 2 ;;
     esac
 done
-[[ ${#packages[@]} -gt 0 ]] || packages=(arch-dotfiles)
+[[ ${#packages[@]} -gt 0 ]] || packages=(aco-arch-dotfiles)
 for package in "${packages[@]}"; do
-    [[ $package =~ ^arch-dotfiles(-[a-z0-9][a-z0-9.-]*)?$ ]] || { echo "Invalid package: $package" >&2; exit 2; }
+    [[ $package =~ ^aco-arch-dotfiles(-[a-z0-9][a-z0-9.-]*)?$ ]] || { echo "Invalid package: $package" >&2; exit 2; }
 done
 server="https://github.com/$repository/releases/download/repo"
 if $dry_run; then
@@ -95,12 +95,12 @@ else
     sudo pacman -Syu --needed "${packages[@]}" </dev/tty
 fi
 if $activate && compgen -G '/usr/share/arch-dotfiles/modules.d/*' >/dev/null; then
-    arch-dotfiles-config activate
+    aco-arch-dotfiles-config activate
     if $sync; then
-        if ! systemctl --user enable --now arch-dotfiles-sync.timer; then
-            echo 'Packages installed. Enable user sync later: systemctl --user enable --now arch-dotfiles-sync.timer' >&2
+        if ! systemctl --user enable --now aco-arch-dotfiles-sync.timer; then
+            echo 'Packages installed. Enable user sync later: systemctl --user enable --now aco-arch-dotfiles-sync.timer' >&2
         fi
     fi
 fi
 printf '\nInstalled. Future updates: sudo pacman -Syu\n'
-printf 'User defaults sync within about two minutes; manual sync: adot sync\n'
+printf 'User defaults sync within about two minutes; manual sync: aco sync\n'

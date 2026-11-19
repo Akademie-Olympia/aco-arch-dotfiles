@@ -1,13 +1,13 @@
-# Arch Dotfiles: Installation, Entwicklung und Registry
+# ACO Arch Dotfiles: Installation, Entwicklung und Registry
 
 ## Schnellinstallation
 
 Als normaler Arch-Benutzer, nicht als root:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash
 # Oder nur ausgewählte Pakete:
-curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash -s -- nvim tmux
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash -s -- nvim tmux
 ```
 
 Alternativ das Script herunterladen, prüfen und `bash install.sh` ausführen.
@@ -21,7 +21,7 @@ signiert. Er aktiviert Paket- **und** Datenbanksignaturprüfungen:
 ```ini
 [arch-dotfiles]
 SigLevel = Required DatabaseRequired
-Server = https://github.com/Akademie-Olympia/aco-dotfiles/releases/download/repo
+Server = https://github.com/Akademie-Olympia/aco-arch-dotfiles/releases/download/repo
 ```
 
 Die Datei liegt unter `/etc/pacman.d/arch-dotfiles.conf`; in `/etc/pacman.conf`
@@ -36,7 +36,7 @@ gefährlich; führe nur Quellcode aus, dem du vertraust.
 16 unabhängig gepflegte Konfigurationen, ein gemeinsames Verwaltungspaket, ein
 Oh-My-Zsh-Runtime-Paket und ein optionales Gesamt-Metapaket. Konfigurationen liegen
 in eigenen Repositories laut `repositories.json`; deren `packaging/arch/PKGBUILD`
-bestimmt Abhängigkeiten. Beispielsweise installiert `arch-dotfiles-nvim` nicht
+bestimmt Abhängigkeiten. Beispielsweise installiert `aco-arch-dotfiles-nvim` nicht
 den gesamten Hyprland-Desktop. Desktop-Konfigurationen deklarieren dagegen die
 benötigten anderen Desktop-Komponenten ausdrücklich als Abhängigkeiten.
 
@@ -46,7 +46,7 @@ noch Root-Hooks bearbeiten Home-Verzeichnisse.
 
 ## Aktivierung und Updates
 
-`arch-dotfiles-config activate [modul ...]` sichert vorhandene Einstellungen und
+`aco-arch-dotfiles-config activate [modul ...]` sichert vorhandene Einstellungen und
 erstellt benutzereigene Kopien in
 `${XDG_DATA_HOME:-~/.local/share}/arch-dotfiles/config`. Diese werden nach
 `~/.config/<modul>` verlinkt; Zsh, tmux und Vim erhalten ihre Home-Einstiege.
@@ -55,11 +55,11 @@ Backups und Aktivierungsjournal liegen in
 `local*.conf` werden übernommen. `XDG_CONFIG_HOME` muss `~/.config` sein; eigene
 absolute Daten-/State-Pfade werden unterstützt.
 
-Der Installer aktiviert `arch-dotfiles-sync.timer` für den aufrufenden Benutzer:
+Der Installer aktiviert `aco-arch-dotfiles-sync.timer` für den aufrufenden Benutzer:
 
 ```bash
 sudo pacman -Syu                    # neue Konfigurationspakete installieren
-adot sync                          # optional sofort statt Timer abwarten
+aco sync                          # optional sofort statt Timer abwarten
 ```
 
 Der Timer läuft etwa alle zwei Minuten und synchronisiert nur aktive Module.
@@ -67,7 +67,7 @@ Unveränderte Dateien werden ersetzt; eigene Änderungen bleiben mit neuen
 `.pacnew`-Defaults daneben. Nach dem Merge die jeweilige Anwendung neu laden.
 Andere Benutzer müssen jeweils selbst aktivieren und ihren Timer einschalten.
 Kein automatischer Neustart der grafischen Sitzung. Ohne aktivierten Timer ist
-`arch-dotfiles-config update` ein ausdrücklicher separater Schritt.
+`aco-arch-dotfiles-config update` ein ausdrücklicher separater Schritt.
 
 ## Entwickeln und veröffentlichen
 
@@ -86,7 +86,7 @@ Konfigurationen. Ein Push alleine bedeutet noch nicht, dass ein Paket verfügbar
 ist. Der Status ist im zentralen Actions-Workflow sichtbar.
 
 ```bash
-gh workflow run packages.yml -R Akademie-Olympia/aco-dotfiles
+gh workflow run packages.yml -R Akademie-Olympia/aco-arch-dotfiles
 ```
 
 Die Pakete erhalten automatisch eine Version der Form
@@ -111,7 +111,7 @@ dann später `pacman -Syu` wiederholen, nicht die Signaturprüfung abschalten.
 ```bash
 sudo pacman -Syu --needed base-devel git python
 bash scripts/clone-repos.sh
-bash packaging/arch/build.sh arch-dotfiles-nvim
+bash packaging/arch/build.sh aco-arch-dotfiles-nvim
 bash packaging/arch/build.sh all
 python3 packaging/arch/check-artifacts.py
 ```
@@ -154,8 +154,8 @@ gesonderte CI-Authentifizierung und sind mit diesem Setup nicht vorgesehen.
 Vom bisherigen lokalen monolithischen Paket zuerst sauber migrieren:
 
 ```bash
-arch-dotfiles-config deactivate
-sudo pacman -R arch-dotfiles
+aco-arch-dotfiles-config deactivate
+sudo pacman -R aco-arch-dotfiles
 # Danach den neuen Installer starten.
 ```
 
@@ -168,18 +168,18 @@ umgeschrieben. Die Konfigurationsquellen werden dort künftig nicht mehr gepfleg
 Ein einzelnes Paket entfernen:
 
 ```bash
-arch-dotfiles-config deactivate nvim
-sudo pacman -Rns arch-dotfiles-nvim
+aco-arch-dotfiles-config deactivate nvim
+sudo pacman -Rns aco-arch-dotfiles-nvim
 ```
 
 Falls das Gesamt-Metapaket installiert ist, dieses zuerst mit `pacman -R
-arch-dotfiles` entfernen, um einzelne Abhängigkeiten entfernen zu können.
+aco-arch-dotfiles` entfernen, um einzelne Abhängigkeiten entfernen zu können.
 Vollständige Entfernung:
 
 ```bash
-systemctl --user disable --now arch-dotfiles-sync.timer
-arch-dotfiles-config deactivate
-sudo pacman -Rns arch-dotfiles
+systemctl --user disable --now aco-arch-dotfiles-sync.timer
+aco-arch-dotfiles-config deactivate
+sudo pacman -Rns aco-arch-dotfiles
 ```
 
 `-Rns` entfernt nur unbenötigte, als Abhängigkeit installierte Pakete. Eigene

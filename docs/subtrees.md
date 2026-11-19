@@ -9,10 +9,10 @@ History-Rewrite notwendig. Installierte Systeme benötigen keinen Git-Checkout;
 sie beziehen Pakete und Updates aus dem signierten GitHub-Pacman-Repository.
 
 ```bash
-sudo pacman -Syu --needed arch-dotfiles-nvim arch-dotfiles-tmux
-arch-dotfiles-config activate nvim tmux
+sudo pacman -Syu --needed aco-arch-dotfiles-nvim aco-arch-dotfiles-tmux
+aco-arch-dotfiles-config activate nvim tmux
 sudo pacman -Syu
-arch-dotfiles-config update
+aco-arch-dotfiles-config update
 ```
 
 Siehe [Installation, Veröffentlichung und sichere Migration](arch-package.md).

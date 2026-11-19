@@ -1,0 +1,19 @@
+# Package-local recipe. Stage checksummed sources with packaging/arch/build.sh.
+pkgname=aco-arch-dotfiles
+pkgver=0.3.0
+pkgrel=1
+pkgdesc='Complete dotfiles environment (optional metapackage)'
+arch=('any')
+url='https://github.com/Akademie-Olympia/aco-arch-dotfiles'
+license=('LicenseRef-arch-dotfiles-bundle')
+depends=('pipewire' 'pipewire-alsa' 'pipewire-pulse' 'pipewire-jack' 'wireplumber' 'gst-plugin-pipewire' 'networkmanager' 'bluez' 'power-profiles-daemon' 'noto-fonts' 'man-db' 'man-pages' 'aco-arch-dotfiles-foot' 'aco-arch-dotfiles-fuzzel' 'aco-arch-dotfiles-ghostty' 'aco-arch-dotfiles-gtk-3.0' 'aco-arch-dotfiles-gtk-4.0' 'aco-arch-dotfiles-hypr' 'aco-arch-dotfiles-kitty' 'aco-arch-dotfiles-libfm' 'aco-arch-dotfiles-nvim' 'aco-arch-dotfiles-pcmanfm' 'aco-arch-dotfiles-tmux' 'aco-arch-dotfiles-vim' 'aco-arch-dotfiles-wallpaper' 'aco-arch-dotfiles-waybar' 'aco-arch-dotfiles-yazi' 'aco-arch-dotfiles-zsh')
+optdepends=()
+replaces=('arch-dotfiles')
+conflicts=('arch-dotfiles')
+options=('!strip')
+source=('payload.tar.gz')
+sha256sums=('__SOURCE_SHA256__')
+
+package() {
+    cp -a "$srcdir/usr" "$pkgdir/"
+}

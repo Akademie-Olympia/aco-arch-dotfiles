@@ -11,7 +11,7 @@ import unittest
 from unittest.mock import patch
 
 
-SCRIPT = Path(__file__).resolve().parents[3] / "packages/arch-dotfiles-core/arch-dotfiles-config"
+SCRIPT = Path(__file__).resolve().parents[3] / "packages/aco-arch-dotfiles-core/aco-arch-dotfiles-config"
 loader = importlib.machinery.SourceFileLoader("package_config", str(SCRIPT))
 spec = importlib.util.spec_from_loader(loader.name, loader)
 module = importlib.util.module_from_spec(spec)

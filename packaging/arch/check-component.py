@@ -89,7 +89,7 @@ def jsonc(text):
 
 def check(module):
     origin = source.component_root(module)
-    name = "arch-dotfiles-" + module
+    name = "aco-arch-dotfiles-" + module
     recipe = source.package_recipe(name)
     subprocess.run(["bash", "-n", str(recipe)], check=True)
     result = subprocess.check_output([
@@ -98,7 +98,7 @@ def check(module):
     ], text=True).splitlines()
     if result[0] != name or result[1]:
         raise RuntimeError("Wrong package name or unexpected root-owned install scriptlet: " + name)
-    if not any(dependency.startswith("arch-dotfiles-core>=") for dependency in result[2:]):
+    if not any(dependency.startswith("aco-arch-dotfiles-core>=") for dependency in result[2:]):
         raise RuntimeError("Missing versioned core dependency: " + name)
     tracked = source.tracked_files(origin)
     for filename in tracked:

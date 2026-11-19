@@ -19,10 +19,10 @@ REGISTRY = json.loads((HERE / "packages.json").read_text())
 REPOSITORIES = json.loads((ROOT / "repositories.json").read_text())
 SOURCE_ROOT = Path(os.environ.get("ARCH_DOTFILES_SOURCE_ROOT", ROOT.parent))
 PRIVATE = {"hypr/monitors.local.lua", "tmux/local.conf", "tmux/local-options.conf"}
-CORE_FILES = ("adot", "arch-dotfiles-config", "package-command", "arch-dotfiles.install",
-              "BUNDLE-LICENSE", "arch-dotfiles-sync.service", "arch-dotfiles-sync.timer",
-              "arch-dotfiles-registry-kick", "arch-dotfiles-registry-kick.service",
-              "arch-dotfiles-registry-kick.timer")
+CORE_FILES = ("aco", "aco-arch-dotfiles-config", "package-command", "aco-arch-dotfiles.install",
+              "BUNDLE-LICENSE", "aco-arch-dotfiles-sync.service", "aco-arch-dotfiles-sync.timer",
+              "aco-arch-dotfiles-registry-kick", "aco-arch-dotfiles-registry-kick.service",
+              "aco-arch-dotfiles-registry-kick.timer")
 
 
 def tracked_files(root=None):
@@ -73,17 +73,18 @@ def recipe(name):
     lines = ["# Package-local recipe. Stage checksummed sources with packaging/arch/build.sh.",
              f"pkgname={name}", "pkgver=0.3.0", "pkgrel=1",
              f"pkgdesc='{data['description']}'", "arch=('any')",
-             "url='https://github.com/Akademie-Olympia/aco-dotfiles'",
+             "url='https://github.com/Akademie-Olympia/aco-arch-dotfiles'",
              "license=('LicenseRef-arch-dotfiles-bundle')",
              "depends=" + array(data["depends"]),
-             "optdepends=" + array(data.get("optdepends", [])), "options=('!strip')",
+             "optdepends=" + array(data.get("optdepends", [])),
+             f"replaces=('{name[4:]}')", f"conflicts=('{name[4:]}')", "options=('!strip')",
              "source=('payload.tar.gz')", "sha256sums=('__SOURCE_SHA256__')"]
     if data.get("kind") == "oh-my-zsh":
         lines += ["_omz_commit=17a2b4c3a5855524ad4772a17ada0dc474e2fdf3",
                   'source+=("ohmyzsh-${_omz_commit}.tar.gz::https://codeload.github.com/ohmyzsh/ohmyzsh/tar.gz/${_omz_commit}")',
                   "sha256sums+=('eb6f2788316ff75f9be60c00372da0da97d4bcab202d64a9229e1f6365166932')"]
     if data.get("kind") == "core":
-        lines += ["install=arch-dotfiles.install"]
+        lines += ["install=aco-arch-dotfiles.install"]
     lines += ["", "package() {", '    cp -a "$srcdir/usr" "$pkgdir/"']
     if data.get("kind") == "oh-my-zsh":
         lines += ['    cp -a "$srcdir/ohmyzsh-$_omz_commit" "$pkgdir/usr/share/arch-dotfiles/oh-my-zsh"']
@@ -105,7 +106,7 @@ def stage(name, destination, tracked=None):
     origin = component_root(module) if module else ROOT
     license_file = origin / "LICENSE" if (origin / "LICENSE").is_file() else ROOT / "LICENSE"
     copy(license_file, destination / f"usr/share/licenses/{name}/LICENSE")
-    copy(PACKAGES / "arch-dotfiles-core/BUNDLE-LICENSE",
+    copy(PACKAGES / "aco-arch-dotfiles-core/BUNDLE-LICENSE",
          destination / f"usr/share/licenses/{name}/BUNDLE-LICENSE")
     if module:
         tracked = tracked_files(origin) if tracked is None else tracked
@@ -141,20 +142,26 @@ def stage(name, destination, tracked=None):
     elif data.get("kind") == "core":
         for filename in CORE_FILES:
             source = package / filename
-            if filename in ("adot", "arch-dotfiles-config", "arch-dotfiles-registry-kick"):
+            if filename in ("aco", "aco-arch-dotfiles-config", "aco-arch-dotfiles-registry-kick"):
                 target = destination / "usr/bin" / filename
             elif filename.endswith((".service", ".timer")):
                 target = destination / "usr/lib/systemd/user" / filename
-            elif filename == "arch-dotfiles.install":
+            elif filename == "aco-arch-dotfiles.install":
                 continue
             else:
                 target = share / filename
             copy(source, target)
-            if filename in ("adot", "arch-dotfiles-config", "package-command",
-                            "arch-dotfiles-registry-kick"):
+            if filename in ("aco", "aco-arch-dotfiles-config", "package-command",
+                            "aco-arch-dotfiles-registry-kick"):
                 target.chmod(0o755)
-        for alias in ("arch-dot", "arch-dotfiles"):
-            (destination / "usr/bin" / alias).symlink_to("adot")
+        # Compatibility with the pre-ACO names, so existing users, shell history
+        # and already enabled user timers keep working after the package rename.
+        for alias in ("adot", "arch-dot", "arch-dotfiles", "aco-arch-dotfiles"):
+            (destination / "usr/bin" / alias).symlink_to("aco")
+        (destination / "usr/bin/arch-dotfiles-config").symlink_to("aco-arch-dotfiles-config")
+        (destination / "usr/bin/arch-dotfiles-registry-kick").symlink_to("aco-arch-dotfiles-registry-kick")
+        for unit in ("sync.service", "sync.timer", "registry-kick.service", "registry-kick.timer"):
+            (destination / "usr/lib/systemd/user" / f"arch-dotfiles-{unit}").symlink_to(f"aco-arch-dotfiles-{unit}")
         copy(HERE / "README.md", destination / "usr/share/doc/arch-dotfiles/README.md")
 
 
@@ -191,9 +198,9 @@ def prepare(name, output=None):
     text = text.replace("__SOURCE_SHA256__", hashlib.sha256(archive.read_bytes()).hexdigest())
     (build / "PKGBUILD").write_text(text)
     if REGISTRY[name].get("kind") == "core":
-        copy(PACKAGES / name / "arch-dotfiles.install", build / "arch-dotfiles.install")
+        copy(PACKAGES / name / "aco-arch-dotfiles.install", build / "aco-arch-dotfiles.install")
     digest = hashlib.sha256()
-    for filename in ("PKGBUILD", "payload.tar.gz", "arch-dotfiles.install"):
+    for filename in ("PKGBUILD", "payload.tar.gz", "aco-arch-dotfiles.install"):
         if (build / filename).exists():
             digest.update(filename.encode() + b"\0" + (build / filename).read_bytes())
     (build / "source.sha256").write_text(digest.hexdigest() + "\n")
