@@ -38,7 +38,7 @@ ist eine zusätzliche Absicherung: Er vergleicht die veröffentlichte
 `sources.json` mit `main` aller Komponenten und des hubs und startet den
 zentralen `Arch packages`-Workflow genau dann, wenn ein Paket hinter
 `main` zurückliegt. Voraussetzung ist ein angemeldeter `gh` (`gh auth login`);
-ohne ihn bleibt der halbstündige, möglicherweise verzögerte Fallback-Cron. Nichts wird
+ohne ihn beendet sich der Timer ohne Aktion; der Build wird dann durch den Push auf `main` ausgelöst. Nichts wird
 hier gebaut oder signiert — der Dispatch ist nur eine Anfrage an die bestehenden
 Sicherheits- und Veröffentlichungsschritte.
 

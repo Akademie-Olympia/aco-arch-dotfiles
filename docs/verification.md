@@ -44,8 +44,8 @@ journalctl --user -u arch-dotfiles-registry-kick.service -n 30 --no-pager
 ```
 
 Ohne `gh` oder ohne `gh auth login` beendet sich das Skript mit Hinweis und
-Exit 0 — die Verantwortung liegt dann beim halbstündigen Cron des
-`Arch packages`-Workflows. Ein „GitHub not reachable“ ist eine Verzögerung und
+Exit 0 — die Verantwortung liegt dann beim Dispatch nach einem Push auf
+`main` (`Arch packages`-Workflow). Ein „GitHub not reachable“ ist eine Verzögerung und
 wird beim nächsten Timer-Tick wiederholt, kein Fehler.
 
 ### Push bis Paket
@@ -66,8 +66,8 @@ wird beim nächsten Timer-Tick wiederholt, kein Fehler.
 
 Der Dispatch fordert einen Build an, er garantiert weder einen erfolgreichen
 Build noch einen festen Veröffentlichungszeitpunkt. GitHub Actions und die
-Signierungsumgebung müssen verfügbar sein. Der Registry-Timer und der Cron
-sind zusätzliche Wiederholungsmöglichkeiten, keine Paket-Updater.
+Signierungsumgebung müssen verfügbar sein. Der Registry-Timer
+ist eine zusätzliche Wiederholungsmöglichkeit, kein Paket-Updater.
 
 ## Automatische Sicherheitsprüfungen
 
