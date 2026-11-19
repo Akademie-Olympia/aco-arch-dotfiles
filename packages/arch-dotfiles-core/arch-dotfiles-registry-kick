@@ -11,7 +11,7 @@
 #  gap the honest way. It compares what the published registry was built
 #  from (sources.json, which names every component commit plus the hub)
 #  with the current main of each of those repositories, and dispatches the
-#  "Arch packages" workflow in MichaelWeissDEV/dotfiles when they disagree.
+#  "Arch packages" workflow in Akademie-Olympia/aco-dotfiles when they disagree.
 #
 #  The dispatch is a REQUEST only. The hub workflow re-runs its own safety
 #  pipeline — recipes, syntax, generated docs, smoke installs, gated
@@ -34,7 +34,7 @@
 
 set -euo pipefail
 
-REPO='MichaelWeissDEV/dotfiles'
+REPO='Akademie-Olympia/aco-dotfiles'
 WORKFLOW='Arch packages'
 
 case "${1:-}" in

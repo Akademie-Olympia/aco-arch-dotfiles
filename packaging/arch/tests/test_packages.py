@@ -62,7 +62,7 @@ class PackageLayoutTest(unittest.TestCase):
     def test_private_and_untracked_files_are_never_exported(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            package = root / "hypr-config"
+            package = root / "aco-hypr"
             package.mkdir(parents=True)
             core = root / "packages/arch-dotfiles-core"
             core.mkdir(parents=True)

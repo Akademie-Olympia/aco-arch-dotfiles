@@ -2,7 +2,7 @@
 
 Alle Komponenten haben ein eigenes GitHub-Repository mit Quellen im Root und
 einem eigenen `packaging/arch/PKGBUILD`. Die Zuordnung steht in
-[`repositories.json`](https://github.com/MichaelWeissDEV/dotfiles/blob/main/repositories.json).
+[`repositories.json`](https://github.com/Akademie-Olympia/aco-dotfiles/blob/main/repositories.json).
 Die hier beschriebenen Pfade beziehen sich auf aktivierte Benutzerkopien unter
 `~/.config`, nicht auf schreibgeschützte Paketdateien unter `/usr`.
 
@@ -10,7 +10,7 @@ Die hier beschriebenen Pfade beziehen sich auf aktivierte Benutzerkopien unter
 
 ```bash
 # Nur bestimmte Konfigurationen einschließlich ihrer Abhängigkeiten:
-curl -fsSL https://raw.githubusercontent.com/MichaelWeissDEV/dotfiles/main/install.sh | bash -s -- nvim tmux
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash -s -- nvim tmux
 # Die komplette Umgebung: den Aufruf ohne Modulnamen verwenden.
 ```
 
@@ -32,12 +32,12 @@ Nach einem Push auf `main` fordert der Komponenten-Workflow nach erfolgreicher
 Paketprüfung automatisch einen zentralen Build an. Zusätzlich prüft ein lokaler,
 optionaler Registry-Timer die veröffentlichten Commits. Der GitHub-Cron
 ist lediglich ein unzuverlässiger Fallback; ein manueller Start ist mit
-`gh workflow run packages.yml -R MichaelWeissDEV/dotfiles` möglich. Erst nach
+`gh workflow run packages.yml -R Akademie-Olympia/aco-dotfiles` möglich. Erst nach
 erfolgreichem Build und Signierung ist die neue Paketversion per `-Syu` verfügbar.
 
 ## Neovim
 
-- Paket: `arch-dotfiles-nvim`; Quelle: [nvim-config](https://github.com/MichaelWeissDEV/nvim-config).
+- Paket: `arch-dotfiles-nvim`; Quelle: [nvim-config](https://github.com/Akademie-Olympia/aco-nvim).
 - Einstieg: `~/.config/nvim/init.lua`; Module unter `lua/`; Plugins sind vendort.
 - [Vollständiges Handbuch](https://nvim-config.readthedocs.io/en/latest/):
   Installation, IDE-/Sprachwerkzeuge, Keymaps, Plugins und Fehlerdiagnose.
@@ -46,7 +46,7 @@ erfolgreichem Build und Signierung ist die neue Paketversion per `-Syu` verfügb
 
 ## tmux
 
-- Paket: `arch-dotfiles-tmux`; Quelle: [tmux-config](https://github.com/MichaelWeissDEV/tmux-config).
+- Paket: `arch-dotfiles-tmux`; Quelle: [tmux-config](https://github.com/Akademie-Olympia/aco-tmux).
 - Einstieg: `~/.config/tmux/tmux.conf`; Anpassungen in `local-options.conf` und `local.conf`.
 - [Vollständiges Handbuch](https://tmux-config.readthedocs.io/en/latest/).
 - tmux 3.8 belegt früher freie Keys: Zusatzfunktionen liegen jetzt auf
@@ -56,35 +56,35 @@ erfolgreichem Build und Signierung ist die neue Paketversion per `-Syu` verfügb
 
 ## Vim
 
-- Paket: `arch-dotfiles-vim`; Quelle: [vim-config](https://github.com/MichaelWeissDEV/vim-config).
+- Paket: `arch-dotfiles-vim`; Quelle: [vim-config](https://github.com/Akademie-Olympia/aco-vim).
 - Einstieg: `~/.config/vim/vimrc`, zusätzlich `~/.vimrc` als verwalteter Link.
 - [Vollständiges Handbuch](https://vim-config.readthedocs.io/en/latest/) für
   Keybindings, Statusline und lokale Anpassungen. Es werden keine Plugins nachgeladen.
 
 ## Ghostty
 
-- Paket: `arch-dotfiles-ghostty`; Quelle: [ghostty-config](https://github.com/MichaelWeissDEV/ghostty-config).
+- Paket: `arch-dotfiles-ghostty`; Quelle: [ghostty-config](https://github.com/Akademie-Olympia/aco-ghostty).
 - Datei: `~/.config/ghostty/config`.
 - [Vollständiges Handbuch](https://ghostty-config.readthedocs.io/en/latest/).
   Der konfigurierte Zsh-Prozess ist als Paketabhängigkeit deklariert.
 
 ## Kitty
 
-- Paket: `arch-dotfiles-kitty`; Quelle: [kitty-config](https://github.com/MichaelWeissDEV/kitty-config).
+- Paket: `arch-dotfiles-kitty`; Quelle: [kitty-config](https://github.com/Akademie-Olympia/aco-kitty).
 - Datei: `~/.config/kitty/kitty.conf`.
 - [Vollständiges Handbuch](https://kitty-config.readthedocs.io/en/latest/):
   Farben, Schrift, Tabs und Tastenkombinationen. `Ctrl+Shift+F5` lädt die Einstellungen neu.
 
 ## Foot
 
-- Paket: `arch-dotfiles-foot`; Quelle: [foot-config](https://github.com/MichaelWeissDEV/foot-config).
+- Paket: `arch-dotfiles-foot`; Quelle: [foot-config](https://github.com/Akademie-Olympia/aco-foot).
 - Datei: `~/.config/foot/foot.ini`; Wayland-Terminal mit Zsh.
 - [Terminal-Anleitung](terminals.md) und `man foot.ini` beschreiben die Einstellungen.
   Änderungen gegebenenfalls durch Neustart eines Terminalfensters übernehmen.
 
 ## Hyprland
 
-- Paket: `arch-dotfiles-hypr`; Quelle: [hypr-config](https://github.com/MichaelWeissDEV/hypr-config).
+- Paket: `arch-dotfiles-hypr`; Quelle: [hypr-config](https://github.com/Akademie-Olympia/aco-hypr).
 - Einstieg: `~/.config/hypr/hyprland.lua`. Desktop-Komponenten, Screenshot-
   Werkzeuge und verwendete Programme werden über Abhängigkeiten installiert.
 - Rechnerabhängige Monitore in `~/.config/hypr/monitors.local.lua` anpassen;
@@ -94,14 +94,14 @@ erfolgreichem Build und Signierung ist die neue Paketversion per `-Syu` verfügb
 
 ## Waybar
 
-- Paket: `arch-dotfiles-waybar`; Quelle: [waybar-config](https://github.com/MichaelWeissDEV/waybar-config).
+- Paket: `arch-dotfiles-waybar`; Quelle: [waybar-config](https://github.com/Akademie-Olympia/aco-waybar).
 - Dateien: `~/.config/waybar/config.jsonc`, `style.css`, `power_menu.xml`.
 - [Panel-Anleitung](waybar.md) beschreibt Module, Bedienung und Anpassungen.
   Für die Darstellung werden Wayland, die passenden Schriftarten und eine laufende Sitzung benötigt.
 
 ## Fuzzel
 
-- Paket: `arch-dotfiles-fuzzel`; Quelle: [fuzzel-config](https://github.com/MichaelWeissDEV/fuzzel-config).
+- Paket: `arch-dotfiles-fuzzel`; Quelle: [fuzzel-config](https://github.com/Akademie-Olympia/aco-fuzzel).
 - Datei: `~/.config/fuzzel/fuzzel.ini` für Schrift, Farben, Layout und Verhalten.
 - Fuzzel ist Anwendungsstarter und `--dmenu`-Frontend für Desktop-Helfer.
   [Hyprland-Anleitung](hyprland.md) dokumentiert die Starter-/Menü-Tasten.
@@ -109,7 +109,7 @@ erfolgreichem Build und Signierung ist die neue Paketversion per `-Syu` verfügb
 
 ## Wallpaper
 
-- Paket: `arch-dotfiles-wallpaper`; Quelle: [wallpaper-config](https://github.com/MichaelWeissDEV/wallpaper-config).
+- Paket: `arch-dotfiles-wallpaper`; Quelle: [wallpaper-config](https://github.com/Akademie-Olympia/aco-wallpaper).
 - Datei: `~/.config/wallpaper/wallpaper.conf`; Programm: `wallpaper` bzw. `wp`.
 - Private Bilder werden nicht verteilt. Bilder in `~/Pictures/Wallpapers` oder
   der Benutzerbibliothek unter `~/.local/share/arch-dotfiles/config/pictures` ablegen.
@@ -136,7 +136,7 @@ Ein privates Bilder-Repository separat mit Git verwalten, nicht mit früheren
 
 ## Yazi
 
-- Paket: `arch-dotfiles-yazi`; Quelle: [yazi-config](https://github.com/MichaelWeissDEV/yazi-config).
+- Paket: `arch-dotfiles-yazi`; Quelle: [yazi-config](https://github.com/Akademie-Olympia/aco-yazi).
 - `~/.config/yazi/yazi.toml`: Layout, Sortierung und Bedienung.
 - `theme.toml` wählt die mitgelieferte Catppuccin-Mocha-Flavor aus `flavors/`;
   `package.toml` dokumentiert die Flavor-Quelle.
@@ -145,7 +145,7 @@ Ein privates Bilder-Repository separat mit Git verwalten, nicht mit früheren
 
 ## Zsh
 
-- Paket: `arch-dotfiles-zsh`; Quelle: [zsh-config](https://github.com/MichaelWeissDEV/zsh-config).
+- Paket: `arch-dotfiles-zsh`; Quelle: [zsh-config](https://github.com/Akademie-Olympia/aco-zsh).
 - Dateien: `~/.config/zsh/zshrc`, `aliases.zsh`, `themes/`; `~/.zshrc` wird verlinkt.
 - Oh My Zsh und die beiden Highlighting-/Vorschlags-Plugins werden über Pakete
   verwaltet. Die paketierte Oh-My-Zsh-Kopie aktualisiert sich nicht selbst per Git.
@@ -154,28 +154,28 @@ Ein privates Bilder-Repository separat mit Git verwalten, nicht mit früheren
 
 ## GTK3
 
-- Paket: `arch-dotfiles-gtk-3.0`; Quelle: [gtk3-config](https://github.com/MichaelWeissDEV/gtk3-config).
+- Paket: `arch-dotfiles-gtk-3.0`; Quelle: [gtk3-config](https://github.com/Akademie-Olympia/aco-gtk3).
 - Dateien: `~/.config/gtk-3.0/settings.ini` und `gtk.css`.
 - `settings.ini` legt GTK-Einstellungen fest; `gtk.css` enthält das Styling.
   Nach Änderungen betroffene GTK3-Anwendungen neu starten, nicht die gesamte Sitzung.
 
 ## GTK4
 
-- Paket: `arch-dotfiles-gtk-4.0`; Quelle: [gtk4-config](https://github.com/MichaelWeissDEV/gtk4-config).
+- Paket: `arch-dotfiles-gtk-4.0`; Quelle: [gtk4-config](https://github.com/Akademie-Olympia/aco-gtk4).
 - Dateien: `~/.config/gtk-4.0/settings.ini` und `gtk.css`.
 - GTK3 und GTK4 verwenden getrennte Konfigurationen. Anwendungen können eigene
   Theme-Regeln oder libadwaita verwenden; nicht jede Anwendung übernimmt jedes CSS.
 
 ## LibFM
 
-- Paket: `arch-dotfiles-libfm`; Quelle: [libfm-config](https://github.com/MichaelWeissDEV/libfm-config).
+- Paket: `arch-dotfiles-libfm`; Quelle: [libfm-config](https://github.com/Akademie-Olympia/aco-libfm).
 - Datei: `~/.config/libfm/libfm.conf` für den von PCManFM verwendeten Backend.
 - Das Paket enthält Einstellungen, keine zusätzliche Desktop-Sitzung und keine
   persönlichen Mount-Zugangsdaten. PCManFM nach Änderungen neu starten.
 
 ## PCManFM
 
-- Paket: `arch-dotfiles-pcmanfm`; Quelle: [pcmanfm-config](https://github.com/MichaelWeissDEV/pcmanfm-config).
+- Paket: `arch-dotfiles-pcmanfm`; Quelle: [pcmanfm-config](https://github.com/Akademie-Olympia/aco-pcmanfm).
 - Datei: `~/.config/pcmanfm/default/pcmanfm.conf` für Fenster, Ansicht und Bedienung.
 - LibFM- und GTK3-Konfiguration sind als Abhängigkeiten deklariert.
   `pcmanfm` startet den Dateimanager; Mounts und Berechtigungen bleiben Aufgabe

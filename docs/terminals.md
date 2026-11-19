@@ -3,7 +3,7 @@
 [![Docs](https://readthedocs.org/projects/arch-dotfiles/badge/?version=latest)](https://arch-dotfiles.readthedocs.io/en/latest/)
 [![Platform: Arch Linux](https://img.shields.io/badge/platform-Arch%20Linux%20%7C%20Linux%20%7C%20macOS-1793D1?logo=arch-linux&logoColor=white)](https://archlinux.org/)
 [![Theme: Catppuccin Mocha](https://img.shields.io/badge/theme-Catppuccin%20Mocha-cba6f7)](https://github.com/catppuccin/catppuccin)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelWeissDEV/dotfiles/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Akademie-Olympia/aco-dotfiles/blob/main/LICENSE)
 
 [**Documentation Hub**](index.md) ·
 [Installation](installation.md) ·
@@ -38,7 +38,7 @@ Regardless of which terminal emulator is active, you experience consistent visua
 | **Wayland Support** | Native Wayland (GTK4) | Native Wayland | Native Wayland |
 | **Tab Management** | Native GTK4 tabs | Powerline tabs | Multiplexer ([tmux](https://tmux-config.readthedocs.io/en/latest/)) |
 | **Config Reload Shortcut** | <kbd>Ctrl+Shift+,</kbd> | <kbd>Ctrl+Shift+F5</kbd> | Automatic / restart |
-| **Repository** | [MichaelWeissDEV/ghostty-config](https://github.com/MichaelWeissDEV/ghostty-config) | [MichaelWeissDEV/kitty-config](https://github.com/MichaelWeissDEV/kitty-config) | [MichaelWeissDEV/foot-config](https://github.com/MichaelWeissDEV/foot-config) |
+| **Repository** | [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot) |
 | **Documentation** | [**ghostty-config.readthedocs.io**](https://ghostty-config.readthedocs.io/en/latest/) | [**kitty-config.readthedocs.io**](https://kitty-config.readthedocs.io/en/latest/) | [Foot section](#3-foot-configfootfootini) · built-in man pages (`man foot.ini`) |
 
 ---
@@ -50,7 +50,7 @@ Regardless of which terminal emulator is active, you experience consistent visua
 Managed by `arch-dotfiles-ghostty`; install and update through [Pacman](arch-package.md). Ghostty is a modern GPU-accelerated terminal written in Zig featuring native GTK4/Wayland rendering and zero window decorations (`window-decoration = none`).
 
 - **Config path**: `~/.config/ghostty/config`
-- **GitHub Repository**: [MichaelWeissDEV/ghostty-config](https://github.com/MichaelWeissDEV/ghostty-config)
+- **GitHub Repository**: [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty)
 - **Full Documentation**: [ghostty-config.readthedocs.io](https://ghostty-config.readthedocs.io/en/latest/)
 
 ### 2. Kitty (`~/.config/kitty/kitty.conf`)
@@ -58,7 +58,7 @@ Managed by `arch-dotfiles-ghostty`; install and update through [Pacman](arch-pac
 Managed by `arch-dotfiles-kitty`; install and update through [Pacman](arch-package.md). Kitty provides mature graphics protocols, kitten automation scripts, dynamic background opacity, and a custom Catppuccin Powerline tab bar.
 
 - **Config path**: `~/.config/kitty/kitty.conf`
-- **GitHub Repository**: [MichaelWeissDEV/kitty-config](https://github.com/MichaelWeissDEV/kitty-config)
+- **GitHub Repository**: [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty)
 - **Full Documentation**: [kitty-config.readthedocs.io](https://kitty-config.readthedocs.io/en/latest/)
 
 ### 3. Foot (`~/.config/foot/foot.ini`)
@@ -66,7 +66,7 @@ Managed by `arch-dotfiles-kitty`; install and update through [Pacman](arch-packa
 Managed by `arch-dotfiles-foot`; install and update through [Pacman](arch-package.md). Foot is an ultra-lightweight terminal designed strictly for Wayland. It starts instantaneously and operates with minimal CPU and memory overhead.
 
 - **Config path**: `~/.config/foot/foot.ini`
-- **GitHub Repository**: [MichaelWeissDEV/foot-config](https://github.com/MichaelWeissDEV/foot-config)
+- **GitHub Repository**: [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot)
 - **Documentation**: This guide and the built-in `man foot.ini` reference
 
 ---
@@ -88,10 +88,10 @@ To switch your default terminal to Ghostty or Foot, change `local terminal = "gh
 
 | Component | Repository | Documentation |
 | :--- | :--- | :--- |
-| **Arch Dotfiles Hub** *(Main System)* | [MichaelWeissDEV/dotfiles](https://github.com/MichaelWeissDEV/dotfiles) | [arch-dotfiles.readthedocs.io](https://arch-dotfiles.readthedocs.io/en/latest/) |
-| **Neovim (`nvim-config`)** | [MichaelWeissDEV/nvim-config](https://github.com/MichaelWeissDEV/nvim-config) | [nvim-config.readthedocs.io](https://nvim-config.readthedocs.io/en/latest/) |
-| **tmux (`tmux-config`)** | [MichaelWeissDEV/tmux-config](https://github.com/MichaelWeissDEV/tmux-config) | [tmux-config.readthedocs.io](https://tmux-config.readthedocs.io/en/latest/) |
-| **Ghostty (`ghostty-config`)** | [MichaelWeissDEV/ghostty-config](https://github.com/MichaelWeissDEV/ghostty-config) | [ghostty-config.readthedocs.io](https://ghostty-config.readthedocs.io/en/latest/) |
-| **Kitty (`kitty-config`)** | [MichaelWeissDEV/kitty-config](https://github.com/MichaelWeissDEV/kitty-config) | [kitty-config.readthedocs.io](https://kitty-config.readthedocs.io/en/latest/) |
-| **Foot (`foot-config`)** | [MichaelWeissDEV/foot-config](https://github.com/MichaelWeissDEV/foot-config) | [Terminals Guide](terminals.md) |
-| **Vim (`vim-config`)** | [MichaelWeissDEV/vim-config](https://github.com/MichaelWeissDEV/vim-config) | [vim-config.readthedocs.io](https://vim-config.readthedocs.io/en/latest/) |
+| **Arch Dotfiles Hub** *(Main System)* | [Akademie-Olympia/aco-dotfiles](https://github.com/Akademie-Olympia/aco-dotfiles) | [arch-dotfiles.readthedocs.io](https://arch-dotfiles.readthedocs.io/en/latest/) |
+| **Neovim (`nvim-config`)** | [Akademie-Olympia/aco-nvim](https://github.com/Akademie-Olympia/aco-nvim) | [nvim-config.readthedocs.io](https://nvim-config.readthedocs.io/en/latest/) |
+| **tmux (`tmux-config`)** | [Akademie-Olympia/aco-tmux](https://github.com/Akademie-Olympia/aco-tmux) | [tmux-config.readthedocs.io](https://tmux-config.readthedocs.io/en/latest/) |
+| **Ghostty (`ghostty-config`)** | [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [ghostty-config.readthedocs.io](https://ghostty-config.readthedocs.io/en/latest/) |
+| **Kitty (`kitty-config`)** | [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [kitty-config.readthedocs.io](https://kitty-config.readthedocs.io/en/latest/) |
+| **Foot (`foot-config`)** | [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot) | [Terminals Guide](terminals.md) |
+| **Vim (`vim-config`)** | [Akademie-Olympia/aco-vim](https://github.com/Akademie-Olympia/aco-vim) | [vim-config.readthedocs.io](https://vim-config.readthedocs.io/en/latest/) |

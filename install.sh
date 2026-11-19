@@ -2,7 +2,7 @@
 # Install signed Arch dotfiles packages; never clone development sources into a home.
 set -euo pipefail
 umask 022
-repository=MichaelWeissDEV/dotfiles
+repository=Akademie-Olympia/aco-dotfiles
 fingerprint=5635E5E93F5BA18D8868AAB5A8DD63927F151C4D
 yes=false
 activate=true

@@ -6,7 +6,7 @@ Git-Subtrees und eines monolithischen Dotfiles-Installers.
 Einmaliger Installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/MichaelWeissDEV/dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash
 ```
 
 Alternativ manuell:

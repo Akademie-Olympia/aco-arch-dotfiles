@@ -15,13 +15,13 @@ nicht mehr als Subtrees oder Konfigurationskopien in diesem Repository.
 Auf Arch Linux als normaler Benutzer mit `sudo`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/MichaelWeissDEV/dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash
 ```
 
 Oder nur ausgewählte Konfigurationen installieren:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/MichaelWeissDEV/dotfiles/main/install.sh | bash -s -- nvim tmux
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash -s -- nvim tmux
 ```
 
 Der Installer prüft den fest hinterlegten Signierschlüssel, richtet das
@@ -54,7 +54,7 @@ Die betroffene Anwendung gegebenenfalls neu laden/starten.
 
 ```bash
 mkdir -p ~/git/config
-git clone git@github.com:MichaelWeissDEV/dotfiles.git ~/git/config/dotfiles
+git clone git@github.com:Akademie-Olympia/aco-dotfiles.git ~/git/config/dotfiles
 bash ~/git/config/dotfiles/scripts/clone-repos.sh
 ```
 
@@ -91,7 +91,7 @@ für normale Konfigurationsänderungen erforderlich. Sofortiger Build-Start für
 Maintainer:
 
 ```bash
-gh workflow run packages.yml -R MichaelWeissDEV/dotfiles
+gh workflow run packages.yml -R Akademie-Olympia/aco-dotfiles
 ```
 
 ## Paketstruktur
@@ -104,7 +104,7 @@ gh workflow run packages.yml -R MichaelWeissDEV/dotfiles
 Jede Konfiguration pflegt ihre Abhängigkeiten und ihr Rezept selbst in
 `packaging/arch/PKGBUILD`. Hier bleiben nur die drei gemeinsamen Paketordner
 unter `packages/`. Alle Pakete und Repository-Daten werden signiert als Assets
-des GitHub-Releases [`repo`](https://github.com/MichaelWeissDEV/dotfiles/releases/tag/repo)
+des GitHub-Releases [`repo`](https://github.com/Akademie-Olympia/aco-dotfiles/releases/tag/repo)
 veröffentlicht. `sources.json` dort dokumentiert die tatsächlich gebauten Commits.
 
 **[Builds, Sicherheit, Migration und Deinstallation](packaging/arch/README.md)** ·

@@ -15,7 +15,7 @@ class ComponentTest(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.origin = self.root / "foot-config"
+        self.origin = self.root / "aco-foot"
         (self.origin / "packaging/arch").mkdir(parents=True)
         self.recipe = self.origin / "packaging/arch/PKGBUILD"
         self.recipe.write_text("pkgname=arch-dotfiles-foot\ndepends=('arch-dotfiles-core>=0.3.0' 'foot')\n")

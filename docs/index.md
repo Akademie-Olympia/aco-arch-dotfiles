@@ -5,7 +5,7 @@ und Shell. Quellen und Paketrezepte liegen in eigenen GitHub-Repositories.
 Ein signiertes GitHub-Release stellt das Pacman-Repository bereit:
 Installation und Updates erfolgen mit `pacman -Syu`, nicht über Git-Subtrees.
 
-Schnellstart: `curl -fsSL https://raw.githubusercontent.com/MichaelWeissDEV/dotfiles/main/install.sh | bash`.
+Schnellstart: `curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash`.
 
 Start: [Installation](installation.md) ·
 [Paketierung, GitHub-Repository und Migration](arch-package.md).

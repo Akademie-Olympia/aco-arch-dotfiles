@@ -73,7 +73,7 @@ def recipe(name):
     lines = ["# Package-local recipe. Stage checksummed sources with packaging/arch/build.sh.",
              f"pkgname={name}", "pkgver=0.3.0", "pkgrel=1",
              f"pkgdesc='{data['description']}'", "arch=('any')",
-             "url='https://github.com/MichaelWeissDEV/dotfiles'",
+             "url='https://github.com/Akademie-Olympia/aco-dotfiles'",
              "license=('LicenseRef-arch-dotfiles-bundle')",
              "depends=" + array(data["depends"]),
              "optdepends=" + array(data.get("optdepends", [])), "options=('!strip')",

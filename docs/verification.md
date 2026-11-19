@@ -116,7 +116,7 @@ Installation wird nicht von Pacman aktualisiert.
 command -v gh
 gh --version
 gh auth status
-gh run list -R MichaelWeissDEV/dotfiles --workflow packages.yml
+gh run list -R Akademie-Olympia/aco-dotfiles --workflow packages.yml
 ```
 
 Keine Tokens oder privaten Signierschlüssel in Issue-/CI-Logs oder Git committen.

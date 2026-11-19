@@ -6,16 +6,16 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
-HUB = "MichaelWeissDEV/dotfiles"
+HUB = "Akademie-Olympia/aco-dotfiles"
 
 SOURCES = {
     "distribution": "1111111111111111111111111111111111111111",
     "components": {
-        "foot": {"repository": "MichaelWeissDEV/foot-config",
+        "foot": {"repository": "Akademie-Olympia/aco-foot",
                  "commit": "2222222222222222222222222222222222222222"},
-        "tmux": {"repository": "MichaelWeissDEV/tmux-config",
+        "tmux": {"repository": "Akademie-Olympia/aco-tmux",
                  "commit": "3333333333333333333333333333333333333333"},
-        "vim": {"repository": "MichaelWeissDEV/vim-config",
+        "vim": {"repository": "Akademie-Olympia/aco-vim",
                 "commit": "4444444444444444444444444444444444444444"},
     },
 }
@@ -39,9 +39,9 @@ case "$1/$2" in
   workflow/run) exit 0 ;;
 esac
 case "$url" in
-  repos/MichaelWeissDEV/dotfiles/releases/tags/repo)
+  repos/Akademie-Olympia/aco-dotfiles/releases/tags/repo)
     ${KICK_NO_ASSET:+:} echo 12345 ;;
-  repos/MichaelWeissDEV/dotfiles/releases/assets/12345)
+  repos/Akademie-Olympia/aco-dotfiles/releases/assets/12345)
     cat "${KICK_SOURCES}" ;;
   repos/*/branches/main)
     repo="${url#repos/}"
@@ -103,13 +103,13 @@ class RegistryKickTest(unittest.TestCase):
 
     def test_ahead_component_is_named_and_dispatched(self):
         heads = dict(EVERYTHING_CURRENT)
-        heads["MichaelWeissDEV/tmux-config"] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        heads["Akademie-Olympia/aco-tmux"] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         self.publish(heads)
         result = self.run_kick()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue(self.dispatched())
-        self.assertIn("dispatched 'Arch packages' in MichaelWeissDEV/dotfiles", result.stdout)
-        self.assertIn("tmux-config", result.stdout)
+        self.assertIn("dispatched 'Arch packages' in Akademie-Olympia/aco-dotfiles", result.stdout)
+        self.assertIn("aco-tmux", result.stdout)
         self.assertIn(SOURCES["components"]["tmux"]["commit"], result.stdout)
         self.assertIn("a" * 40, result.stdout)
         self.assertIn("(1 source(s) ahead)", result.stdout)

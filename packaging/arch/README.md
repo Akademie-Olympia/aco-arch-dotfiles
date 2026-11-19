@@ -5,9 +5,9 @@
 Als normaler Arch-Benutzer, nicht als root:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/MichaelWeissDEV/dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash
 # Oder nur ausgewählte Pakete:
-curl -fsSL https://raw.githubusercontent.com/MichaelWeissDEV/dotfiles/main/install.sh | bash -s -- nvim tmux
+curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-dotfiles/main/install.sh | bash -s -- nvim tmux
 ```
 
 Alternativ das Script herunterladen, prüfen und `bash install.sh` ausführen.
@@ -21,7 +21,7 @@ signiert. Er aktiviert Paket- **und** Datenbanksignaturprüfungen:
 ```ini
 [arch-dotfiles]
 SigLevel = Required DatabaseRequired
-Server = https://github.com/MichaelWeissDEV/dotfiles/releases/download/repo
+Server = https://github.com/Akademie-Olympia/aco-dotfiles/releases/download/repo
 ```
 
 Die Datei liegt unter `/etc/pacman.d/arch-dotfiles.conf`; in `/etc/pacman.conf`
@@ -73,7 +73,7 @@ Kein automatischer Neustart der grafischen Sitzung. Ohne aktivierten Timer ist
 
 ```bash
 bash scripts/clone-repos.sh
-cd ../nvim-config
+cd ../aco-nvim
 # Änderungen bearbeiten, committen und nach main pushen
 git push origin main
 ```
@@ -86,7 +86,7 @@ Konfigurationen. Ein Push alleine bedeutet noch nicht, dass ein Paket verfügbar
 ist. Der Status ist im zentralen Actions-Workflow sichtbar.
 
 ```bash
-gh workflow run packages.yml -R MichaelWeissDEV/dotfiles
+gh workflow run packages.yml -R Akademie-Olympia/aco-dotfiles
 ```
 
 Die Pakete erhalten automatisch eine Version der Form
