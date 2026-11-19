@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Copy the shared docs kit (docs/_aco) into every component repository.
+"""Copy the shared docs kit (docs/_aco) into every repository that builds documentation.
 
     python3 scripts/sync-docs-kit.py [--root DIR] [--check]
 
@@ -58,11 +58,15 @@ def main():
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     repositories = json.loads((HUB / "repositories.json").read_text())
+    repositories["docs"] = "Akademie-Olympia/aco-docs"  # shared site of the small components
     stale = []
     for module, full in sorted(repositories.items()):
         repo = args.root / full.split("/")[1]
         if not repo.is_dir():
             print(f"skip {module}: {repo} is not cloned")
+            continue
+        if not (repo / "docs").is_dir():
+            print(f"skip {module}: no docs/ (documented in aco-docs)")
             continue
         for relative, content in wanted(repo).items():
             target = repo / relative

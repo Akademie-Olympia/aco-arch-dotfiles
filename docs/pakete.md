@@ -1,27 +1,27 @@
-# Pakete und Repositories
+# Packages and repositories
 
-Das zentrale [dotfiles-Repository](https://github.com/Akademie-Olympia/aco-arch-dotfiles) enthält Installer, Paketbau, Signierung und Dokumentation. Die Komponenten werden unabhängig entwickelt.
+The central [hub repository](https://github.com/Akademie-Olympia/aco-arch-dotfiles) holds the installer, package build, signing and documentation. The components are developed independently.
 
-| Paket | Repository | Handbuch |
+| Package | Repository | Manual |
 | --- | --- | --- |
-| `aco-arch-dotfiles-core` | [dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [aco-arch-dotfiles](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-oh-my-zsh` | [dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [aco-arch-dotfiles](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-foot` | [foot](https://github.com/Akademie-Olympia/aco-foot) | [aco-foot](https://aco-foot.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-fuzzel` | [fuzzel](https://github.com/Akademie-Olympia/aco-fuzzel) | [aco-fuzzel](https://aco-fuzzel.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-ghostty` | [ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [aco-ghostty](https://aco-ghostty.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-gtk-3.0` | [gtk-3.0](https://github.com/Akademie-Olympia/aco-gtk3) | [aco-gtk3](https://aco-gtk3.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-gtk-4.0` | [gtk-4.0](https://github.com/Akademie-Olympia/aco-gtk4) | [aco-gtk4](https://aco-gtk4.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-hypr` | [hypr](https://github.com/Akademie-Olympia/aco-hypr) | [aco-hypr](https://aco-hypr.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-kitty` | [kitty](https://github.com/Akademie-Olympia/aco-kitty) | [aco-kitty](https://aco-kitty.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-libfm` | [libfm](https://github.com/Akademie-Olympia/aco-libfm) | [aco-libfm](https://aco-libfm.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-nvim` | [nvim](https://github.com/Akademie-Olympia/aco-nvim) | [aco-nvim](https://aco-nvim.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-pcmanfm` | [pcmanfm](https://github.com/Akademie-Olympia/aco-pcmanfm) | [aco-pcmanfm](https://aco-pcmanfm.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-tmux` | [tmux](https://github.com/Akademie-Olympia/aco-tmux) | [aco-tmux](https://aco-tmux.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-vim` | [vim](https://github.com/Akademie-Olympia/aco-vim) | [aco-vim](https://aco-vim.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-wallpaper` | [wallpaper](https://github.com/Akademie-Olympia/aco-wallpaper) | [aco-wallpaper](https://aco-wallpaper.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-waybar` | [waybar](https://github.com/Akademie-Olympia/aco-waybar) | [aco-waybar](https://aco-waybar.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-yazi` | [yazi](https://github.com/Akademie-Olympia/aco-yazi) | [aco-yazi](https://aco-yazi.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles-zsh` | [zsh](https://github.com/Akademie-Olympia/aco-zsh) | [aco-zsh](https://aco-zsh.readthedocs.io/en/latest/) |
-| `aco-arch-dotfiles` | [dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [aco-arch-dotfiles](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-core` | [aco-arch-dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [Hub](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-oh-my-zsh` | [aco-arch-dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [Hub](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-foot` | [aco-foot](https://github.com/Akademie-Olympia/aco-foot) | [aco-foot](https://aco-docs.readthedocs.io/en/latest/foot/) |
+| `aco-arch-dotfiles-fuzzel` | [aco-fuzzel](https://github.com/Akademie-Olympia/aco-fuzzel) | [aco-fuzzel](https://aco-docs.readthedocs.io/en/latest/fuzzel/) |
+| `aco-arch-dotfiles-ghostty` | [aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [aco-ghostty](https://aco-ghostty.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-gtk-3.0` | [aco-gtk3](https://github.com/Akademie-Olympia/aco-gtk3) | [aco-gtk3](https://aco-docs.readthedocs.io/en/latest/gtk3/) |
+| `aco-arch-dotfiles-gtk-4.0` | [aco-gtk4](https://github.com/Akademie-Olympia/aco-gtk4) | [aco-gtk4](https://aco-docs.readthedocs.io/en/latest/gtk4/) |
+| `aco-arch-dotfiles-hypr` | [aco-hypr](https://github.com/Akademie-Olympia/aco-hypr) | [aco-hypr](https://aco-hypr.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-kitty` | [aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [aco-kitty](https://aco-kitty.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-libfm` | [aco-libfm](https://github.com/Akademie-Olympia/aco-libfm) | [aco-libfm](https://aco-docs.readthedocs.io/en/latest/libfm/) |
+| `aco-arch-dotfiles-nvim` | [aco-nvim](https://github.com/Akademie-Olympia/aco-nvim) | [aco-nvim](https://aco-nvim.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-pcmanfm` | [aco-pcmanfm](https://github.com/Akademie-Olympia/aco-pcmanfm) | [aco-pcmanfm](https://aco-docs.readthedocs.io/en/latest/pcmanfm/) |
+| `aco-arch-dotfiles-tmux` | [aco-tmux](https://github.com/Akademie-Olympia/aco-tmux) | [aco-tmux](https://aco-tmux.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-vim` | [aco-vim](https://github.com/Akademie-Olympia/aco-vim) | [aco-vim](https://aco-vim.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles-wallpaper` | [aco-wallpaper](https://github.com/Akademie-Olympia/aco-wallpaper) | [aco-wallpaper](https://aco-docs.readthedocs.io/en/latest/wallpaper/) |
+| `aco-arch-dotfiles-waybar` | [aco-waybar](https://github.com/Akademie-Olympia/aco-waybar) | [aco-waybar](https://aco-docs.readthedocs.io/en/latest/waybar/) |
+| `aco-arch-dotfiles-yazi` | [aco-yazi](https://github.com/Akademie-Olympia/aco-yazi) | [aco-yazi](https://aco-docs.readthedocs.io/en/latest/yazi/) |
+| `aco-arch-dotfiles-zsh` | [aco-zsh](https://github.com/Akademie-Olympia/aco-zsh) | [aco-zsh](https://aco-zsh.readthedocs.io/en/latest/) |
+| `aco-arch-dotfiles` | [aco-arch-dotfiles](https://github.com/Akademie-Olympia/aco-arch-dotfiles) | [Hub](https://aco-arch-dotfiles.readthedocs.io/en/latest/) |
 
-Das Metapaket `aco-arch-dotfiles` installiert die vollständige Umgebung; einzelne Pakete können unabhängig ausgewählt werden. Paketabhängigkeiten stehen in den jeweiligen PKGBUILDs. Siehe [Komponenten](components.md) für Konfigurationspfade und Anleitungen.
+The meta package `aco-arch-dotfiles` installs the complete environment; individual packages can be chosen independently. Package dependencies are listed in the respective PKGBUILDs and on every component's “Design and dependencies” page. See [Components](components.md) for configuration paths and guides.

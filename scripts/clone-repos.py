@@ -16,7 +16,8 @@ def main():
     args = parser.parse_args()
     args.root.mkdir(parents=True, exist_ok=True)
     repositories = json.loads((ROOT / "repositories.json").read_text())
-    for repository in repositories.values():
+    # The shared documentation of the small components is not a package, so it is not in repositories.json.
+    for repository in [*repositories.values(), "Akademie-Olympia/aco-docs"]:
         path = args.root / repository.split("/")[1]
         url = f"https://github.com/{repository}.git" if args.https else f"git@github.com:{repository}.git"
         if not path.exists():

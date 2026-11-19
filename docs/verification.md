@@ -1,6 +1,6 @@
-# Installation prüfen und Fehler vermeiden
+# Verifying the installation and avoiding mistakes
 
-## Auf einem installierten Rechner
+## On an installed machine
 
 ```bash
 pacman -Q | grep '^aco-arch-dotfiles'
@@ -10,10 +10,8 @@ systemctl --user status aco-arch-dotfiles-sync.timer
 systemctl --user status aco-arch-dotfiles-sync.service
 ```
 
-Bei einer vollständigen Installation sind 19 Pakete vorhanden. Eine absichtlich
-selektive Installation benötigt weniger. `-Qkk` prüft Paketdateien unter `/usr`,
-nicht deine editierbaren Kopien. Ein erfolgreicher oneshot-Sync-Service darf als
-`inactive (dead)` erscheinen; entscheidend sind Exit-Code 0 und der aktive Timer.
+A complete installation has 19 packages; a deliberately selective one has fewer. `-Qkk` checks the package files under `/usr`, not your editable
+copies. A successful oneshot sync service may show up as `inactive (dead)`; what matters is exit code 0 and an active timer.
 
 ```bash
 aco sync
@@ -21,70 +19,52 @@ find "${XDG_DATA_HOME:-$HOME/.local/share}/arch-dotfiles/config" -name '*.pacnew
 journalctl --user -u aco-arch-dotfiles-sync.service -n 30 --no-pager
 ```
 
-Eigene Änderungen werden nicht automatisch zusammengeführt. `.pacnew`-Dateien
-prüfen und erst dann die betroffene Anwendung neu laden. Niemals `/usr`-Defaults
-editieren, Aktivierung als root ausführen oder mit `--overwrite '*'` Konflikte
-verdecken. Ein vorhandener gleichnamiger manueller Pacman-Repository-Abschnitt
-muss vor einer erneuten Installer-Nutzung überprüft werden.
+Your own changes are not merged automatically. Review `.pacnew` files and only then reload the affected application. Never edit the `/usr`
+defaults, run activation as root, or hide conflicts with `--overwrite '*'`. An existing manual pacman repository section with the same name
+must be reviewed before you use the installer again (the installer replaces only the known pre-organisation file, with a backup).
 
-## Registry frisch halten
+## Keeping the registry fresh
 
-Die Registry wird aus dem Hub-Repository heraus gebaut. Nach erfolgreicher
-Komponentenprüfung fordert ein Push auf `main` den zentralen Build direkt an.
-Zusätzlich vergleicht `aco-arch-dotfiles-registry-kick` die veröffentlichte `sources.json`
-(alle Komponenten-Commits plus hub) mit dem `main` jeder Quelle und startet
-den zentralen `Arch packages`-Workflow genau dann, wenn ein Paket hinter `main`
-zurückliegt. Der Dispatch ist nur eine Anfrage — gebaut, signiert und
-veröffentlicht wird ausschließlich der geprüfte hub-Workflow.
+The registry is built from the hub repository. After a component's check succeeds, a push to `main` requests the central build directly.
+In addition `aco-arch-dotfiles-registry-kick` compares the published `sources.json` (all component commits plus the hub) with `main` of every
+source and starts the central `Arch packages` workflow exactly when a package is behind `main`. The dispatch is only a request — building,
+signing and publishing is done solely by the checked hub workflow.
 
 ```bash
-aco-arch-dotfiles-registry-kick          # vergleicht, dispatcht nur bei Drift
+aco-arch-dotfiles-registry-kick          # compares, dispatches only on drift
 systemctl --user status aco-arch-dotfiles-registry-kick.timer
 journalctl --user -u aco-arch-dotfiles-registry-kick.service -n 30 --no-pager
 ```
 
-Ohne `gh` oder ohne `gh auth login` beendet sich das Skript mit Hinweis und
-Exit 0 — die Verantwortung liegt dann beim Dispatch nach einem Push auf
-`main` (`Arch packages`-Workflow). Ein „GitHub not reachable“ ist eine Verzögerung und
-wird beim nächsten Timer-Tick wiederholt, kein Fehler.
+Without `gh`, or without `gh auth login`, the script exits with a hint and status 0 — responsibility then lies with the dispatch after a push
+to `main` (`Arch packages` workflow). “GitHub not reachable” is a delay, retried on the next timer tick, not an error.
 
-### Push bis Paket
+### From push to package
 
-1. `git push origin main` im Komponenten-Repository startet dessen Workflow
-   `Package safety`. Pull Requests prüfen ebenfalls, veröffentlichen aber nicht.
-2. Nur nach erfolgreicher Prüfung fordert der Workflow mit dem Actions-Secret
-   `DOTFILES_DISPATCH_TOKEN` den Workflow `Arch packages` im Hub an. Das Secret
-   muss Zugriff auf GitHub Actions im Hub haben; sein Wert gehört nie in Git.
-   Ein fehlendes oder ungültiges Secret lässt den Dispatch-Job sichtbar scheitern.
-3. Der Hub klont die Komponenten auf `main`, prüft und baut die Pakete, testet
-   Installation und Updates isoliert und veröffentlicht signierte Pakete und
-   Repository-Datenbanken. Ein Push auf den Hub startet denselben Workflow direkt.
-4. `sudo pacman -Syu` installiert veröffentlichte Updates. `aco sync` gleicht
-   anschließend die Benutzerkopie ab; der optionale Sync-Timer erledigt dies
-   ebenfalls. Änderungen des Benutzers bleiben erhalten; abweichende neue
-   Vorgaben landen als `.pacnew` daneben und müssen geprüft werden.
+1. `git push origin main` in a component repository starts its `Package safety` workflow. Pull requests are checked too but do not publish.
+2. Only after a successful check does the workflow request the hub's `Arch packages` workflow using the Actions secret
+   `DOTFILES_DISPATCH_TOKEN`. The secret needs access to GitHub Actions in the hub; its value never belongs in git.
+   A missing or invalid secret makes the dispatch job fail visibly.
+3. The hub clones the components at `main`, checks and builds the packages, tests installation and updates in isolation and publishes signed
+   packages and repository databases. A push to the hub starts the same workflow directly.
+4. `sudo pacman -Syu` installs published updates. `aco sync` then reconciles the user copy; the optional sync timer does that as well. Your
+   changes are preserved; differing new defaults land next to them as `.pacnew` and need review.
 
-Der Dispatch fordert einen Build an, er garantiert weder einen erfolgreichen
-Build noch einen festen Veröffentlichungszeitpunkt. GitHub Actions und die
-Signierungsumgebung müssen verfügbar sein. Der Registry-Timer
-ist eine zusätzliche Wiederholungsmöglichkeit, kein Paket-Updater.
+The dispatch requests a build; it guarantees neither a successful build nor a fixed publication time. GitHub Actions and the signing
+environment must be available. The registry timer is an additional way to retry, not a package updater.
 
-## Automatische Sicherheitsprüfungen
+## Automatic safety checks
 
-- Jedes Komponenten-Repository prüft auf Push und Pull Request sein Paket-Rezept,
-  Shell-/Python-/TOML-/JSONC-/INI-/XML-Syntax, Einstiegspunkte, Modulinventar und das isolierte
-  `/usr`-Payload. Git-Metadaten und aus dem Paket ausbrechende Links sind verboten.
-- Repositories mit `.readthedocs.yaml` bauen ihre Dokumentation mit derselben
-  Python-Version und `sphinx-build -W --keep-going`, bevor Änderungen als grün gelten.
-- Vor einem Registry-Build laufen zentrale Unit- und Dokumentationstests.
-- Vor **jeder Veröffentlichung geänderter Pakete** wird mit einem nur für den Test
-  erzeugten Schlüssel ein Repository gebaut. Pacman muss fehlende Signaturen
-  ablehnen und alle 19 Pakete in einer temporären Root installieren können.
-- Zuvor wird die vollständige Abhängigkeitsauflösung offline gegen die vorhandenen
-  offiziellen Arch-Sync-Datenbanken geprüft. Programme werden für diesen Test
-  nicht auf dem Entwicklerrechner nachinstalliert.
-- In temporären Homes werden Aktivierung, Editor-/Shell-/tmux-Start,
-  konfliktfreie Updates, `.pacnew` und Wiederherstellung der Backups getestet.
+- Every component repository checks its package recipe, shell/Python/TOML/JSONC/INI/XML syntax, entry points, module inventory and the isolated
+  `/usr` payload on push and pull request. Git metadata and links escaping the package are forbidden.
+- Repositories with a `.readthedocs.yaml` build their documentation with the same Python version and `sphinx-build -W --keep-going` before
+  changes count as green.
+- Central unit and documentation tests run before a registry build.
+- Before **every publication of changed packages** a repository is built with a key created only for the test. Pacman must reject missing
+  signatures and be able to install all 19 packages into a temporary root.
+- Before that, full dependency resolution is checked offline against the existing official Arch sync databases. No programs are installed on the
+  developer machine for this test.
+- Activation, editor/shell/tmux start, conflict-free updates, `.pacnew` and restoring the backups are tested in temporary homes.
 
 ```bash
 python3 -B -m unittest discover -s packaging/arch/tests -v
@@ -94,23 +74,18 @@ python3 packaging/arch/check-artifacts.py
 python3 packaging/arch/smoke-install.py
 ```
 
-Der Smoke-Test läuft **ohne echte Root-Rechte** mit `fakeroot`, eigenen Pacman-
-Datenbanken und eigenen Homes. Er benötigt die Build-Werkzeuge, GnuPG sowie
-aktuelle vorhandene Arch-Sync-Datenbanken. Installations-Scriptlets sind in der
-temporären Root deaktiviert; produktive Scriptlets schreiben ausschließlich
-Hinweise und bearbeiten keine Home-Verzeichnisse.
+The smoke test runs **without real root privileges** using `fakeroot`, its own pacman databases and its own homes. It needs the build tools, GnuPG
+and current Arch sync databases. Install scriptlets are disabled in the temporary root; production scriptlets only print hints and never touch
+home directories.
 
-Diese Tests ersetzen keine visuelle Prüfung in einer echten Wayland-Sitzung.
-Monitore, Grafiktreiber, Audio, Bluetooth, Portale und persönliche Dienste sind
-rechnerabhängig. CI startet oder beendet keine laufende grafische Benutzersitzung.
+These tests do not replace a visual check in a real Wayland session. Monitors, graphics drivers, audio, Bluetooth, portals and personal services
+are machine dependent. CI never starts or ends a running graphical user session.
 
-## GitHub CLI für Maintainer
+## GitHub CLI for maintainers
 
-Die GitHub CLI muss dauerhaft auf `PATH` liegen, nicht nur in einem temporären
-Build-Ordner. Auf Arch kann sie regulär mit `sudo pacman -Syu --needed github-cli`
-installiert werden. Alternativ eignet sich das offizielle, gegen die
-Release-Prüfsumme geprüfte Binary unter `~/.local/bin/gh`; diese manuelle
-Installation wird nicht von Pacman aktualisiert.
+The GitHub CLI must be permanently on `PATH`, not only in a temporary build folder. On Arch install it regularly with
+`sudo pacman -Syu --needed github-cli`. Alternatively the official binary, verified against the release checksum, works from `~/.local/bin/gh`;
+that manual installation is not updated by pacman.
 
 ```bash
 command -v gh
@@ -119,4 +94,4 @@ gh auth status
 gh run list -R Akademie-Olympia/aco-arch-dotfiles --workflow packages.yml
 ```
 
-Keine Tokens oder privaten Signierschlüssel in Issue-/CI-Logs oder Git committen.
+Never commit tokens or private signing keys to issue/CI logs or git.

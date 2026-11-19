@@ -2,64 +2,64 @@
 
 # Cheatsheet
 
-Die wichtigsten Tasten und Befehle auf einen Blick. Alles hier wird aus den
-Konfigurationen erzeugt; die **vollständigen** Referenzen stehen in den Handbüchern
-der Komponenten. `Super` ist die Windows-Taste.
+The most important keys and commands at a glance. Everything here is generated from the
+configurations; the **complete** references are in the manuals of the
+components. `Super` is the Windows key. `aco keys` (or `Super + K`) searches every shortcut.
 
 :::{tip}
-In tmux öffnet {kbd}`Strg+b` dann {kbd}`H` den durchsuchbaren Key Explorer, in Neovim
-{kbd}`Space` (Leader) nach kurzer Pause which-key.
+In tmux {kbd}`Ctrl+b` then {kbd}`H` opens the searchable key explorer; in Neovim
+{kbd}`Space` (leader) followed by a short pause shows which-key.
 :::
 
 ::::{tab-set}
 
 :::{tab-item} Desktop
 
-| Taste | Aktion |
+| Key | Action |
 | --- | --- |
-| {kbd}`Super + Enter` | Terminal öffnen |
-| {kbd}`Super + Q` | Terminal öffnen |
-| {kbd}`Super + Shift + Enter` | Terminal mit tmux-Sitzung `main` |
-| {kbd}`Super + Leertaste` | Anwendungsstarter (Fuzzel) |
-| {kbd}`Alt + Leertaste` | Anwendungsstarter (Fuzzel) |
-| {kbd}`Super + D` | Anwendungsstarter (Fuzzel) |
-| {kbd}`Super + R` | Anwendungsstarter (Fuzzel) |
-| {kbd}`Super + A` | Anwendungsstarter (Fuzzel) |
-| {kbd}`Super + B` | Browser öffnen |
-| {kbd}`Super + E` | Dateimanager (PCManFM) |
-| {kbd}`Super + Y` | Dateimanager im Terminal (Yazi) |
-| {kbd}`Super + L` | Bildschirm sperren |
-| {kbd}`Super + Esc` | Powermenü |
-| {kbd}`Super + Shift + B` | Waybar neu starten |
-| {kbd}`Super + Shift + W` | Wallpaper-Auswahl |
-| {kbd}`Super + Shift + D` | Bildschirm-Verwaltung (Layout, Spiegeln, Skalierung, Profile) |
-| {kbd}`Super + K` | Tastenkürzel-Liste aller Programme |
-| {kbd}`Super + Shift + E` | Hyprland beenden |
-| {kbd}`Super + M` | Hyprland beenden |
-| {kbd}`Druck` | Bereich aufnehmen |
-| {kbd}`Super + Shift + P` | Bereich aufnehmen |
-| {kbd}`Super + Druck` | Alle Monitore aufnehmen |
-| {kbd}`Alt + Druck` | Aktives Fenster aufnehmen |
-| {kbd}`Shift + Druck` | Aktiven Monitor aufnehmen |
-| {kbd}`Super + C` | Fenster schließen |
-| {kbd}`Super + F` | Vollbild umschalten |
-| {kbd}`Super + V` | Schwebend umschalten |
-| {kbd}`Super + Tab` | Zum zuletzt aktiven Fenster wechseln |
-| {kbd}`Alt + Tab` | Zum zuletzt aktiven Fenster wechseln |
-| {kbd}`Super + ←` | Fokus verschieben nach links |
-| {kbd}`Super + Shift + ←` | Fenster verschieben nach links |
-| {kbd}`Super + 1…0` | Zu Workspace N wechseln |
-| {kbd}`Super + Shift + 1…0` | Fenster auf Workspace N verschieben |
-| {kbd}`Super + S` | Scratchpad ein-/ausblenden |
+| {kbd}`Super + Enter` | Open terminal |
+| {kbd}`Super + Q` | Open terminal |
+| {kbd}`Super + Shift + Enter` | Terminal with tmux session `main` |
+| {kbd}`Super + Space` | Application launcher (Fuzzel) |
+| {kbd}`Alt + Space` | Application launcher (Fuzzel) |
+| {kbd}`Super + D` | Application launcher (Fuzzel) |
+| {kbd}`Super + R` | Application launcher (Fuzzel) |
+| {kbd}`Super + A` | Application launcher (Fuzzel) |
+| {kbd}`Super + B` | Open browser |
+| {kbd}`Super + E` | File manager (PCManFM) |
+| {kbd}`Super + Y` | Terminal file manager (Yazi) |
+| {kbd}`Super + L` | Lock screen |
+| {kbd}`Super + Esc` | Power menu |
+| {kbd}`Super + Shift + B` | Restart Waybar |
+| {kbd}`Super + Shift + W` | Wallpaper picker |
+| {kbd}`Super + Shift + D` | Monitor manager (layout, mirror, scale, profiles) |
+| {kbd}`Super + K` | Searchable list of all shortcuts |
+| {kbd}`Super + Shift + E` | Exit Hyprland |
+| {kbd}`Super + M` | Exit Hyprland |
+| {kbd}`Print` | Capture a region |
+| {kbd}`Super + Shift + P` | Capture a region |
+| {kbd}`Super + Print` | Capture all monitors |
+| {kbd}`Alt + Print` | Capture the active window |
+| {kbd}`Shift + Print` | Capture the active monitor |
+| {kbd}`Super + C` | Close window |
+| {kbd}`Super + F` | Toggle fullscreen |
+| {kbd}`Super + V` | Toggle floating |
+| {kbd}`Super + Tab` | Switch to the last active window |
+| {kbd}`Alt + Tab` | Switch to the last active window |
+| {kbd}`Super + ←` | Move focus left |
+| {kbd}`Super + Shift + ←` | Move window left |
+| {kbd}`Super + 1…0` | Switch to workspace N |
+| {kbd}`Super + Shift + 1…0` | Move window to workspace N |
+| {kbd}`Super + S` | Show/hide scratchpad |
 
-Alle Belegungen: [Hyprland-Tastenkombinationen](https://aco-hypr.readthedocs.io/en/latest/keybindings/).
+All bindings: [Hyprland key bindings](https://aco-hypr.readthedocs.io/en/latest/keybindings/).
 :::
 
 :::{tab-item} tmux
 
-`prefix` ist {kbd}`Strg+b`.
+`prefix` is {kbd}`Ctrl+b`.
 
-| Taste | Aktion |
+| Key | Action |
 | --- | --- |
 | {kbd}`prefix ?` | List key bindings |
 | {kbd}`prefix H` | Open the Key Explorer |
@@ -110,14 +110,14 @@ Alle Belegungen: [Hyprland-Tastenkombinationen](https://aco-hypr.readthedocs.io/
 | {kbd}`prefix #` | List all paste buffers |
 | {kbd}`prefix -` | Delete the most recent paste buffer |
 
-Vollständig und durchsuchbar: [tmux-Tastenkombinationen](https://aco-tmux.readthedocs.io/en/latest/keybindings/quick/).
+Complete and searchable: [tmux key bindings](https://aco-tmux.readthedocs.io/en/latest/keybindings/quick/).
 :::
 
 :::{tab-item} Neovim
 
-`<leader>` ist {kbd}`Space`.
+`<leader>` is {kbd}`Space`.
 
-| Taste | Aktion |
+| Key | Action |
 | --- | --- |
 | {kbd}`<leader><space>` | Find files |
 | {kbd}`<leader>ff` | Find files |
@@ -138,33 +138,34 @@ Vollständig und durchsuchbar: [tmux-Tastenkombinationen](https://aco-tmux.readt
 | {kbd}`<leader>dc` | Start / Continue |
 | {kbd}`<leader>gd` | Git diff against index (split) |
 
-Alle Belegungen und Befehle: [Neovim-Handbuch](https://aco-nvim.readthedocs.io/en/latest/).
+All bindings and commands: [Neovim manual](https://aco-nvim.readthedocs.io/en/latest/).
 :::
 
 :::{tab-item} Vim
 
-Vim verwendet dieselben Leader-Belegungen wie Neovim (`<Space>`), siehe
-[Vim-Tastenkombinationen](https://aco-vim.readthedocs.io/en/latest/keybindings/).
+Vim uses the same leader bindings as Neovim (`<Space>`), see
+[Vim key bindings](https://aco-vim.readthedocs.io/en/latest/keybindings/).
 :::
 
-:::{tab-item} Shell & Befehle
+:::{tab-item} Shell & commands
 
-| Befehl | Wirkung |
+| Command | Effect |
 | --- | --- |
-| `aco update` | System aktualisieren (`pacman -Syu`) und Defaults zusammenführen |
-| `aco status` | Zeigt, ob die Konfiguration aktiv ist |
-| `aco list` | Installierte ACO-Pakete |
-| `aco install [modul]` | Installierte Module aktivieren (ohne `sudo`) |
-| `aco deactivate [modul]` | Vorherige Einstellungen wiederherstellen |
-| `aco path` | Verzeichnis deiner bearbeitbaren Kopien |
-| `y` | Yazi starten und danach im besuchten Verzeichnis bleiben |
-| `j <teil>` | Per zoxide in ein häufig besuchtes Verzeichnis springen |
-| `tm` | tmux-Sitzung `main` öffnen oder anhängen |
+| `aco update` | Update the system (`pacman -Syu`) and merge defaults |
+| `aco status` | Shows whether the configuration is active |
+| `aco list` | Installed ACO packages |
+| `aco keys` | Searchable list of every shortcut (Super + K) |
+| `aco install [module]` | Activate installed modules (without `sudo`) |
+| `aco deactivate [module]` | Restore the previous settings |
+| `aco path` | Directory of your editable copies |
+| `y` | Start Yazi and stay in the directory you ended in |
+| `j <part>` | Jump to a frequently used directory with zoxide |
+| `tm` | Open or attach the tmux session `main` |
 | `nv` / `v` | Neovim / Vim |
-| `wp` | wallpaper-Befehl |
-| `dotfiles` | In deine bearbeitbaren Konfigurationskopien wechseln |
+| `wp` | The wallpaper command |
+| `dotfiles` | Change into your editable configuration copies |
 
-Alle Befehle: [`aco`-Referenz](commands.md).
+All commands: [`aco` reference](commands.md).
 :::
 
 ::::

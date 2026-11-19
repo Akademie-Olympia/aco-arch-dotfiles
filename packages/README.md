@@ -1,10 +1,8 @@
-# Gemeinsame Pakete
+# Shared packages
 
-Hier liegen nur `aco-arch-dotfiles-core`, `aco-arch-dotfiles-oh-my-zsh` und das optionale
-Gesamt-Metapaket `aco-arch-dotfiles`.
+Only `aco-arch-dotfiles-core`, `aco-arch-dotfiles-oh-my-zsh` and the optional all-in-one meta package `aco-arch-dotfiles` live here.
 
-Die 16 Konfigurationspakete pflegen Quellen und `packaging/arch/PKGBUILD` jeweils
-in eigenen Repositories, siehe [`repositories.json`](../repositories.json).
-Lokale Arbeitskopien anlegen: `bash scripts/clone-repos.sh` vom Repository-Root.
+The 16 configuration packages keep their sources and `packaging/arch/PKGBUILD` in their own repositories, see [`repositories.json`](../repositories.json).
+Create local working copies with `bash scripts/clone-repos.sh` from the repository root.
 
-Details: [Paketierung](../packaging/arch/README.md).
+Details: [packaging](../packaging/arch/README.md).

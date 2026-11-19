@@ -1,39 +1,35 @@
 # ACO Arch Dotfiles
 
-**Einmal installieren. In einzelnen Repositories entwickeln. Mit `pacman -Syu` aktualisieren.**
+**Install once. Develop in individual repositories. Update with `pacman -Syu`.**
 
-**[Vollständige Dokumentation](https://aco-arch-dotfiles.readthedocs.io/en/latest/)** ·
-[Komponenten](https://aco-arch-dotfiles.readthedocs.io/en/latest/components/) ·
-[Installation prüfen](https://aco-arch-dotfiles.readthedocs.io/en/latest/verification/)
+**[Full documentation](https://aco-arch-dotfiles.readthedocs.io/en/latest/)** ·
+[Components](https://aco-arch-dotfiles.readthedocs.io/en/latest/components/) ·
+[Verify an installation](https://aco-arch-dotfiles.readthedocs.io/en/latest/verification/) ·
+[Small components](https://aco-docs.readthedocs.io/en/latest/)
 
-Dieses Repository enthält Installer, Paketverwaltung und die signierte
-Pacman-Registry. Die 16 Konfigurationen liegen in **eigenen GitHub-Repositories**,
-nicht mehr als Subtrees oder Konfigurationskopien in diesem Repository.
+This repository holds the installer, package management and the signed pacman registry. The 16 configurations live in **their own GitHub
+repositories**, no longer as subtrees or configuration copies inside this repository.
 
 ## Installation
 
-Auf Arch Linux als normaler Benutzer mit `sudo`:
+On Arch Linux as a normal user with `sudo`:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash
 ```
 
-Oder nur ausgewählte Konfigurationen installieren:
+Or install only selected configurations:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash -s -- nvim tmux
 ```
 
-Der Installer prüft den fest hinterlegten Signierschlüssel, richtet das
-Pacman-Repository ein, installiert Pakete samt Abhängigkeiten, sichert bestehende
-Einstellungen und aktiviert die Benutzerkonfigurationen. Ein User-Timer übernimmt
-künftig aktualisierte Defaults. Eigene Änderungen werden nicht überschrieben;
-neue Defaults erscheinen als `.pacnew`. Dienste des Systems und Login-Shell werden
-nicht automatisch umgestellt. Wie bei jedem Remote-Installer vertraust du beim
-Ausführen dem Quellcode dieses GitHub-Repositories; du kannst `install.sh` vorher
-herunterladen und prüfen.
+The installer verifies the hard-coded signing key, sets up the pacman repository, installs packages with their dependencies, backs up existing
+settings and activates the user configurations. A user timer takes over updated defaults later. Your own changes are never overwritten; new
+defaults appear as `.pacnew`. System services and the login shell are not switched automatically. As with every remote installer you trust the
+source code of this GitHub repository when you run it; you can download and read `install.sh` first.
 
-Signierschlüssel-Fingerprint:
+Signing key fingerprint:
 
 ```text
 11FB 2A9A B0F5 B8AC 4F4B A79C 27CD 0D52 E7E0 08F2
@@ -45,12 +41,16 @@ Signierschlüssel-Fingerprint:
 sudo pacman -Syu
 ```
 
-Nach erfolgreichem Registry-Build sind neue Konfigurationspakete normale
-Pacman-Updates. Der installierte User-Timer synchronisiert die Defaults innerhalb
-von etwa zwei Minuten. Sofortige Synchronisation: `aco sync`.
-Die betroffene Anwendung gegebenenfalls neu laden/starten.
+After a successful registry build, new configuration packages are normal pacman updates. The installed user timer synchronises the defaults
+within about two minutes. Immediate synchronisation: `aco sync`. Reload or restart the affected application if necessary.
 
-## Entwicklung: unabhängige Repositories
+## Everyday tools
+
+- `aco keys` (or `Super + K` in Hyprland) – searchable list of every shortcut of every component.
+- `monitors.sh` (`Super + Shift + D`) – monitor manager: layout, arrangement, scale, profiles that restore themselves.
+- `wallpaper` (`Super + Shift + W`) – wallpapers per monitor with fit modes and extra folders.
+
+## Development: independent repositories
 
 ```bash
 mkdir -p ~/git/config
@@ -58,54 +58,60 @@ git clone git@github.com:Akademie-Olympia/aco-arch-dotfiles.git ~/git/config/aco
 bash ~/git/config/aco-arch-dotfiles/scripts/clone-repos.sh
 ```
 
-Danach liegen alle Repositories nebeneinander:
+Afterwards all repositories sit next to each other:
 
 ```text
 ~/git/config/
-  aco-arch-dotfiles/ # Installer, Registry, gemeinsame Verwaltung
-  aco-nvim/       # eigene Git-Historie, main, Quellen und PKGBUILD
+  aco-arch-dotfiles/ # installer, registry, shared management
+  aco-docs/          # documentation of the small components (one Read the Docs project)
+  aco-nvim/          # own git history, main, sources and PKGBUILD
   aco-tmux/
   aco-hypr/
   aco-zsh/
   ...
 ```
 
-Die vollständige Zuordnung steht in [`repositories.json`](repositories.json).
-Vorhandene Arbeitskopien werden nicht überschrieben. Explizite Updates sauberer
-`main`-Checkouts: `bash scripts/clone-repos.sh --update`.
+The full mapping is in [`repositories.json`](repositories.json). Existing working copies are never overwritten. Explicit update of clean `main`
+checkouts: `bash scripts/clone-repos.sh --update`.
 
-Beispiel:
+Example:
 
 ```bash
-cd ~/git/config/nvim-config
-# Konfiguration bearbeiten
+cd ~/git/config/aco-nvim
+# edit the configuration
 git add lua/config
 git commit -m "Adjust editor configuration"
 git push origin main
 ```
 
-Nach einem Push auf `main` fordert die erfolgreiche Paketprüfung automatisch den
-zentralen Registry-Build an. Hinzu kommen Warte- und Build-Zeit. Nach dessen Erfolg erhält
-das nächste `pacman -Syu` die neue Version. Es ist kein manuelles Versionsbumpen
-für normale Konfigurationsänderungen erforderlich. Sofortiger Build-Start für
-Maintainer:
+After a push to `main`, a successful package check automatically requests the central registry build. Waiting and build time come on top; after it
+succeeds the next `pacman -Syu` delivers the new version. No manual version bump is needed for normal configuration changes. Immediate build start
+for maintainers:
 
 ```bash
 gh workflow run packages.yml -R Akademie-Olympia/aco-arch-dotfiles
 ```
 
-## Paketstruktur
+## Documentation layout
 
-- 16 Konfigurationspakete, jeweils aus einem eigenen Repository.
-- `aco-arch-dotfiles-core`: `aco`, Aktivierung, Backups und User-Synchronisation.
-- `aco-arch-dotfiles-oh-my-zsh`: separat gepinnter Oh-My-Zsh-Runtime.
-- `aco-arch-dotfiles`: optionales Metapaket für die komplette Umgebung.
+- **This hub** – installation, commands, packages, security, cheatsheet.
+- **Large components** (Hyprland, Neovim, tmux, Zsh, Vim, Kitty, Ghostty) – one Read the Docs project each.
+- **[aco-docs](https://github.com/Akademie-Olympia/aco-docs)** – Waybar, Wallpaper, Fuzzel, Foot, Yazi, PCManFM, libfm, GTK 3 and GTK 4 together,
+  so that the ecosystem needs 9 Read the Docs projects instead of 17. Every site's sidebar still lists all components.
+- Every component has a generated “Design & dependencies” page (`scripts/gen-design.py`): rationale, required packages, libraries and tested versions.
 
-Jede Konfiguration pflegt ihre Abhängigkeiten und ihr Rezept selbst in
-`packaging/arch/PKGBUILD`. Hier bleiben nur die drei gemeinsamen Paketordner
-unter `packages/`. Alle Pakete und Repository-Daten werden signiert als Assets
-des GitHub-Releases [`repo`](https://github.com/Akademie-Olympia/aco-arch-dotfiles/releases/tag/repo)
-veröffentlicht. `sources.json` dort dokumentiert die tatsächlich gebauten Commits.
+All documentation is written in English.
 
-**[Builds, Sicherheit, Migration und Deinstallation](packaging/arch/README.md)** ·
-**[Anwendungsdokumentation](https://aco-arch-dotfiles.readthedocs.io/en/latest/)**
+## Package structure
+
+- 16 configuration packages, each from its own repository.
+- `aco-arch-dotfiles-core`: `aco`, activation, backups and user synchronisation.
+- `aco-arch-dotfiles-oh-my-zsh`: separately pinned Oh My Zsh runtime.
+- `aco-arch-dotfiles`: optional meta package for the complete environment.
+
+Every configuration maintains its dependencies and recipe itself in `packaging/arch/PKGBUILD`. Only the three shared package folders remain
+under `packages/` here. All packages and repository data are published signed as assets of the GitHub release
+[`repo`](https://github.com/Akademie-Olympia/aco-arch-dotfiles/releases/tag/repo). `sources.json` there documents the commits that were actually built.
+
+**[Builds, security, migration and removal](packaging/arch/README.md)** ·
+**[Application documentation](https://aco-arch-dotfiles.readthedocs.io/en/latest/)**

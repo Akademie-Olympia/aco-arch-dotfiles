@@ -1,49 +1,37 @@
 # Installation
 
-Die unterstützte Arch-Installation verwendet einzelne Pacman-Pakete statt
-Git-Subtrees und eines monolithischen Dotfiles-Installers.
+The supported Arch installation uses individual pacman packages instead of git subtrees and a monolithic dotfiles installer.
 
-Einmaliger Installer:
+One-time installer:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash
 ```
 
-Alternativ manuell:
+Alternatively, by hand:
 
-1. Das signierte GitHub-Repository nach der [Paket-Anleitung](arch-package.md)
-   einrichten und den Signierschlüssel unabhängig verifizieren.
-2. Gewünschte Konfigurationspakete auswählen; Abhängigkeiten installiert Pacman.
-3. Als normaler Benutzer aktivieren, damit bestehende Einstellungen gesichert
-   und editierbare Konfigurationskopien angelegt werden.
+1. Set up the signed GitHub repository following the [package guide](arch-package.md) and verify the signing key independently.
+2. Pick the configuration packages you want; pacman installs the dependencies.
+3. Activate them as a normal user so existing settings are backed up and editable copies are created.
 
 ```bash
 sudo pacman -Syu --needed aco-arch-dotfiles-nvim aco-arch-dotfiles-tmux
 aco-arch-dotfiles-config activate nvim tmux
 
-# Oder die komplette Desktop-/Terminal-Umgebung:
+# Or the complete desktop/terminal environment:
 sudo pacman -Syu --needed aco-arch-dotfiles
 aco-arch-dotfiles-config activate
 ```
 
-Updates: `aco update` oder `sudo pacman -Syu` gefolgt von
-`aco-arch-dotfiles-config update`. Optional synchronisiert der User-Timer
-`aco-arch-dotfiles-sync.timer` die Defaults automatisch. Eigene Änderungen werden
-nicht überschrieben; neue Defaults erscheinen als `.pacnew`.
+Updates: `aco update`, or `sudo pacman -Syu` followed by `aco-arch-dotfiles-config update`. Optionally the user timer
+`aco-arch-dotfiles-sync.timer` synchronises the defaults automatically. Your own changes are never overwritten; new defaults appear as `.pacnew`.
 
-Ein Push auf `main` einer Komponente fordert nach erfolgreicher Paketprüfung
-automatisch einen zentralen Registry-Build an. Der optionale Timer
-`aco-arch-dotfiles-registry-kick.timer` (enthalten in `aco-arch-dotfiles-core`)
-ist eine zusätzliche Absicherung: Er vergleicht die veröffentlichte
-`sources.json` mit `main` aller Komponenten und des hubs und startet den
-zentralen `Arch packages`-Workflow genau dann, wenn ein Paket hinter
-`main` zurückliegt. Voraussetzung ist ein angemeldeter `gh` (`gh auth login`);
-ohne ihn beendet sich der Timer ohne Aktion; der Build wird dann durch den Push auf `main` ausgelöst. Nichts wird
-hier gebaut oder signiert — der Dispatch ist nur eine Anfrage an die bestehenden
-Sicherheits- und Veröffentlichungsschritte.
+A push to `main` of a component requests a central registry build once its package check succeeds. The optional timer
+`aco-arch-dotfiles-registry-kick.timer` (part of `aco-arch-dotfiles-core`) is an additional safeguard: it compares the published
+`sources.json` with `main` of all components and the hub and starts the central `Arch packages` workflow exactly when a package is behind
+`main`. It needs a logged-in `gh` (`gh auth login`); without it the timer exits without action and the build is triggered by the push to `main`.
+Nothing is built or signed here — the dispatch is only a request to the existing security and publication steps.
 
-Die Paket-Anleitung erklärt auch lokale Builds, die Umstellung vom bisherigen
-Monolithen, einzelne Deinstallationen und Backups. Dienste und Login-Shell werden
-nicht automatisch geändert. Auf anderen Plattformen können die einzelnen
-Quellen der einzelnen `<modul>-config`-Repositories manuell verwendet werden; die Pacman-Registry
-ist ausdrücklich für Arch Linux gedacht.
+The package guide also covers local builds, migrating from the former monolith, individual removals and backups. Services and the login shell
+are never changed automatically. On other platforms you can use the sources of the individual `aco-*` repositories by hand; the pacman registry
+is explicitly meant for Arch Linux.

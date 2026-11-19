@@ -1,9 +1,9 @@
 # ACO Arch Dotfiles
 
 ::::{div} aco-hero
-**Dein kompletter Arch-Desktop als signierte Pacman-Pakete.**
-Ein Befehl installiert Hyprland, Waybar, Terminal, Editoren und Shell – danach hält
-`pacman -Syu` alles aktuell. Eigene Änderungen bleiben erhalten.
+**Your complete Arch desktop as signed pacman packages.**
+One command installs Hyprland, Waybar, terminal, editors and shell – after that
+`pacman -Syu` keeps everything current. Your own changes are preserved.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash
@@ -17,49 +17,48 @@ curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/
 :link: installation
 :link-type: doc
 
-Voraussetzungen, Installer, einzelne Module, Aktualisieren und Entfernen.
+Requirements, installer, single modules, updating and removing.
 :::
 
 :::{grid-item-card} Cheatsheet
 :link: cheatsheet
 :link-type: doc
 
-Die wichtigsten Tasten für Desktop, tmux, Neovim, Vim und Shell.
+The most important keys for desktop, tmux, Neovim, Vim and shell. `aco keys` (Super + K) searches all of them.
 :::
 
-:::{grid-item-card} Befehle
+:::{grid-item-card} Commands
 :link: commands
 :link-type: doc
 
-`aco`, `pacman`, `screenshot`, `wallpaper` – alles, was du tippen kannst.
+`aco`, `pacman`, `screenshot`, `wallpaper` – everything you can type.
 :::
 
-:::{grid-item-card} Komponenten
+:::{grid-item-card} Components
 :link: components
 :link-type: doc
 
-Jede Konfiguration als eigenes Paket und Repository.
+Every configuration as its own package and repository.
 :::
 
-:::{grid-item-card} Pakete & Sicherheit
+:::{grid-item-card} Packages & security
 :link: verification
 :link-type: doc
 
-Signaturen, Prüfungen, Update und Wiederherstellung.
+Signatures, checks, update and recovery.
 :::
 
-:::{grid-item-card} Entwickeln
+:::{grid-item-card} Develop
 :link: arch-package
 :link-type: doc
 
-Repositories, CI und wie ein Push zum Paket-Update wird.
+Repositories, CI and how a push becomes a package update.
 :::
 ::::
 
-## Die Handbücher
+## The manuals
 
-Jede Komponente hat ihr eigenes Handbuch im selben Design. Die Seitenleiste führt
-von überall zu allen anderen.
+Every component has a manual in the same design. The sidebar leads from anywhere to all the others.
 
 ::::{grid} 2 3 4 4
 :gutter: 2
@@ -68,42 +67,35 @@ von überall zu allen anderen.
 :link: https://aco-hypr.readthedocs.io/en/latest/
 :link-type: url
 
-Desktop, Fenster-Slots, Tasten
-:::
-
-:::{grid-item-card} Waybar
-:link: https://aco-waybar.readthedocs.io/en/latest/
-:link-type: url
-
-Statusleiste, Powermenü
+Desktop, window slots, monitors, keys
 :::
 
 :::{grid-item-card} Neovim
 :link: https://aco-nvim.readthedocs.io/en/latest/
 :link-type: url
 
-Editor, LSP, Debugger
+Editor, LSP, debugger
 :::
 
 :::{grid-item-card} Vim
 :link: https://aco-vim.readthedocs.io/en/latest/
 :link-type: url
 
-Schlanke Konfiguration
+Lean configuration
 :::
 
 :::{grid-item-card} tmux
 :link: https://aco-tmux.readthedocs.io/en/latest/
 :link-type: url
 
-Sitzungen, Panes, Key Explorer
+Sessions, panes, key explorer
 :::
 
 :::{grid-item-card} Zsh
 :link: https://aco-zsh.readthedocs.io/en/latest/
 :link-type: url
 
-Shell, Aliase, Prompt
+Shell, aliases, prompt
 :::
 
 :::{grid-item-card} Kitty
@@ -120,36 +112,15 @@ Terminal
 Terminal
 :::
 
-:::{grid-item-card} Foot
-:link: https://aco-foot.readthedocs.io/en/latest/
+:::{grid-item-card} ACO Components
+:link: https://aco-docs.readthedocs.io/en/latest/
 :link-type: url
 
-Terminal
-:::
-
-:::{grid-item-card} Yazi
-:link: https://aco-yazi.readthedocs.io/en/latest/
-:link-type: url
-
-Dateimanager im Terminal
-:::
-
-:::{grid-item-card} Fuzzel
-:link: https://aco-fuzzel.readthedocs.io/en/latest/
-:link-type: url
-
-Anwendungsstarter
-:::
-
-:::{grid-item-card} Wallpaper
-:link: https://aco-wallpaper.readthedocs.io/en/latest/
-:link-type: url
-
-Hintergründe pro Monitor
+Waybar, Wallpaper, Fuzzel, Foot, Yazi, PCManFM, libfm, GTK 3/4
 :::
 ::::
 
-PCManFM, libfm, GTK 3 und GTK 4 findest du in der Seitenleiste unter „ACO Ökosystem".
+The small components share one site, **ACO Components**; the sidebar of every site links straight to each of its pages.
 
 ```{toctree}
 :hidden:

@@ -26,7 +26,7 @@ Regardless of which terminal emulator is active, you experience consistent visua
 | **Tab Management** | Native GTK4 tabs | Powerline tabs | Multiplexer ([tmux](https://aco-tmux.readthedocs.io/en/latest/)) |
 | **Config Reload Shortcut** | <kbd>Ctrl+Shift+,</kbd> | <kbd>Ctrl+Shift+F5</kbd> | Automatic / restart |
 | **Repository** | [Akademie-Olympia/aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty) | [Akademie-Olympia/aco-kitty](https://github.com/Akademie-Olympia/aco-kitty) | [Akademie-Olympia/aco-foot](https://github.com/Akademie-Olympia/aco-foot) |
-| **Documentation** | [**aco-ghostty.readthedocs.io**](https://aco-ghostty.readthedocs.io/en/latest/) | [**aco-kitty.readthedocs.io**](https://aco-kitty.readthedocs.io/en/latest/) | [Foot section](#3-foot-configfootfootini) · built-in man pages (`man foot.ini`) |
+| **Documentation** | [**aco-ghostty.readthedocs.io**](https://aco-ghostty.readthedocs.io/en/latest/) | [**aco-kitty.readthedocs.io**](https://aco-kitty.readthedocs.io/en/latest/) | [Foot](https://aco-docs.readthedocs.io/en/latest/foot/) · man pages (`man foot.ini`) |
 
 ---
 

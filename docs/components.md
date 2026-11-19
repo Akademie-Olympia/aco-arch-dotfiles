@@ -1,182 +1,105 @@
-# Komponenten und Einzelpakete
+# Components and individual packages
 
-Alle Komponenten haben ein eigenes GitHub-Repository mit Quellen im Root und
-einem eigenen `packaging/arch/PKGBUILD`. Die Zuordnung steht in
+Every component has its own GitHub repository with the sources in the root and its own
+`packaging/arch/PKGBUILD`. The mapping lives in
 [`repositories.json`](https://github.com/Akademie-Olympia/aco-arch-dotfiles/blob/main/repositories.json).
-Die hier beschriebenen Pfade beziehen sich auf aktivierte Benutzerkopien unter
-`~/.config`, nicht auf schreibgeschützte Paketdateien unter `/usr`.
+The paths below refer to activated user copies under `~/.config`, not to the read-only package files in `/usr`.
 
-## Installation, Entwicklung und Updates
+**Where the documentation lives:** the large components have their own site (Hyprland, Neovim, tmux, Zsh, Vim, Kitty, Ghostty).
+The small ones – Waybar, Wallpaper, Fuzzel, Foot, Yazi, PCManFM, libfm, GTK 3 and GTK 4 – are documented together in the
+[ACO Components](https://aco-docs.readthedocs.io/en/latest/) site, so the ecosystem needs one Read the Docs project instead of nine.
+The sidebar of every site lists all of them.
+
+## Installation, development and updates
 
 ```bash
-# Nur bestimmte Konfigurationen einschließlich ihrer Abhängigkeiten:
+# Only selected configurations, including their dependencies:
 curl -fsSL https://raw.githubusercontent.com/Akademie-Olympia/aco-arch-dotfiles/main/install.sh | bash -s -- nvim tmux
-# Die komplette Umgebung: den Aufruf ohne Modulnamen verwenden.
+# The complete environment: run the command without module names.
 ```
 
-Der Installer aktiviert die Benutzerkopien und den Sync-Timer. Anschließend:
-`sudo pacman -Syu`, optional sofort `aco sync`; sonst übernimmt der Timer die
-Defaults innerhalb von etwa zwei Minuten. Eigene Änderungen werden als `.pacnew`
-zum Zusammenführen angeboten, nicht überschrieben. Siehe [Paket-Anleitung](arch-package.md).
+The installer activates the user copies and the sync timer. Afterwards run `sudo pacman -Syu` and, if you want it immediately, `aco sync`;
+otherwise the timer merges the defaults within about two minutes. Your own changes are offered as `.pacnew` for merging, never overwritten.
+See the [package guide](arch-package.md).
 
-Entwickelt wird in separaten Checkouts, nicht durch Bearbeiten von `/usr`:
+Development happens in separate checkouts, not by editing `/usr`:
 
 ```bash
-bash scripts/clone-repos.sh  # aus dem zentralen dotfiles-Checkout
-cd ../nvim-config
-# Änderungen bearbeiten, committen und auf main pushen.
+bash scripts/clone-repos.sh  # from the central hub checkout
+cd ../aco-nvim
+# edit, commit and push to main
 git push origin main
 ```
 
-Nach einem Push auf `main` fordert der Komponenten-Workflow nach erfolgreicher
-Paketprüfung automatisch einen zentralen Build an. Zusätzlich prüft ein lokaler,
-optionaler Registry-Timer die veröffentlichten Commits. Es gibt keinen
-zeitgesteuerten Build mehr: CI läuft nur bei Änderungen. Ein manueller Start ist mit
-`gh workflow run packages.yml -R Akademie-Olympia/aco-arch-dotfiles` möglich. Erst nach
-erfolgreichem Build und Signierung ist die neue Paketversion per `-Syu` verfügbar.
+After a push to `main` the component workflow requests a central build once the package check succeeds. An optional local registry timer
+additionally compares the published commits. There is no scheduled build: CI only runs on changes. A manual start is possible with
+`gh workflow run packages.yml -R Akademie-Olympia/aco-arch-dotfiles`. The new package version is available through `-Syu` only after a successful build and signing.
 
 ## Neovim
 
-- Paket: `aco-arch-dotfiles-nvim`; Quelle: [nvim-config](https://github.com/Akademie-Olympia/aco-nvim).
-- Einstieg: `~/.config/nvim/init.lua`; Module unter `lua/`; Plugins sind vendort.
-- [Vollständiges Handbuch](https://aco-nvim.readthedocs.io/en/latest/):
-  Installation, IDE-/Sprachwerkzeuge, Keymaps, Plugins und Fehlerdiagnose.
-- `:NvimConfigHealth` prüft optionale Werkzeuge; Sprachserver werden bewusst nicht
-  als Root-Installationsschritt nachgeladen.
+- Package: `aco-arch-dotfiles-nvim`; source: [aco-nvim](https://github.com/Akademie-Olympia/aco-nvim).
+- Entry point: `~/.config/nvim/init.lua`; modules under `lua/`; plugins are vendored.
+- [Full manual](https://aco-nvim.readthedocs.io/en/latest/): installation, IDE and language tools, keymaps, plugins and diagnostics.
+- `:NvimConfigHealth` checks optional tools; language servers are deliberately not fetched as a root installation step.
 
 ## tmux
 
-- Paket: `aco-arch-dotfiles-tmux`; Quelle: [tmux-config](https://github.com/Akademie-Olympia/aco-tmux).
-- Einstieg: `~/.config/tmux/tmux.conf`; Anpassungen in `local-options.conf` und `local.conf`.
-- [Vollständiges Handbuch](https://aco-tmux.readthedocs.io/en/latest/).
-- tmux 3.8 belegt früher freie Keys: Zusatzfunktionen liegen jetzt auf
-  `prefix G` (Scratch-Terminal), `prefix J` (Pane holen) und `prefix B`
-  (letztes Fenster). `g`, `@` und `Tab` behalten ihre tmux-Standardfunktion.
-  `prefix H` öffnet den Key Explorer, `prefix R` lädt die Konfiguration neu.
+- Package: `aco-arch-dotfiles-tmux`; source: [aco-tmux](https://github.com/Akademie-Olympia/aco-tmux).
+- Entry point: `~/.config/tmux/tmux.conf`; customisations in `local-options.conf` and `local.conf`.
+- [Full manual](https://aco-tmux.readthedocs.io/en/latest/).
+- tmux 3.8 claims keys that used to be free: the extras now live on `prefix G` (scratch terminal), `prefix J` (fetch pane) and `prefix B` (last window).
+  `g`, `@` and `Tab` keep their tmux defaults. `prefix H` opens the key explorer, `prefix R` reloads the configuration.
 
 ## Vim
 
-- Paket: `aco-arch-dotfiles-vim`; Quelle: [vim-config](https://github.com/Akademie-Olympia/aco-vim).
-- Einstieg: `~/.config/vim/vimrc`, zusätzlich `~/.vimrc` als verwalteter Link.
-- [Vollständiges Handbuch](https://aco-vim.readthedocs.io/en/latest/) für
-  Keybindings, Statusline und lokale Anpassungen. Es werden keine Plugins nachgeladen.
+- Package: `aco-arch-dotfiles-vim`; source: [aco-vim](https://github.com/Akademie-Olympia/aco-vim).
+- Entry point: `~/.config/vim/vimrc`, plus `~/.vimrc` as a managed link.
+- [Full manual](https://aco-vim.readthedocs.io/en/latest/) for key bindings, status line and local customisation. No plugins are downloaded.
 
 ## Ghostty
 
-- Paket: `aco-arch-dotfiles-ghostty`; Quelle: [ghostty-config](https://github.com/Akademie-Olympia/aco-ghostty).
-- Datei: `~/.config/ghostty/config`.
-- [Vollständiges Handbuch](https://aco-ghostty.readthedocs.io/en/latest/).
-  Der konfigurierte Zsh-Prozess ist als Paketabhängigkeit deklariert.
+- Package: `aco-arch-dotfiles-ghostty`; source: [aco-ghostty](https://github.com/Akademie-Olympia/aco-ghostty).
+- File: `~/.config/ghostty/config`.
+- [Full manual](https://aco-ghostty.readthedocs.io/en/latest/). The configured Zsh process is declared as a package dependency.
 
 ## Kitty
 
-- Paket: `aco-arch-dotfiles-kitty`; Quelle: [kitty-config](https://github.com/Akademie-Olympia/aco-kitty).
-- Datei: `~/.config/kitty/kitty.conf`.
-- [Vollständiges Handbuch](https://aco-kitty.readthedocs.io/en/latest/):
-  Farben, Schrift, Tabs und Tastenkombinationen. `Ctrl+Shift+F5` lädt die Einstellungen neu.
-
-## Foot
-
-- Paket: `aco-arch-dotfiles-foot`; Quelle: [foot-config](https://github.com/Akademie-Olympia/aco-foot).
-- Datei: `~/.config/foot/foot.ini`; Wayland-Terminal mit Zsh.
-- [Terminal-Anleitung](terminals.md) und `man foot.ini` beschreiben die Einstellungen.
-  Änderungen gegebenenfalls durch Neustart eines Terminalfensters übernehmen.
+- Package: `aco-arch-dotfiles-kitty`; source: [aco-kitty](https://github.com/Akademie-Olympia/aco-kitty).
+- File: `~/.config/kitty/kitty.conf`.
+- [Full manual](https://aco-kitty.readthedocs.io/en/latest/): colours, font, tabs and shortcuts. `Ctrl+Shift+F5` reloads the settings.
 
 ## Hyprland
 
-- Paket: `aco-arch-dotfiles-hypr`; Quelle: [hypr-config](https://github.com/Akademie-Olympia/aco-hypr).
-- Einstieg: `~/.config/hypr/hyprland.lua`. Desktop-Komponenten, Screenshot-
-  Werkzeuge und verwendete Programme werden über Abhängigkeiten installiert.
-- Rechnerabhängige Monitore in `~/.config/hypr/monitors.local.lua` anpassen;
-  diese Datei wird nicht verteilt.
-- [Desktop, Screenshots und Keybindings](https://aco-hypr.readthedocs.io/en/latest/guide/).
-  Eine laufende grafische Sitzung wird weder vom Installer noch von Tests neugestartet.
-
-## Waybar
-
-- Paket: `aco-arch-dotfiles-waybar`; Quelle: [waybar-config](https://github.com/Akademie-Olympia/aco-waybar).
-- Dateien: `~/.config/waybar/config.jsonc`, `style.css`, `power_menu.xml`.
-- [Panel-Anleitung](https://aco-waybar.readthedocs.io/en/latest/guide/) beschreibt Module, Bedienung und Anpassungen.
-  Für die Darstellung werden Wayland, die passenden Schriftarten und eine laufende Sitzung benötigt.
-
-## Fuzzel
-
-- Paket: `aco-arch-dotfiles-fuzzel`; Quelle: [fuzzel-config](https://github.com/Akademie-Olympia/aco-fuzzel).
-- Datei: `~/.config/fuzzel/fuzzel.ini` für Schrift, Farben, Layout und Verhalten.
-- Fuzzel ist Anwendungsstarter und `--dmenu`-Frontend für Desktop-Helfer.
-  [Hyprland-Anleitung](https://aco-hypr.readthedocs.io/en/latest/guide/) dokumentiert die Starter-/Menü-Tasten.
-  Starten lässt es sich in einer Wayland-Sitzung mit `fuzzel`.
-
-## Wallpaper
-
-- Paket: `aco-arch-dotfiles-wallpaper`; Quelle: [wallpaper-config](https://github.com/Akademie-Olympia/aco-wallpaper).
-- Datei: `~/.config/wallpaper/wallpaper.conf`; Programm: `wallpaper` bzw. `wp`.
-- Private Bilder werden nicht verteilt. Bilder in `~/Pictures/Wallpapers` oder
-  der Benutzerbibliothek unter `~/.local/share/arch-dotfiles/config/pictures` ablegen.
-- `WALLPAPER_DIRS`, `WALLPAPER_FIT` und `WALLPAPER_NOTIFY` steuern Suchpfade,
-  Skalierung und Benachrichtigungen.
-
-```bash
-wallpaper list
-wallpaper set forest.png
-wallpaper set ocean.png --monitor DP-1
-wallpaper set city.png --all
-wallpaper monitor DP-1 default
-wallpaper current
-wallpaper add ~/Downloads/background.png --set
-wallpaper doctor
-```
-
-Ohne Monitoroption gilt ein globaler Default; ein Monitor-Override bleibt davon
-unabhängig. `--all` entfernt die Overrides. `apply` stellt den gespeicherten
-Zustand wieder her, `reload` startet hyprpaper neu. `next`, `prev` und `random`
-wechseln Bilder. `dirs` zeigt die effektiven Suchpfade; `open` öffnet die Bibliothek.
-Ein privates Bilder-Repository separat mit Git verwalten, nicht mit früheren
-`aco wallpapers`-/Subtree-Kommandos.
-
-## Yazi
-
-- Paket: `aco-arch-dotfiles-yazi`; Quelle: [yazi-config](https://github.com/Akademie-Olympia/aco-yazi).
-- `~/.config/yazi/yazi.toml`: Layout, Sortierung und Bedienung.
-- `theme.toml` wählt die mitgelieferte Catppuccin-Mocha-Flavor aus `flavors/`;
-  `package.toml` dokumentiert die Flavor-Quelle.
-- `yazi` startet den Dateimanager. Die Zsh-Funktion `y [pfad]` wechselt nach dem
-  Beenden in das zuletzt besuchte Verzeichnis; siehe [Shell-Anleitung](https://aco-zsh.readthedocs.io/en/latest/guide/).
+- Package: `aco-arch-dotfiles-hypr`; source: [aco-hypr](https://github.com/Akademie-Olympia/aco-hypr).
+- Entry point: `~/.config/hypr/hyprland.lua`. Desktop components, screenshot tools and the programs in use are installed through dependencies.
+- Adjust machine-specific monitor rules in `~/.config/hypr/monitors.local.lua` – or let `monitors.sh` (`Super + Shift + D`) write it; this file is not distributed.
+- [Desktop, screenshots and key bindings](https://aco-hypr.readthedocs.io/en/latest/guide/).
+  Neither the installer nor the tests restart a running graphical session.
 
 ## Zsh
 
-- Paket: `aco-arch-dotfiles-zsh`; Quelle: [zsh-config](https://github.com/Akademie-Olympia/aco-zsh).
-- Dateien: `~/.config/zsh/zshrc`, `aliases.zsh`, `themes/`; `~/.zshrc` wird verlinkt.
-- Oh My Zsh und die beiden Highlighting-/Vorschlags-Plugins werden über Pakete
-  verwaltet. Die paketierte Oh-My-Zsh-Kopie aktualisiert sich nicht selbst per Git.
-- [Shell-Anleitung](https://aco-zsh.readthedocs.io/en/latest/guide/): `j`/`ji`, `y`, FZF, Editor- und tmux-Aliase.
-  Die Login-Shell bei Bedarf selbst mit `chsh -s /usr/bin/zsh` umstellen.
+- Package: `aco-arch-dotfiles-zsh`; source: [aco-zsh](https://github.com/Akademie-Olympia/aco-zsh).
+- Files: `~/.config/zsh/zshrc`, `aliases.zsh`, `themes/`; `~/.zshrc` is linked.
+- Oh My Zsh and the two highlighting/suggestion plugins are managed through packages. The packaged Oh My Zsh copy does not update itself through git.
+- [Shell guide](https://aco-zsh.readthedocs.io/en/latest/guide/): `j`/`ji`, `y`, fzf, editor and tmux aliases.
+  Switch your login shell yourself with `chsh -s /usr/bin/zsh` if you want it.
 
-## GTK3
+## Small components (documented in aco-docs)
 
-- Paket: `aco-arch-dotfiles-gtk-3.0`; Quelle: [gtk3-config](https://github.com/Akademie-Olympia/aco-gtk3).
-- Dateien: `~/.config/gtk-3.0/settings.ini` und `gtk.css`.
-- `settings.ini` legt GTK-Einstellungen fest; `gtk.css` enthält das Styling.
-  Nach Änderungen betroffene GTK3-Anwendungen neu starten, nicht die gesamte Sitzung.
+| Component | Package | Source | Files | Documentation |
+| --- | --- | --- | --- | --- |
+| Waybar | `aco-arch-dotfiles-waybar` | [aco-waybar](https://github.com/Akademie-Olympia/aco-waybar) | `~/.config/waybar/config.jsonc`, `style.css`, `power_menu.xml` | [Waybar](https://aco-docs.readthedocs.io/en/latest/waybar/) |
+| Wallpaper | `aco-arch-dotfiles-wallpaper` | [aco-wallpaper](https://github.com/Akademie-Olympia/aco-wallpaper) | `~/.config/wallpaper/wallpaper.conf`; command `wallpaper` / `wp` | [Wallpaper](https://aco-docs.readthedocs.io/en/latest/wallpaper/) |
+| Fuzzel | `aco-arch-dotfiles-fuzzel` | [aco-fuzzel](https://github.com/Akademie-Olympia/aco-fuzzel) | `~/.config/fuzzel/fuzzel.ini` | [Fuzzel](https://aco-docs.readthedocs.io/en/latest/fuzzel/) |
+| Foot | `aco-arch-dotfiles-foot` | [aco-foot](https://github.com/Akademie-Olympia/aco-foot) | `~/.config/foot/foot.ini` | [Foot](https://aco-docs.readthedocs.io/en/latest/foot/) |
+| Yazi | `aco-arch-dotfiles-yazi` | [aco-yazi](https://github.com/Akademie-Olympia/aco-yazi) | `~/.config/yazi/yazi.toml`, `theme.toml`, `flavors/` | [Yazi](https://aco-docs.readthedocs.io/en/latest/yazi/) |
+| PCManFM | `aco-arch-dotfiles-pcmanfm` | [aco-pcmanfm](https://github.com/Akademie-Olympia/aco-pcmanfm) | `~/.config/pcmanfm/default/pcmanfm.conf` | [PCManFM](https://aco-docs.readthedocs.io/en/latest/pcmanfm/) |
+| libfm | `aco-arch-dotfiles-libfm` | [aco-libfm](https://github.com/Akademie-Olympia/aco-libfm) | `~/.config/libfm/libfm.conf` | [libfm](https://aco-docs.readthedocs.io/en/latest/libfm/) |
+| GTK 3 | `aco-arch-dotfiles-gtk-3.0` | [aco-gtk3](https://github.com/Akademie-Olympia/aco-gtk3) | `~/.config/gtk-3.0/settings.ini`, `gtk.css` | [GTK 3](https://aco-docs.readthedocs.io/en/latest/gtk3/) |
+| GTK 4 | `aco-arch-dotfiles-gtk-4.0` | [aco-gtk4](https://github.com/Akademie-Olympia/aco-gtk4) | `~/.config/gtk-4.0/settings.ini`, `gtk.css` | [GTK 4](https://aco-docs.readthedocs.io/en/latest/gtk4/) |
 
-## GTK4
-
-- Paket: `aco-arch-dotfiles-gtk-4.0`; Quelle: [gtk4-config](https://github.com/Akademie-Olympia/aco-gtk4).
-- Dateien: `~/.config/gtk-4.0/settings.ini` und `gtk.css`.
-- GTK3 und GTK4 verwenden getrennte Konfigurationen. Anwendungen können eigene
-  Theme-Regeln oder libadwaita verwenden; nicht jede Anwendung übernimmt jedes CSS.
-
-## LibFM
-
-- Paket: `aco-arch-dotfiles-libfm`; Quelle: [libfm-config](https://github.com/Akademie-Olympia/aco-libfm).
-- Datei: `~/.config/libfm/libfm.conf` für den von PCManFM verwendeten Backend.
-- Das Paket enthält Einstellungen, keine zusätzliche Desktop-Sitzung und keine
-  persönlichen Mount-Zugangsdaten. PCManFM nach Änderungen neu starten.
-
-## PCManFM
-
-- Paket: `aco-arch-dotfiles-pcmanfm`; Quelle: [pcmanfm-config](https://github.com/Akademie-Olympia/aco-pcmanfm).
-- Datei: `~/.config/pcmanfm/default/pcmanfm.conf` für Fenster, Ansicht und Bedienung.
-- LibFM- und GTK3-Konfiguration sind als Abhängigkeiten deklariert.
-  `pcmanfm` startet den Dateimanager; Mounts und Berechtigungen bleiben Aufgabe
-  des jeweiligen Systems und seiner Benutzer-/Sitzungsdienste.
+Wallpaper in short: images are not distributed; put them in `~/Pictures/Wallpapers` or in the user library
+`~/.local/share/arch-dotfiles/config/pictures`. `wallpaper set forest.png`, `wallpaper set ocean.png --monitor DP-1`,
+`wallpaper fit contain --monitor DP-1`, `wallpaper dirs add ~/Pictures/Nature`, `wallpaper doctor`. Manage a private image repository
+separately with git, not with the former `aco wallpapers`/subtree commands. The full command reference is in the
+[Wallpaper guide](https://aco-docs.readthedocs.io/en/latest/wallpaper/guide/).
