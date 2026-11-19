@@ -18,10 +18,27 @@ Alte Namen funktionieren weiter: `adot`, `arch-dot`, `arch-dotfiles`, `arch-dotf
 | `aco status` | Zeigt, ob alles aktiv ist, und wo Kopien und Backups liegen |
 | `aco list` | Installierte `aco-arch-dotfiles*`-Pakete |
 | `aco packages [paket …]` | Pakete mit vollständigem System-Upgrade installieren (ohne Argument: das Metapaket) |
+| `aco keys [--menu] [programm …]` | Durchsuchbare Liste **aller** Tastenkürzel (Hyprland, tmux, Neovim, Vim, Kitty, Ghostty, Shell). In Hyprland: {kbd}`Super + K` |
 | `aco path` | Verzeichnis deiner bearbeitbaren Kopien (`~/.local/share/arch-dotfiles/config`) |
 | `aco commands` | Diese Befehle als Kurzhilfe |
 | `aco docs` | Adresse der Dokumentation |
 | `aco scripts` | Mitgelieferte Programme (`aco`, `screenshot`, `wallpaper`, …) |
+
+### Bildschirme verwalten
+
+Das Hyprland-Modul bringt `monitors.sh` mit ({kbd}`Super + Shift + D` öffnet das Menü):
+
+```bash
+~/.config/hypr/monitors.sh status                 # Bildschirme und Modi
+~/.config/hypr/monitors.sh extend right           # nebeneinander (left/above/below möglich)
+~/.config/hypr/monitors.sh mirror                 # extern spiegelt intern
+~/.config/hypr/monitors.sh only external          # Laptop-Display aus
+~/.config/hypr/monitors.sh scale HDMI-A-1 1.5
+~/.config/hypr/monitors.sh profile save buero     # Layout merken; später: profile load buero
+~/.config/hypr/monitors.sh reset                  # zurück zur Automatik
+```
+
+Das Skript schreibt `~/.config/hypr/monitors.local.lua` (wird von `hyprland.lua` geladen) und lädt Hyprland neu.
 
 Modul-Namen: `foot fuzzel ghostty gtk-3.0 gtk-4.0 hypr kitty libfm nvim pcmanfm tmux vim wallpaper waybar yazi zsh`.
 

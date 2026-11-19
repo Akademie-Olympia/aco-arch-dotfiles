@@ -26,7 +26,10 @@ case "${1:-help}" in
         ;;
     path)
         printf '%s\n' "${XDG_DATA_HOME:-$HOME/.local/share}/arch-dotfiles/config" ;;
-    keys|docs)
+    keys|shortcuts)
+        shift
+        exec aco-arch-dotfiles-keys "$@" ;;
+    docs)
         printf '%s\n' 'https://aco-arch-dotfiles.readthedocs.io/en/latest/'
         printf '%s\n' 'See also each installed module README in /usr/share/arch-dotfiles/<module>.' ;;
     commands)
@@ -36,11 +39,12 @@ aco sync                    merge defaults after running pacman yourself
 aco packages <package>...    install packages with a full system upgrade
 aco install [module]...      activate installed modules (without sudo)
 aco deactivate [module]...   restore previous settings
+aco keys [--menu] [app]...   searchable list of all shortcuts (Hyprland: Super+K)
 aco status / aco list       inspect activation / installed packages
 HELP
         ;;
     scripts)
-        printf '%s\n' /usr/bin/aco /usr/bin/aco-arch-dotfiles-config /usr/bin/aco-arch-dotfiles-registry-kick
+        printf '%s\n' /usr/bin/aco /usr/bin/aco-arch-dotfiles-config /usr/bin/aco-arch-dotfiles-keys /usr/bin/aco-arch-dotfiles-registry-kick
         for script in screenshot wallpaper; do command -v "$script" || true; done ;;
     subtrees|subtree|pull|push|wallpapers)
         echo 'Subtree/Git updates have been retired. Use pacman -Syu; manage private pictures separately.' >&2

@@ -22,7 +22,7 @@ PRIVATE = {"hypr/monitors.local.lua", "tmux/local.conf", "tmux/local-options.con
 CORE_FILES = ("aco", "aco-arch-dotfiles-config", "package-command", "aco-arch-dotfiles.install",
               "BUNDLE-LICENSE", "aco-arch-dotfiles-sync.service", "aco-arch-dotfiles-sync.timer",
               "aco-arch-dotfiles-registry-kick", "aco-arch-dotfiles-registry-kick.service",
-              "aco-arch-dotfiles-registry-kick.timer")
+              "aco-arch-dotfiles-registry-kick.timer", "aco-arch-dotfiles-keys")
 
 
 def tracked_files(root=None):
@@ -142,7 +142,8 @@ def stage(name, destination, tracked=None):
     elif data.get("kind") == "core":
         for filename in CORE_FILES:
             source = package / filename
-            if filename in ("aco", "aco-arch-dotfiles-config", "aco-arch-dotfiles-registry-kick"):
+            if filename in ("aco", "aco-arch-dotfiles-config", "aco-arch-dotfiles-registry-kick",
+                            "aco-arch-dotfiles-keys"):
                 target = destination / "usr/bin" / filename
             elif filename.endswith((".service", ".timer")):
                 target = destination / "usr/lib/systemd/user" / filename
@@ -152,7 +153,7 @@ def stage(name, destination, tracked=None):
                 target = share / filename
             copy(source, target)
             if filename in ("aco", "aco-arch-dotfiles-config", "package-command",
-                            "aco-arch-dotfiles-registry-kick"):
+                            "aco-arch-dotfiles-registry-kick", "aco-arch-dotfiles-keys"):
                 target.chmod(0o755)
         # Compatibility with the pre-ACO names, so existing users, shell history
         # and already enabled user timers keep working after the package rename.

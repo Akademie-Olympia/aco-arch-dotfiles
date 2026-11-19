@@ -1,0 +1,189 @@
+#!/usr/bin/env python3
+"""Systemweite Tastenkürzel-Liste der ACO-Umgebung.
+
+    aco keys               durchsuchbare Liste (fzf im Terminal, sonst Ausgabe/Pager)
+    aco keys --menu        Fuzzel-Menü (Hyprland: Super + K)
+    aco keys hypr tmux     nur diese Programme
+    aco keys --list        reine Textliste, Spalten mit Tab getrennt (für Skripte)
+    aco keys --apps        Programme, für die Kürzel gefunden wurden
+
+Die Daten stammen aus den installierten Paketen unter /usr/share/arch-dotfiles
+(Hyprland, tmux, Neovim, Vim, Kitty, Ghostty) und sind damit immer so aktuell
+wie die installierte Konfiguration. Eigene Änderungen siehe die jeweilige Konfiguration.
+"""
+import argparse
+import csv
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+
+SHARE = Path(os.environ.get("ARCH_DOTFILES_SHARE", "/usr/share/arch-dotfiles"))
+
+SHELL_ROWS = [
+    ("aco update", "System aktualisieren (pacman -Syu) und Defaults zusammenführen"),
+    ("aco status", "Zeigt, ob die Konfiguration aktiv ist"),
+    ("aco keys", "Diese Kürzel-Liste"),
+    ("y", "Yazi starten und im besuchten Verzeichnis bleiben"),
+    ("j <teil>", "Per zoxide in ein häufig besuchtes Verzeichnis springen"),
+    ("tm", "tmux-Sitzung main öffnen oder anhängen"),
+    ("nv / v", "Neovim / Vim"),
+    ("wp", "Wallpaper-Befehl"),
+    ("monitors.sh", "Bildschirm-Verwaltung im Terminal (extend, mirror, scale, profile …)"),
+    ("Strg+R / Strg+T / Alt+C", "fzf: Verlauf / Dateien / Verzeichnis wechseln"),
+]
+
+
+def clean(text):
+    text = re.sub(r"\{kbd\}`([^`]*)`", r"\1", text)
+    text = re.sub(r"</?kbd>", "", text)
+    text = text.replace("`", "")
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def table_rows(path):
+    """Yield the cells of every data row of every Markdown table in path."""
+    if not path.is_file():
+        return
+    for line in path.read_text(errors="replace").splitlines():
+        line = line.strip()
+        if not line.startswith("|") or re.match(r"^\|[\s:|-]+\|$", line):
+            continue
+        cells = [clean(cell) for cell in line.strip("|").split("|")]
+        yield cells
+
+
+def hypr():
+    group = ""
+    path = SHARE / "hypr/docs/keybindings.md"
+    if not path.is_file():
+        return
+    for line in path.read_text().splitlines():
+        if line.startswith("## "):
+            group = line[3:].strip()
+        elif line.startswith("| {kbd}"):
+            cells = [clean(cell) for cell in line.strip("|").split("|")]
+            yield group, cells[0], cells[1]
+
+
+def tmux():
+    base = SHARE / "tmux/keys"
+    quick, desc = base / "quick.tsv", {}
+    generated = base / "generated/keys.tsv"
+    if not quick.is_file() or not generated.is_file():
+        return
+    with open(generated, newline="") as handle:
+        lines = [line for line in handle if not line.startswith("#")]
+    for row in csv.DictReader(lines, delimiter="\t"):
+        desc[(row["table"], row["key"].strip('"'))] = (row["description"], row["category"])
+    for line in quick.read_text().splitlines():
+        if line.startswith("#") or line.startswith("table\t") or not line.strip():
+            continue
+        table, key = line.split("\t")[:2]
+        text, category = desc.get((table, key.strip('"')), (None, ""))
+        if text is None:
+            continue
+        shown = key.strip('"')
+        if table == "prefix":
+            shown = f"Strg+b {shown}"
+        elif table.startswith("copy-mode"):
+            shown = f"[Kopiermodus] {shown}"
+        yield category, shown, text
+
+
+def nvim():
+    for cells in table_rows(SHARE / "nvim/docs/_generated/keymaps.md"):
+        if len(cells) >= 4 and cells[0] not in ("Mode",):
+            yield cells[3], f"{cells[1]}  ({cells[0]})", cells[2]
+
+
+def vim():
+    for cells in table_rows(SHARE / "vim/docs/keybindings.md"):
+        if len(cells) >= 3 and cells[0] not in ("Keybinding", "Command"):
+            yield "", cells[0], cells[2]
+
+
+def terminal(name):
+    def rows():
+        for cells in table_rows(SHARE / name / "docs/keybindings.md"):
+            if len(cells) >= 2 and cells[0] != "Shortcut":
+                yield "", cells[0], cells[1] + (f" – {cells[2]}" if len(cells) > 2 and cells[2] else "")
+    return rows
+
+
+def shell():
+    for key, text in SHELL_ROWS:
+        yield "Befehle", key, text
+
+
+SOURCES = {"hypr": ("Hyprland", hypr), "tmux": ("tmux", tmux), "nvim": ("Neovim", nvim),
+           "vim": ("Vim", vim), "kitty": ("Kitty", terminal("kitty")),
+           "ghostty": ("Ghostty", terminal("ghostty")), "shell": ("Shell", shell)}
+
+
+def collect(apps):
+    rows = []
+    for app in apps:
+        label, source = SOURCES[app]
+        seen = set()
+        for group, key, text in source():
+            if not key or (key, text) in seen:
+                continue
+            seen.add((key, text))
+            rows.append((app, label, group, key, text))
+    return rows
+
+
+def render(rows):
+    width_app = max((len(r[1]) for r in rows), default=0)
+    width_key = min(max((len(r[3]) for r in rows), default=0), 34)
+    return ["{:<{}}  {:<{}}  {}".format(r[1], width_app, r[3], width_key, r[4] + (f"  [{r[2]}]" if r[2] else ""))
+            for r in rows]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("apps", nargs="*", help="hypr tmux nvim vim kitty ghostty shell (Standard: alle)")
+    parser.add_argument("--menu", action="store_true", help="Fuzzel-Menü statt Terminal")
+    parser.add_argument("--list", action="store_true", help="Tab-getrennte Textliste")
+    parser.add_argument("--apps", dest="show_apps", action="store_true", help="Verfügbare Programme")
+    args = parser.parse_args()
+
+    unknown = [a for a in args.apps if a not in SOURCES]
+    if unknown:
+        print(f"Unbekannt: {' '.join(unknown)}. Verfügbar: {' '.join(SOURCES)}", file=sys.stderr)
+        return 2
+    apps = args.apps or list(SOURCES)
+    rows = collect(apps)
+    if args.show_apps:
+        for app in SOURCES:
+            print(f"{app}\t{len([r for r in rows if r[0] == app]) if app in apps else len(collect([app]))}")
+        return 0
+    if not rows:
+        print("Keine Tastenkürzel gefunden – sind die Pakete installiert? (aco list)", file=sys.stderr)
+        return 1
+    if args.list:
+        for r in rows:
+            print("\t".join((r[1], r[3], r[4], r[2])))
+        return 0
+    lines = render(rows)
+    if args.menu:
+        if not shutil.which("fuzzel"):
+            print("fuzzel fehlt", file=sys.stderr)
+            return 1
+        subprocess.run(["fuzzel", "--dmenu", "--width=90", "--lines=20", "--prompt=Tasten "],
+                       input="\n".join(lines), text=True, stdout=subprocess.DEVNULL)
+        return 0
+    if sys.stdout.isatty() and shutil.which("fzf"):
+        subprocess.run(["fzf", "--no-sort", "--reverse", "--prompt=Tasten > ",
+                        "--header=Tippen zum Filtern, Esc beendet"],
+                       input="\n".join(lines), text=True)
+        return 0
+    print("\n".join(lines))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
